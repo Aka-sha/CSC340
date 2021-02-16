@@ -3,7 +3,7 @@ package Models;
 /**
  * This class loads the recipe information from the Food API.
  * Last Updated 02/14/2021
- * @author Andy Cruse
+ * @author Andy Cruse, modified by Edward Hicks
  */
 public class Recipe extends APIBaseClass {
 
@@ -15,6 +15,13 @@ public class Recipe extends APIBaseClass {
     protected Double pricePerServing;
     protected Integer readyInMinutes;
     protected Integer servings;
+    protected final String itemTitle = "title";
+    protected final String itemSummary = "summary";
+    protected final String itemVegetarian = "vegetarian";
+    protected final String itemVegan = "vegan";
+    protected final String itemPricePerServing = "pricePerServing";
+    protected final String itemReadyInMinutes = "readyInMinutes";
+    protected final String itemServings = "servings";
 
     public void Recipe() {}
 
@@ -27,7 +34,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadRecipeTitleById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        String title = Recipe.myFoodAPI.loadRecipeTitleById(_id);
+        String title = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemTitle).toString();
         if (title == null) {
             return null;
         }
@@ -44,7 +51,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadSummaryById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        String summary = Recipe.myFoodAPI.loadSummaryById(_id);
+        String summary = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemSummary).toString();
         if (summary == null) {
             return null;
         }
@@ -61,7 +68,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadIsVegetarianById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Boolean isVegetarian = Recipe.myFoodAPI.loadIsVegetarianById(_id);
+        Boolean isVegetarian = Boolean.parseBoolean(myFoodAPI.loadRecipeItem(_id, recipe.itemVegetarian).toString());
         if (isVegetarian == null) {
             return null;
         }
@@ -78,7 +85,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadIsVeganById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Boolean isVegan = Recipe.myFoodAPI.loadIsVeganById(_id);
+        Boolean isVegan = Boolean.parseBoolean(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemVegan).toString());
         if (isVegan == null) {
             return null;
         }
@@ -95,7 +102,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadPricePerServingById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Double pricePerServing = Recipe.myFoodAPI.loadPricePerServingById(_id);
+        Double pricePerServing = Double.parseDouble(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemPricePerServing).toString());
         if (pricePerServing == null){
             return null;
         }
@@ -112,7 +119,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadReadyInMinutesById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Integer minutes = Recipe.myFoodAPI.loadReadyInMinutesById(_id);
+        Integer minutes = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemReadyInMinutes).toString());
         if (minutes == null){
             return null;
         }
@@ -129,7 +136,7 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadServingsById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Integer servings = Recipe.myFoodAPI.loadServingsById(_id);
+        Integer servings = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemServings).toString());
         if (servings == null){
             return null;
         }
