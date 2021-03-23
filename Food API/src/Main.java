@@ -1,4 +1,5 @@
 import Models.Recipe;
+import Models.City;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,5 +19,9 @@ public class Main {
         System.out.println("Price Per Serving: " + recipePricePerServing.getPricePerServing());
         System.out.println("Minutes Needed to Cook: " + recipeMinutes.getReadyInMinutes());
         System.out.println("Servings: " + recipeServings.getServings());
+
+        String ipAddress = "24.48.0.1"; //returns "Montreal"
+        City cityTitle = City.loadCityTitleByIP(ipAddress);
+        System.out.println(cityTitle.getCityTitle());
     }
 }
