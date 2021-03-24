@@ -20,15 +20,15 @@ public class UserDatabase {
     This methods checks to see if the username of the new account is unique and if it is, creates a new account using the
     provided username and password and adds it to the applicationUser List. The applicationUser list is then sorted.
      */
-    public void addNewApplicationUser(String _u, String _p) {
+    public void addNewApplicationUser(String _userName, String _passWord) {
         //Create new user and add it to the List
-        if (checkForValidUsername(_u)) {
-            UserProfile newUser = new UserProfile(_u, _p);
+        if (checkForValidUsername(_userName)) {
+            UserProfile newUser = new UserProfile(_userName, _passWord);
             applicationUser.add(newUser);
             sortList();
-            System.out.println("New account created! Username: " + _u + ", Password: " + _p);
+            System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
         }
-        else System.out.println("The username " + _u + " is already being used by another account. Account registration denied.");
+        else System.out.println("The username " + _userName + " is already being used by another account. Account registration denied.");
     }
 
     /*

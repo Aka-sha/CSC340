@@ -6,23 +6,23 @@ package API;
  * @author Edward Hicks
  */
 public class UserProfile {
-    protected String username;
-    protected String password;
+    protected String userName;
+    protected String passWord;
     //Anime preferences
     //Food preferences
 
     //Creates a new account that's approved by the UserDatabase
     public UserProfile(String _u, String _p) {
-        this.username = _u;
-        this.password = _p;
+        this.userName = _u;
+        this.passWord = _p;
         //Anime and food preferences are created, using default settings
     }
 
     //=================  GETTERS ===============
-    public String getUsername() { return this.username; }
-    public String getPassword() { return this.password; }
+    public String getUsername() { return this.userName; }
+    public String getPassword() { return this.passWord; }
 
     //=================  SETTERS ===============
-    public void setUsername(String _u) { this.username = _u; }
-    public void setPassword(String _p) { this.password = _p; }
+    public void setUsername(String _u) { this.userName = _u; }
+    public void setPassword(String _p) { this.passWord = _p; }
 }

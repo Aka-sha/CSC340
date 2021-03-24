@@ -33,6 +33,8 @@ public class Main {
         userDB.addNewApplicationUser("aCandy", "ijustreallyfuckinglovegators");
         userDB.addNewApplicationUser("eHicks", "fuckthatothereHicks");
         userDB.addNewApplicationUser("Ehicks", "Roh roh, cheat da system.");
-        for (int i = 0; i < userDB.getSize(); i++) System.out.println(i + ": USERNAME: " + userDB.getUsernameByIndex(i) + " /\tPASSWORD: " + userDB.getPasswordByIndex(i));
+        for (int i = 0; i < userDB.getSize(); i++) {
+            System.out.println(i + ": USERNAME: " + userDB.getUsernameByIndex(i) + " /\tPASSWORD: " + userDB.getPasswordByIndex(i));
+        }
     }
 }
