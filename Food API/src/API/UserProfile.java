@@ -12,9 +12,9 @@ public class UserProfile {
     //Food preferences
 
     //Creates a new account that's approved by the UserDatabase
-    public UserProfile(String _u, String _p) {
-        this.userName = _u;
-        this.passWord = _p;
+    public UserProfile(String _userName, String _passWord) {
+        this.userName = _userName;
+        this.passWord = _passWord;
         //Anime and food preferences are created, using default settings
     }
 
@@ -23,6 +23,6 @@ public class UserProfile {
     public String getPassword() { return this.passWord; }
 
     //=================  SETTERS ===============
-    public void setUsername(String _u) { this.userName = _u; }
-    public void setPassword(String _p) { this.passWord = _p; }
+    public void setUsername(String _userName) { this.userName = _userName; }
+    public void setPassword(String _passWord) { this.passWord = _passWord; }
 }

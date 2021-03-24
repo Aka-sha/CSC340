@@ -96,7 +96,7 @@ public class UserDatabase {
     /*
     Compares two strings with a uniform case.
      */
-    public int compareWithCase(String _username1, String _username2) { return _username1.toLowerCase().compareTo(_username2.toLowerCase()); }
+    public int compareWithCase(String _userName1, String _userName2) { return _userName1.toLowerCase().compareTo(_userName2.toLowerCase()); }
 
     //=================  GETTERS =================
     public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
@@ -105,15 +105,15 @@ public class UserDatabase {
     public int getSize() { return this.applicationUser.size(); }
 
     //=================  SETTERS =================
-    public void setUserProfileByIndex(int _i, UserProfile _u) { this.applicationUser.set(_i, _u); }
-    public void setUsernameByIndex(int _i, String _username) {
+    public void setUserProfileByIndex(int _i, UserProfile _userName) { this.applicationUser.set(_i, _userName); }
+    public void setUsernameByIndex(int _i, String _userName) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
-        edittedUser.setUsername(_username);
+        edittedUser.setUsername(_userName);
         setUserProfileByIndex(_i, edittedUser);
     }
-    public void setPasswordByIndex(int _i, String _password) {
+    public void setPasswordByIndex(int _i, String _passWord) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
-        edittedUser.setPassword(_password);
+        edittedUser.setPassword(_passWord);
         setUserProfileByIndex(_i, edittedUser);
     }
 }
