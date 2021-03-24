@@ -2,7 +2,7 @@ package Models;
 
 /**
  * This class loads the recipe information from the Food API.
- * Last Updated 02/14/2021
+ * Last Updated 03/24/2021
  * @author Andy Cruse, modified by Edward Hicks
  */
 public class Recipe extends APIBaseClass {
@@ -34,11 +34,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadRecipeTitleById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        String title = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemTitle).toString();
-        if (title == null) {
-            return null;
+        String title;
+        try {
+            title = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemTitle).toString();
+            recipe.setTitle(title.toString());
         }
-        recipe.setTitle(title);
+        catch (NullPointerException ex) {
+            recipe.setTitle("!NA!");
+        }
         return recipe;
     }
 
@@ -51,11 +54,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadSummaryById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        String summary = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemSummary).toString();
-        if (summary == null) {
-            return null;
+        String summary;
+        try {
+            summary = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemSummary).toString();
+            recipe.setSummary(summary);
         }
-        recipe.setSummary(summary);
+        catch (NullPointerException ex) {
+            recipe.setSummary("!NA!");
+        }
         return recipe;
     }
 
@@ -68,11 +74,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadIsVegetarianById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Boolean isVegetarian = Boolean.parseBoolean(myFoodAPI.loadRecipeItem(_id, recipe.itemVegetarian).toString());
-        if (isVegetarian == null) {
-            return null;
+        Boolean isVegetarian;
+        try {
+            isVegetarian = Boolean.parseBoolean(myFoodAPI.loadRecipeItem(_id, recipe.itemVegetarian).toString());
+            recipe.setIsVegetarian(isVegetarian);
         }
-        recipe.setIsVegetarian(isVegetarian);
+        catch (NullPointerException ex) {
+            recipe.setIsVegetarian(false);
+        }
         return recipe;
     }
 
@@ -85,11 +94,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadIsVeganById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Boolean isVegan = Boolean.parseBoolean(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemVegan).toString());
-        if (isVegan == null) {
-            return null;
+        Boolean isVegan;
+        try {
+            isVegan = Boolean.parseBoolean(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemVegan).toString());
+            recipe.setIsVegan(isVegan);
         }
-        recipe.setIsVegan(isVegan);
+        catch (NullPointerException ex) {
+            recipe.setIsVegan(false);
+        }
         return recipe;
     }
 
@@ -102,11 +114,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadPricePerServingById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Double pricePerServing = Double.parseDouble(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemPricePerServing).toString());
-        if (pricePerServing == null){
-            return null;
+        Double pricePerServing;
+        try {
+            pricePerServing = Double.parseDouble(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemPricePerServing).toString());
+            recipe.setPricePerServing(pricePerServing);
         }
-        recipe.setPricePerServing(pricePerServing);
+        catch (NullPointerException ex) {
+            recipe.setPricePerServing(0d);
+        }
         return recipe;
     }
 
@@ -119,11 +134,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadReadyInMinutesById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Integer minutes = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemReadyInMinutes).toString());
-        if (minutes == null){
-            return null;
+        Integer minutes;
+        try {
+            minutes = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemReadyInMinutes).toString());
+            recipe.setReadyInMinutes(minutes);
         }
-        recipe.setReadyInMinutes(minutes);
+        catch (NullPointerException ex) {
+            recipe.setReadyInMinutes(0);
+        }
         return recipe;
     }
 
@@ -136,11 +154,14 @@ public class Recipe extends APIBaseClass {
     public static Recipe loadServingsById(int _id) {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
-        Integer servings = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemServings).toString());
-        if (servings == null){
-            return null;
+        Integer servings;
+        try {
+            servings = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.itemServings).toString());
+            recipe.setServings(servings);
         }
-        recipe.setServings(servings);
+        catch (NullPointerException ex) {
+            recipe.setServings(0);
+        }
         return recipe;
     }
 
