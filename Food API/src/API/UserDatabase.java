@@ -20,10 +20,10 @@ public class UserDatabase {
     This methods checks to see if the username of the new account is unique and if it is, creates a new account using the
     provided username and password and adds it to the applicationUser List. The applicationUser list is then sorted.
      */
-    public void addNewApplicationUser(String _userName, String _passWord) {
+    public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
         //Create new user and add it to the List
         if (checkForValidUsername(_userName)) {
-            UserProfile newUser = new UserProfile(_userName, _passWord);
+            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
             applicationUser.add(newUser);
             sortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
@@ -34,7 +34,7 @@ public class UserDatabase {
     /*
     The applicationUser database is searched to see if the desired username doesn't already exist, returning the outcome.
      */
-    public boolean checkForValidUsername(String _u) {
+    public boolean checkForValidUsername(String _userName) {
         //First, check is database is empty. If so, return true.
         if (this.applicationUser.size() == 0) return true;
 
@@ -42,7 +42,7 @@ public class UserDatabase {
         int upperThreshold = this.applicationUser.size()-1;
 
         for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
-            int usernameCompare = compareWithCase(_u, getUsernameByIndex(i));
+            int usernameCompare = compareWithCase(_userName, getUsernameByIndex(i));
             //A matching username has been found, new username is not unique
             if (usernameCompare == 0) return false;
             //A matching username has not been found, new username is unique
@@ -101,7 +101,11 @@ public class UserDatabase {
     //=================  GETTERS =================
     public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
     public String getUsernameByIndex(int _i) { return this.applicationUser.get(_i).getUsername(); }
+    public String getEmailByIndex(int _i) { return this.applicationUser.get(_i).getEmail(); }
     public String getPasswordByIndex(int _i) { return this.applicationUser.get(_i).getPassword(); }
+    public int getAgeByIndex(int _i) { return this.applicationUser.get(_i).getAge(); }
+    public String getCityByIndex(int _i) { return this.applicationUser.get(_i).getCity(); }
+    public String getIpAddressByIndex(int _i) { return this.applicationUser.get(_i).getIpAddress(); }
     public int getSize() { return this.applicationUser.size(); }
 
     //=================  SETTERS =================
@@ -111,9 +115,29 @@ public class UserDatabase {
         edittedUser.setUsername(_userName);
         setUserProfileByIndex(_i, edittedUser);
     }
+    public void setEmailByIndex(int _i, String _email) {
+        UserProfile edittedUser = getUserProfileByIndex(_i);
+        edittedUser.setEmail(_email);
+        setUserProfileByIndex(_i, edittedUser);
+    }
     public void setPasswordByIndex(int _i, String _passWord) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
         edittedUser.setPassword(_passWord);
+        setUserProfileByIndex(_i, edittedUser);
+    }
+    public void setBirthdayByIndex(int _i, int _age) {
+        UserProfile edittedUser = getUserProfileByIndex(_i);
+        edittedUser.setAge(_age);
+        setUserProfileByIndex(_i, edittedUser);
+    }
+    public void setCityByIndex(int _i, String _city) {
+        UserProfile edittedUser = getUserProfileByIndex(_i);
+        edittedUser.setCity(_city);
+        setUserProfileByIndex(_i, edittedUser);
+    }
+    public void setIpAddressByIndex(int _i, String _ipAddress) {
+        UserProfile edittedUser = getUserProfileByIndex(_i);
+        edittedUser.setIpAddress(_ipAddress);
         setUserProfileByIndex(_i, edittedUser);
     }
 }
