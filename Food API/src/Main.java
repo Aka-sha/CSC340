@@ -1,10 +1,11 @@
-import API.UserDatabase;
-import API.UserProfile;
-import Models.Recipe;
 import Models.City;
+import Models.Recipe;
+import db.UserDatabase;
+import db.UserProfile;
 
 public class Main {
     public static void main(String[] args) {
+        //Testing Food API (NEEDS WORK)
         int id = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         Recipe recipeTitle = Recipe.loadRecipeTitleById(id);
         Recipe recipeSummary = Recipe.loadSummaryById(id);
@@ -22,17 +23,33 @@ public class Main {
         System.out.println("Minutes Needed to Cook: " + recipeMinutes.getReadyInMinutes());
         System.out.println("Servings: " + recipeServings.getServings());
 
-        String ipAddress = "24.48.0.1"; //returns "Montreal"
+        //Testing Location API
+        String ipAddress = "174.204.142.53"; //returns New York
         City cityTitle = City.loadCityTitleByIP(ipAddress);
         System.out.println(cityTitle.getCityTitle());
 
         //Testing the UserDatabase
         UserDatabase userDB = new UserDatabase();
-        userDB.addNewApplicationUser("eHicks", "poopergeist");
-        userDB.addNewApplicationUser("ACarver", "g0thVi0lence");
-        userDB.addNewApplicationUser("aCandy", "ijustreallyfuckinglovegators");
-        userDB.addNewApplicationUser("eHicks", "fuckthatothereHicks");
-        userDB.addNewApplicationUser("Ehicks", "Roh roh, cheat da system.");
-        for (int i = 0; i < userDB.getSize(); i++) System.out.println(i + ": USERNAME: " + userDB.getUsernameByIndex(i) + " /\tPASSWORD: " + userDB.getPasswordByIndex(i));
+        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass", 18, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass", 21, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustreallyfuckinglovegators", 23, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), ipAddress);
+        for (int i = 0; i < userDB.getSize(); i++) {
+            System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
+                    "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getIpAddressByIndex(i));
+        }
+
+        //testing MySQL Queries for Database established above
+        for (int i = 0; i < userDB.getSize(); i++) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUsername(userDB.getUsernameByIndex(i));
+            userProfile.setEmail(userDB.getEmailByIndex(i));
+            userProfile.setPassword(userDB.getPasswordByIndex(i));
+            userProfile.setAge(userDB.getAgeByIndex(i));
+            userProfile.setCity(cityTitle.getCityTitle());
+            userProfile.setIpAddress(ipAddress);
+            userProfile.save();
+        }
     }
 }
