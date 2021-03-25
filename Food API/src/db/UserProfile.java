@@ -1,11 +1,12 @@
-package API;
+package db;
 
 /**
  * This class holds all the data for a single user of the application.
- * Last modified 03/24/2021
+ * Last modified 03/24/2021 by Andy Cruse
  * @author Edward Hicks
  */
-public class UserProfile {
+public class UserProfile extends DataObject{
+    protected final String dataTable = "User";
     protected String userName;
     protected String email;
     protected String passWord;
@@ -14,6 +15,8 @@ public class UserProfile {
     protected String ipAddress;
     //Anime preferences
     //Food preferences
+
+    public UserProfile() {}
 
     //Creates a new account that's approved by the UserDatabase
     public UserProfile(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {

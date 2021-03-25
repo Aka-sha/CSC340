@@ -1,4 +1,4 @@
-package API;
+package db;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class contains a list of every user of the applications, and can handle adding new users to the database
  * and editting the data of preexisting users.
- * Last modified 03/24/2021
+ * Last modified 03/24/2021 by Andy Cruse
  * @author Edward Hicks
  */
 public class UserDatabase {

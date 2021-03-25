@@ -1,10 +1,11 @@
-import API.UserDatabase;
-import API.UserProfile;
-import Models.Recipe;
 import Models.City;
+import Models.Recipe;
+import db.UserDatabase;
+import db.UserProfile;
 
 public class Main {
     public static void main(String[] args) {
+        //Testing Food API (NEEDS WORK)
         int id = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         Recipe recipeTitle = Recipe.loadRecipeTitleById(id);
         Recipe recipeSummary = Recipe.loadSummaryById(id);
@@ -22,6 +23,7 @@ public class Main {
         System.out.println("Minutes Needed to Cook: " + recipeMinutes.getReadyInMinutes());
         System.out.println("Servings: " + recipeServings.getServings());
 
+        //Testing Location API
         String ipAddress = "174.204.142.53"; //returns New York
         City cityTitle = City.loadCityTitleByIP(ipAddress);
         System.out.println(cityTitle.getCityTitle());
@@ -36,6 +38,18 @@ public class Main {
         for (int i = 0; i < userDB.getSize(); i++) {
             System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
                     "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getIpAddressByIndex(i));
+        }
+
+        //testing MySQL Queries for Database established above
+        for (int i = 0; i < userDB.getSize(); i++) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUsername(userDB.getUsernameByIndex(i));
+            userProfile.setEmail(userDB.getEmailByIndex(i));
+            userProfile.setPassword(userDB.getPasswordByIndex(i));
+            userProfile.setAge(userDB.getAgeByIndex(i));
+            userProfile.setCity(cityTitle.getCityTitle());
+            userProfile.setIpAddress(ipAddress);
+            userProfile.save();
         }
     }
 }
