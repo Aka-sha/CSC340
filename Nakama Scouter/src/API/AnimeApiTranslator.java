@@ -1,37 +1,35 @@
 package API;
 
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * The class is used to translate the information retrieved from the Food API.
+ * The class is used to translate the information retrieved from the Anime API.
  * The contents from connecting to the API URL produces a readable JSON file.
  *
- * TRANSLATOR NEEDS ADJUSTMENT (won't go deeper into the JSON files, for example try loading Restaurant Name)
+ * Translator sometimes returns JSON file. Needs more work.
  *
- * Last Updated 03/25/2021
+ * Last Updated 03/26/2021
  * @author Andy Cruse
  */
-public class RestaurantApiTranslator implements RestaurantApiInterface {
+public class AnimeApiTranslator implements AnimeApiInterface {
 
-    private static final String RESTAURANT_BASE_URL = "https://api.documenu.com/v2/restaurant";
-    private static final String RESTAURANT_API_KEY = "6144484d3b41cf035960ad4820487068";
-
+    private static final String ANIME_BASED_URL = "https://api.jikan.moe/v3";
 
     /**
-     * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
+     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
-     * When _loadItem = restaurant_name, another JSON file is read but is returned
+     * When _loadItem = title, another JSON file is read but points to null
      */
     @Override
-    public Object loadRestaurantItemBySearch(double _latitude, double _longitude, int _distance, String _cuisine, String _loadItem) {
-        String searchString = "s/search/geo?" + "key=" + RestaurantApiTranslator.RESTAURANT_API_KEY + "&lat=" + _latitude + "&lon=" + _longitude + "&distance=" + _distance + "&cuisine=" + _cuisine;
+    public Object loadAnimeMangaItemByID(String _id, String _loadItem) {
+        // Builds base url string
+        String searchString = "/anime/" + _id;
         try {
-            URL url = new URL(RestaurantApiTranslator.RESTAURANT_BASE_URL + searchString);
+            URL url = new URL(AnimeApiTranslator.ANIME_BASED_URL + searchString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -53,14 +51,15 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
     }
 
     /**
-     * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
+     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
-     * The URL IS CORRECT but it won't connect. API Tester won't connect either. API down or outdated documentation?
      */
-    public Object loadRestaurantItemByID(String _id, String _loadItem) {
-        String searchString = "/" +_id + "?key=" + RestaurantApiTranslator.RESTAURANT_API_KEY;
+    @Override
+    public Object loadAnimeMangaItemSearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort, String _loadItem) {
+        // Builds base url string
+        String searchString = "/search/" + _type + "?q=&genre=" + _genre1 + "," + _genre2 + "," + _genre3 + "&order_by=" + _orderBy + "&sort=" + _sort;
         try {
-            URL url = new URL(RestaurantApiTranslator.RESTAURANT_BASE_URL + searchString);
+            URL url = new URL(AnimeApiTranslator.ANIME_BASED_URL + searchString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -79,8 +78,5 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
         } catch (Exception ex) {
             return null;
         }
-
-
-
     }
 }

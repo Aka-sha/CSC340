@@ -45,6 +45,4 @@ public class FoodApiTranslator implements FoodApiInterface{
             return null;
         }
     }
-
-
-    }
+}
