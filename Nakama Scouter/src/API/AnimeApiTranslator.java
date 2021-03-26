@@ -6,10 +6,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * The class is used to translate the information retrieved from the Anime API.
+ * The contents from connecting to the API URL produces a readable JSON file.
+ * Last Updated 03/26/2021
+ * @author Andy Cruse
+ */
 public class AnimeApiTranslator implements AnimeApiInterface {
 
     private static final String ANIME_BASED_URL = "https://api.jikan.moe/v3";
 
+    /**
+     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
+     * Then, the file is read to a String.
+     */
     @Override
     public Object loadAnimeMangaItemByID(String _id, String _loadItem) {
         // Builds base url string
@@ -36,6 +46,10 @@ public class AnimeApiTranslator implements AnimeApiInterface {
         }
     }
 
+    /**
+     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
+     * Then, the file is read to a String.
+     */
     @Override
     public Object loadAnimeMangaItemSearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort, String _loadItem) {
         // Builds base url string

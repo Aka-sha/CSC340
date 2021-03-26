@@ -1,5 +1,11 @@
 package Models;
 
+/**
+ * This class loads the Anime/Manga information under a number of various parameters
+ * The API used for this, Jikan, is confusing. Study it carefully before making alterations
+ * Last Updated 03/26/21
+ * @author Andy Cruse
+ */
 public class AnimeManga extends APIBaseClass {
 
     protected String results;
@@ -33,8 +39,8 @@ public class AnimeManga extends APIBaseClass {
     protected final String RATING = "rated";
 
     /**
-     * Static method creates a City object based on the given user ipAddress string.
-     * Method connects to Geolocation API to return the latitude reading of a city given an IP Address.
+     * Static method creates a AnimeManga object based on the given user ipAddress string.
+     * Method connects to AnimeManga API to returns whether the ID is a Manga or Anime
      * @param _id
      * @return AnimeManga animemanga
      */
@@ -51,7 +57,7 @@ public class AnimeManga extends APIBaseClass {
 
     /**
      * Static method creates a AnimeManga object based on the given user ID string.
-     * Method connects to AnimeManga API to return the Genre given an IP Address.
+     * Method connects to AnimeManga API to return the Genre given an ID.
      *
      * CURRENTLY DOES NOT WORK!!!
      *
@@ -69,6 +75,14 @@ public class AnimeManga extends APIBaseClass {
         return animemanga;
     }
 
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Title of an anime or manga
+     * by the user inputted type, genres, sort order genre, and the method of sorting
+     *
+     * @param _type, _genre1, _genre2, _genre3, _orderBy, _sort
+     * @return AnimeManga animemanga
+     */
     public static AnimeManga loadAnimeMangaTitleBySearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort) {
         AnimeManga animemanga = new AnimeManga();
         animemanga.setType(_type);

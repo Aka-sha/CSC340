@@ -1,5 +1,10 @@
 package API;
 
+/**
+ * This interface will define methods that are needed for the Anime/Manga API Translator
+ * Last Updated 03/26/2021
+ * @author Andy Cruse
+ */
 public interface AnimeApiInterface {
 
     public Object loadAnimeMangaItemByID(String _id, String _loadItem);

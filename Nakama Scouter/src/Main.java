@@ -49,7 +49,7 @@ public class Main {
         System.out.println(animeSearch.getTitle());
         System.out.println(animeTitle.getTitle());
 
-        
+
         //Testing the UserDatabase
         UserDatabase userDB = new UserDatabase();
         userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass", 18, cityTitle.getCityTitle(), ipAddress);
