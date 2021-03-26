@@ -20,6 +20,7 @@ public class AnimeManga extends APIBaseClass {
     protected String url;
     protected String imageUrl;
     protected String title;
+    protected String titleEnglish;
     protected String synopsis;
     protected String episodes;
     protected String score;
@@ -33,14 +34,16 @@ public class AnimeManga extends APIBaseClass {
     protected final String URL = "url";
     protected final String IMAGE_URL = "image_url";
     protected final String TITLE = "title";
+    protected final String TITLE_ENGLISH = "title_english";
     protected final String SYNOPSIS = "synopsis";
     protected final String EPISODES = "episodes";
     protected final String SCORE = "score";
     protected final String RATING = "rated";
 
     /**
-     * Static method creates a AnimeManga object based on the given user ipAddress string.
+     * Static method creates a AnimeManga object based on the given user ID string.
      * Method connects to AnimeManga API to returns whether the ID is a Manga or Anime
+     * (NEEDS WORK/TESTING)
      * @param _id
      * @return AnimeManga animemanga
      */
@@ -57,10 +60,62 @@ public class AnimeManga extends APIBaseClass {
 
     /**
      * Static method creates a AnimeManga object based on the given user ID string.
-     * Method connects to AnimeManga API to return the Genre given an ID.
-     *
-     * CURRENTLY DOES NOT WORK!!!
-     *
+     * Method connects to AnimeManga API to returns Genre of an Anime/Manga
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaGenreByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String genre = AnimeManga.myLocationAPI.loadLocation(_id, animemanga.GENRE).toString();
+        if (genre == null) {
+            return null;
+        }
+        animemanga.setGenre(genre);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to returns the MyAnimeList url for the Anime/Manga
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaURLByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String url = AnimeManga.myLocationAPI.loadLocation(_id, animemanga.URL).toString();
+        if (url == null) {
+            return null;
+        }
+        animemanga.setURL(url);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Image URL for the Anime/Manga
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaImageUrlByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String imageUrl = AnimeManga.myLocationAPI.loadLocation(_id, animemanga.IMAGE_URL).toString();
+        if (imageUrl == null) {
+            return null;
+        }
+        animemanga.setImageUrl(imageUrl);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Title of an Anime/Manga.
+     * (NEEDS WORK/TESTING)
      * @param _id
      * @return AnimeManga animemanga
      */
@@ -77,8 +132,98 @@ public class AnimeManga extends APIBaseClass {
 
     /**
      * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the English Title of an Anime/Manga.
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaTitleEnglishByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String titleEnglish = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemByID(_id, animemanga.TITLE_ENGLISH).toString();
+        if (titleEnglish == null) {
+            return null;
+        }
+        animemanga.setTitleEnglish(titleEnglish);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Synopsis of an Anime/Manga.
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaSynopsisByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String synopsis = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemByID(_id, animemanga.SYNOPSIS).toString();
+        if (synopsis == null) {
+            return null;
+        }
+        animemanga.setSynopsis(synopsis);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Episodes of an Anime or Manga
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaEpisodesByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String episodes = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemByID(_id, animemanga.EPISODES).toString();
+        if (episodes == null) {
+            return null;
+        }
+        animemanga.setEpisodes(episodes);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the rating score of an Anime/Manga
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaScoreByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String score = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemByID(_id, animemanga.SCORE).toString();
+        if (score == null) {
+            return null;
+        }
+        animemanga.setScore(score);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
+     * Method connects to AnimeManga API to return the Title of an Anime/Manga.
+     * (NEEDS WORK/TESTING)
+     * @param _id
+     * @return AnimeManga animemanga
+     */
+    public static AnimeManga loadAnimeMangaRatingByID(String _id) {
+        AnimeManga animemanga = new AnimeManga();
+        animemanga.setID(_id);
+        String rating = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemByID(_id, animemanga.RATING).toString();
+        if (rating == null) {
+            return null;
+        }
+        animemanga.setRating(rating);
+        return animemanga;
+    }
+
+    /**
+     * Static method creates a AnimeManga object based on the given user ID string.
      * Method connects to AnimeManga API to return the Title of an anime or manga
-     * by the user inputted type, genres, sort order genre, and the method of sorting
+     * by the user inputted type, 3 genres, sort order genre, and the method of sorting
      *
      * @param _type, _genre1, _genre2, _genre3, _orderBy, _sort
      * @return AnimeManga animemanga
@@ -133,6 +278,9 @@ public class AnimeManga extends APIBaseClass {
     public String getTitle() {
         return this.title;
     }
+    public String getTitleEnglish() {
+        return this.titleEnglish;
+    }
     public String getSynopsis() {
         return this.synopsis;
     }
@@ -180,6 +328,9 @@ public class AnimeManga extends APIBaseClass {
     }
     public void setTitle(String _title) {
         this.title = _title;
+    }
+    public void setTitleEnglish(String _titleEnglish) {
+        this.titleEnglish = _titleEnglish;
     }
     public void setSynopsis(String _synopsis) {
         this.synopsis = _synopsis;

@@ -9,14 +9,15 @@ public class Main {
     public static void main(String[] args) {
 
         //Testing Food API
-        int id = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        Recipe recipeTitle = Recipe.loadRecipeTitleById(id);
-        Recipe recipeSummary = Recipe.loadSummaryById(id);
-        Recipe recipeVegetarian = Recipe.loadIsVegetarianById(id);
-        Recipe recipeVegan = Recipe.loadIsVeganById(id);
-        Recipe recipePricePerServing = Recipe.loadPricePerServingById(id);
-        Recipe recipeMinutes = Recipe.loadReadyInMinutesById(id);
-        Recipe recipeServings = Recipe.loadServingsById(id);
+        //API Fails randomly. CONSIDER REMOVING OR REPLACE
+        int foodID = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+        Recipe recipeTitle = Recipe.loadRecipeTitleById(foodID);
+        Recipe recipeSummary = Recipe.loadSummaryById(foodID);
+        Recipe recipeVegetarian = Recipe.loadIsVegetarianById(foodID);
+        Recipe recipeVegan = Recipe.loadIsVeganById(foodID);
+        Recipe recipePricePerServing = Recipe.loadPricePerServingById(foodID);
+        Recipe recipeMinutes = Recipe.loadReadyInMinutesById(foodID);
+        Recipe recipeServings = Recipe.loadServingsById(foodID);
         System.out.println("Recipe Title: " + recipeTitle.getTitle());
         System.out.println("Recipe Summary: " + recipeSummary.getSummary());
         System.out.println("Vegetarian: " + recipeVegetarian.getIsVegetarian());
@@ -27,27 +28,60 @@ public class Main {
 
 
         //Testing Location API
-        String ipAddress = "174.204.142.53"; //returns New York
+        String ipAddress = "174.204.142.53"; // New York
         City cityTitle = City.loadCityTitleByIP(ipAddress);
         City cityLat = City.loadCityLatitudeByIP(ipAddress);
         City cityLon = City.loadCityLongitudeByIP(ipAddress);
-        System.out.println(cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
+        System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
 
 
         //Testing Restaurant API
-        Restaurant restaurantResults = Restaurant.loadRestaurantResults(cityLat.getLatitude(), cityLon.getLongitude(), 30, "Japanese");
-        Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), 30, "Japanese");
-        Restaurant restaurantData = Restaurant.loadRestaurantData(cityLat.getLatitude(), cityLon.getLongitude(), 30, "Japanese");
-        System.out.println(restaurantResults.getTotalResults());
-        System.out.println(restaurantName.getRestaurantName()); //TRANSLATOR NEEDS WORK!!!!!
-        System.out.println(restaurantData.getData());
-
+        //RestaurantApiTranslator NEEDS WORK!!!!!
+        int distance = 30;
+        String cuisine = "Japanese";
+        String restID = "407270267399819";
+        Restaurant restaurantResults = Restaurant.loadRestaurantResults(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantData = Restaurant.loadRestaurantData(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantWeb = Restaurant.loadRestaurantWebsite(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantHours = Restaurant.loadRestaurantHours(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        Restaurant restaurantPrice = Restaurant.loadRestaurantPriceRange(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        //Restaurant restaurantNameByID = Restaurant.loadRestaurantNameByID(restID); //API won't connect to this link, API may be down. Tester gets not response
+        //Restaurant restaurantPhoneByID = Restaurant.loadRestaurantPhoneByID(restID);
+        //Restaurant restaurantWebByID = Restaurant.loadRestaurantWebsiteByID(restID);
+        //Restaurant restaurantHoursByID = Restaurant.loadRestaurantHoursByID(restID);
+        //Restaurant restaurantPriceByID = Restaurant.loadRestaurantPriceByID(restID);
+        System.out.println("Rest. Get Results: " + restaurantResults.getTotalResults());
+        System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
+        System.out.println("Restaurant Get Data: " + restaurantData.getData()); //RestaurantApiTranslator NEEDS WORK!!!!! Currently returns a JSON file of RESULTS (same issue)
+        //System.out.println("Restaurant Name By ID: " + restaurantNameByID.getRestaurantName());
 
         //Testing AnimeManga API
-        AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch("anime", "1", "10", "4", "start_date", "desc");
-        AnimeManga animeTitle = AnimeManga.loadAnimeMangaTitleByID("884");
-        System.out.println(animeSearch.getTitle());
-        System.out.println(animeTitle.getTitle());
+        String type = "anime";
+        String id = "884";
+        String genre1 = "1";
+        String genre2 = "10";
+        String genre3 = "4";
+        String orderBy = "start_date";
+        String sort = "desc";
+        AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
+
+        /** //AnimeApiTranslator NEEDS WORK!!!!! Currently returns a JSON file of RESULTS
+
+        AnimeManga animeTypeByID = AnimeManga.loadAnimeMangaTypeByID(id);
+        AnimeManga animeGenreByID = AnimeManga.loadAnimeMangaGenreByID(id);
+        AnimeManga animeURLByID = AnimeManga.loadAnimeMangaURLByID(id);
+        AnimeManga animeImageURLByID = AnimeManga.loadAnimeMangaImageUrlByID(id);
+        AnimeManga animeTitleByID = AnimeManga.loadAnimeMangaTitleByID(id);
+        AnimeManga animeTitleEnglishByID = AnimeManga.loadAnimeMangaTitleEnglishByID(id);
+        AnimeManga animeSynopsisByID = AnimeManga.loadAnimeMangaSynopsisByID(id);
+        AnimeManga animeEpisodesByID = AnimeManga.loadAnimeMangaEpisodesByID(id);
+        AnimeManga animeScoreByID = AnimeManga.loadAnimeMangaScoreByID(id);
+         */
+        //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
+        System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
+        //System.out.println(animeRatingByID.getRating());
 
 
         //Testing the UserDatabase

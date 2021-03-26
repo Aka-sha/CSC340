@@ -9,6 +9,9 @@ import java.net.URL;
 /**
  * The class is used to translate the information retrieved from the Anime API.
  * The contents from connecting to the API URL produces a readable JSON file.
+ *
+ * Translator sometimes returns JSON file. Needs more work.
+ *
  * Last Updated 03/26/2021
  * @author Andy Cruse
  */
@@ -19,6 +22,7 @@ public class AnimeApiTranslator implements AnimeApiInterface {
     /**
      * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
+     * When _loadItem = title, another JSON file is read but points to null
      */
     @Override
     public Object loadAnimeMangaItemByID(String _id, String _loadItem) {

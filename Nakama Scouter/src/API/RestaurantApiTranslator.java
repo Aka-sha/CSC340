@@ -18,16 +18,18 @@ import java.net.URL;
  */
 public class RestaurantApiTranslator implements RestaurantApiInterface {
 
-    private static final String RESTAURANT_BASE_URL = "https://api.documenu.com/v2/restaurants/search/geo?";
+    private static final String RESTAURANT_BASE_URL = "https://api.documenu.com/v2/restaurant";
     private static final String RESTAURANT_API_KEY = "6144484d3b41cf035960ad4820487068";
+
 
     /**
      * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
+     * When _loadItem = restaurant_name, another JSON file is read but is returned
      */
     @Override
-    public Object loadRestaurantItem(double _latitude, double _longitude, int _distance, String _cuisine, String _loadItem) {
-        String searchString = "key=" + RestaurantApiTranslator.RESTAURANT_API_KEY + "&lat=" + _latitude + "&lon=" + _longitude + "&distance=" + _distance + "&cuisine=" + _cuisine;
+    public Object loadRestaurantItemBySearch(double _latitude, double _longitude, int _distance, String _cuisine, String _loadItem) {
+        String searchString = "s/search/geo?" + "key=" + RestaurantApiTranslator.RESTAURANT_API_KEY + "&lat=" + _latitude + "&lon=" + _longitude + "&distance=" + _distance + "&cuisine=" + _cuisine;
         try {
             URL url = new URL(RestaurantApiTranslator.RESTAURANT_BASE_URL + searchString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -48,5 +50,37 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    /**
+     * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
+     * Then, the file is read to a String.
+     * The URL IS CORRECT but it won't connect. API Tester won't connect either. API down or outdated documentation?
+     */
+    public Object loadRestaurantItemByID(String _id, String _loadItem) {
+        String searchString = "/" +_id + "?key=" + RestaurantApiTranslator.RESTAURANT_API_KEY;
+        try {
+            URL url = new URL(RestaurantApiTranslator.RESTAURANT_BASE_URL + searchString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            // Build the content from the buffered input
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            // Close connections
+            in.close();
+            connection.disconnect();
+            // Extract JSON object
+            JSONObject obj = new JSONObject(content.toString());
+            return obj.getString(_loadItem);
+        } catch (Exception ex) {
+            return null;
+        }
+
+
+
     }
 }

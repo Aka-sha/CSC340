@@ -7,6 +7,7 @@ package API;
  */
 public interface RestaurantApiInterface {
 
-    public Object loadRestaurantItem(double _latitude, double longitude, int _distance, String _cuisine, String _loadItem);
+    public Object loadRestaurantItemBySearch(double _latitude, double longitude, int _distance, String _cuisine, String _loadItem);
+    public Object loadRestaurantItemByID(String _id, String _loadItem);
 
 }
