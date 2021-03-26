@@ -15,5 +15,6 @@ public class APIBaseClass {
     protected final static FoodApiInterface myFoodAPI = new FoodApiTranslator();
     protected final static GeolocationApiInterface myLocationAPI = new GeolocationApiTranslator();
     protected final static RestaurantApiInterface myRestaurantAPI = new RestaurantApiTranslator();
+    protected final static AnimeApiInterface myAnimeMangaAPI = new AnimeApiTranslator();
 
 }

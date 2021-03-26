@@ -1,3 +1,4 @@
+import Models.AnimeManga;
 import Models.City;
 import Models.Recipe;
 import Models.Restaurant;
@@ -42,6 +43,13 @@ public class Main {
         System.out.println(restaurantData.getData());
 
 
+        //Testing AnimeManga API
+        AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch("anime", "1", "10", "4", "start_date", "desc");
+        AnimeManga animeTitle = AnimeManga.loadAnimeMangaTitleByID("884");
+        System.out.println(animeSearch.getTitle());
+        System.out.println(animeTitle.getTitle());
+
+        
         //Testing the UserDatabase
         UserDatabase userDB = new UserDatabase();
         userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass", 18, cityTitle.getCityTitle(), ipAddress);
