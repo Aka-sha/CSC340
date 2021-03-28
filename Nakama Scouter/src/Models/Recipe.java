@@ -3,8 +3,13 @@ package Models;
 /**
  * This class loads the recipe information from the Food API.
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
  * Last Updated 03/24/2021
  * @author Andy Cruse, modified by Edward Hicks
+=======
+ * Last Updated 02/14/2021
+ * @author Andy Cruse
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
 =======
  * Last Updated 02/14/2021
  * @author Andy Cruse
@@ -21,6 +26,7 @@ public class Recipe extends APIBaseClass {
     protected Integer readyInMinutes;
     protected Integer servings;
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
     protected final String ITEM_TITLE = "title";
     protected final String ITEM_SUMMARY = "summary";
     protected final String ITEM_IS_VEGETARIAN = "vegetarian";
@@ -28,6 +34,8 @@ public class Recipe extends APIBaseClass {
     protected final String ITEM_PRICE_PER_SERVING = "pricePerServing";
     protected final String ITEM_READY_IN_MINUTES = "readyInMinutes";
     protected final String ITEM_SERVINGS = "servings";
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
 =======
 >>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
 
@@ -43,6 +51,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         String title;
         try {
             title = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_TITLE).toString();
@@ -51,6 +60,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setTitle("!NA!");
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         String title = Recipe.myFoodAPI.loadRecipeTitleById(_id);
         if (title == null) {
             return null;
@@ -69,6 +80,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         String summary;
         try {
             summary = Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_SUMMARY).toString();
@@ -77,6 +89,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setSummary("!NA!");
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         String summary = Recipe.myFoodAPI.loadSummaryById(_id);
         if (summary == null) {
             return null;
@@ -95,6 +109,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         Boolean isVegetarian;
         try {
             isVegetarian = Boolean.parseBoolean(myFoodAPI.loadRecipeItem(_id, recipe.ITEM_IS_VEGETARIAN).toString());
@@ -103,6 +118,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setIsVegetarian(false);
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         Boolean isVegetarian = Recipe.myFoodAPI.loadIsVegetarianById(_id);
         if (isVegetarian == null) {
             return null;
@@ -121,6 +138,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         Boolean isVegan;
         try {
             isVegan = Boolean.parseBoolean(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_IS_VEGAN).toString());
@@ -129,6 +147,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setIsVegan(false);
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         Boolean isVegan = Recipe.myFoodAPI.loadIsVeganById(_id);
         if (isVegan == null) {
             return null;
@@ -147,6 +167,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         Double pricePerServing;
         try {
             pricePerServing = Double.parseDouble(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_PRICE_PER_SERVING).toString());
@@ -155,6 +176,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setPricePerServing(0d);
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         Double pricePerServing = Recipe.myFoodAPI.loadPricePerServingById(_id);
         if (pricePerServing == null){
             return null;
@@ -173,6 +196,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         Integer minutes;
         try {
             minutes = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_READY_IN_MINUTES).toString());
@@ -181,6 +205,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setReadyInMinutes(0);
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         Integer minutes = Recipe.myFoodAPI.loadReadyInMinutesById(_id);
         if (minutes == null){
             return null;
@@ -199,6 +225,7 @@ public class Recipe extends APIBaseClass {
         Recipe recipe = new Recipe();
         recipe.setId(_id);
 <<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
+<<<<<<< HEAD:Nakama Scouter/src/Models/Recipe.java
         Integer servings;
         try {
             servings = Integer.parseInt(Recipe.myFoodAPI.loadRecipeItem(_id, recipe.ITEM_SERVINGS).toString());
@@ -207,6 +234,8 @@ public class Recipe extends APIBaseClass {
         catch (NullPointerException ex) {
             recipe.setServings(0);
 =======
+=======
+>>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/Models/Recipe.java
         Integer servings = Recipe.myFoodAPI.loadServingsById(_id);
         if (servings == null){
             return null;

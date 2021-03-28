@@ -7,29 +7,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * The class is used to translate the information retrieved from the Geolocation API.
+ * The class is used to translate the information retrieved from the Food API.
  * The contents from connecting to the API URL produces a readable JSON file.
-<<<<<<< HEAD:Nakama Scouter/src/API/GeolocationApiTranslator.java
- * Last Updated 03/23/2021
-=======
  * Last Updated 02/14/2021
->>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/API/FoodApiTranslator.java
  * @author Andy Cruse
  */
-
-public class GeolocationApiTranslator implements GeolocationApiInterface{
-    private static final String baseURL = "http://ip-api.com/json/";
+public class FoodApiTranslator implements FoodApiInterface{
+    private static final String baseURL = "https://api.spoonacular.com";
+    private static final String apiKey = "2608aa6998b6435aafe55ed681664869";
 
     /**
-<<<<<<< HEAD:Nakama Scouter/src/API/GeolocationApiTranslator.java
-     * This method is used to connect to the Location API via a URL and add the contents to a JSON file.
-     * Then, the file is read to a String.
-     * @param _ipAddress, _loadItem
-     * @return _loadItem
-     */
-    @Override
-    public Object loadLocation(String _ipAddress, String _loadItem){
-=======
      * This method is used to connect to the Food API via a URL and add the contents to a JSON file.
      * Then the file is read to a String.
      * @param _id
@@ -39,15 +26,14 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
     public String loadRecipeTitleById(int _id) {
         // Builds base url string
         String searchString = new String("/recipes/" + _id + "/information?apiKey=" + FoodApiTranslator.apiKey);
->>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/API/FoodApiTranslator.java
         try{
-            URL url = new URL(GeolocationApiTranslator.baseURL + _ipAddress + "?fields=status,city,lat,lon,query");
+            URL url = new URL(FoodApiTranslator.baseURL + searchString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             // Build the content from the buffered input
-            StringBuilder content = new StringBuilder();
+            StringBuffer content = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
             }
@@ -62,9 +48,6 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
             return null;
         }
     }
-<<<<<<< HEAD:Nakama Scouter/src/API/GeolocationApiTranslator.java
-}
-=======
 
     /**
      * This method is used to connect to the Food API via a URL and add the contents to a JSON file.
@@ -269,4 +252,3 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
         }
     }
 }
->>>>>>> parent of 4cd4337 (Merge pull request #3 from Aka-sha/echicks):Food API/src/API/FoodApiTranslator.java
