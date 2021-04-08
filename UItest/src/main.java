@@ -28,20 +28,20 @@ public class main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage){
-       try {
-           Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-           Scene scene = new Scene(root, 1028, 579);
-           primaryStage.setScene(scene);
-           primaryStage.setTitle("Welcome to Nakama Scouter");
-           primaryStage.setResizable(false);
-           primaryStage.setScene(scene);
-           primaryStage.show();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            Scene scene = new Scene(root, 1028, 579);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Welcome to Nakama Scouter");
+            primaryStage.setResizable(false);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    }
+}
 
 
