@@ -45,7 +45,7 @@
 
 <VBox prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
   <children>
-    <AnchorPane maxHeight="579.0" maxWidth="1028.0" minHeight="579.0" minWidth="1028.0" prefHeight="579.0" prefWidth="1028.0" style="-fx-background-image: url('image/login.png'); -fx-background-repeat: round;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="579.0" maxWidth="1028.0" minHeight="579.0" minWidth="1028.0" prefHeight="579.0" prefWidth="1028.0" style="-fx-background-image: url('fxml/image/login.png'); -fx-background-repeat: round;" VBox.vgrow="ALWAYS">
          <children>
             <Text fill="RED" layoutX="20.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anime" wrappingWidth="69.0">
                <font>
@@ -57,10 +57,10 @@
                   <Font name="ROGFontsv1.6-Regular" size="25.0" />
                </font>
             </Text>
-            <Button fx:id="home" layoutX="204.0" layoutY="23.0" mnemonicParsing="false" onAction="#home" text="Home" />
-            <Button fx:id="top" layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topa" text="Top Anime" />
-            <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" text="SignUp" />
-            <Button fx:id="mov" layoutX="917.0" layoutY="23.0" mnemonicParsing="false" onAction="#login" text="Login" />
+            <Button layoutX="204.0" layoutY="23.0" mnemonicParsing="false" onAction="#homePage" text="Home" />
+            <Button layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topPage" text="Top Anime" />
+            <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" onAction="#signPage" text="SignUp" />
+            <Button layoutX="917.0" layoutY="23.0" mnemonicParsing="false" onAction="#loginPage" text="Login" />
             <GridPane layoutX="65.0" layoutY="133.0" prefHeight="379.0" prefWidth="852.0" style="-fx-background-color: transparent;">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="100.0" />

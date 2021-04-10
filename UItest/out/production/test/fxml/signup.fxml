@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -13,22 +14,24 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('image/login.png'); -fx-background-repeat: round;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('fxml/image/login.png'); -fx-background-repeat: round;">
          <children>
             <Text fill="#2b00ff" layoutX="113.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!">
                <font>
                   <Font name="ROGFontsv1.6-Regular" size="88.0" />
                </font>
             </Text>
-            <Button fx:id="sub" alignment="CENTER" layoutX="133.0" layoutY="335.0" mnemonicParsing="false" onAction="#loginB" prefHeight="49.0" prefWidth="128.0" text="SignUp">
+            <Button fx:id="sub" alignment="CENTER" layoutX="133.0" layoutY="335.0" mnemonicParsing="false" onAction="#signup" prefHeight="49.0" prefWidth="128.0" text="SignUp">
                <font>
                   <Font name="ROGFonts-Regular" size="16.0" />
                </font>
             </Button>
-            <GridPane layoutX="85.0" layoutY="89.0" prefHeight="223.0" prefWidth="455.0">
+            <GridPane layoutX="5.0" layoutY="72.0" prefHeight="257.0" prefWidth="591.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="109.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="346.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="108.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="0.0" prefWidth="176.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="62.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="222.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -60,10 +63,28 @@
                      </font>
                   </Text>
                   <PasswordField fx:id="rePass2" prefHeight="26.0" prefWidth="213.0" promptText="Enter your password again" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <PasswordField fx:id="reEmail" prefHeight="26.0" prefWidth="213.0" promptText="Enter your email address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="reEmail" prefHeight="26.0" prefWidth="323.0" promptText="Enter your email address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="ROGFontsv1.6-Regular" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="13.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="ROGFontsv1.6-Regular" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="13.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="reAge" prefHeight="26.0" prefWidth="323.0" promptText="Enter your age" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="reCity" prefHeight="26.0" prefWidth="323.0" promptText="Enter your city" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button fx:id="clear" alignment="CENTER" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#clear" prefHeight="49.0" prefWidth="128.0" text="Clear">
+            <Button alignment="CENTER" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#clear" prefHeight="49.0" prefWidth="128.0" text="Clear">
                <font>
                   <Font name="ROGFonts-Regular" size="16.0" />
                </font>
