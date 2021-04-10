@@ -29,6 +29,44 @@ public class controller {
     }
 
     @FXML
+    private Button home;
+
+    @FXML
+    public void home(ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Welcome to Nakama Scouter");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root, 1028, 579));
+            stage.show();
+            Stage primaryStage = (Stage) home.getScene().getWindow();
+            primaryStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Button top;
+
+    @FXML
+    public void topa(ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("topAnime.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Top Anime");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root, 1028, 579));
+            stage.show();
+            Stage primaryStage = (Stage) top.getScene().getWindow();
+            primaryStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void alert(ActionEvent event, String info) throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, info, new ButtonType("Close", ButtonBar.ButtonData.YES));
         alert.setHeaderText(null);
@@ -61,4 +99,28 @@ public class controller {
             alert(event, info);
         }
     }
+
+    @FXML
+    private TextField reUserid;
+
+    @FXML
+    private PasswordField rePass1;
+
+    @FXML
+    private PasswordField rePass2;
+
+    @FXML
+    private PasswordField reEmail;
+
+    @FXML
+    private Button clear;
+
+    @FXML
+    void clear(ActionEvent event) {
+        reEmail.clear();
+        rePass1.clear();
+        reUserid.clear();
+        rePass2.clear();
+    }
+
 }
