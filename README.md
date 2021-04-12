@@ -6,7 +6,7 @@ Aka'sh Carver
 
 Edward Hicks
 
-Andy Cruse
+Andy William Cruse
 
 Messiah Henderson
 
