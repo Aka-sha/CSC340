@@ -4,6 +4,8 @@ import Models.Recipe;
 import Models.Restaurant;
 import db.UserProfile;
 import db.UserDatabase;
+import db.FileReadAndWriter;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
@@ -107,5 +109,13 @@ public class Main {
             userProfile.setIpAddress(ipAddress);
             userProfile.save();
         }
+
+        //Testing the file creation, reading, and writing methods
+        FileReadAndWriter readWrite = new FileReadAndWriter();
+        final String testingAddress = System.getProperty("user.home") + File.separator + "Documents\\test.txt";
+        readWrite.createFile(testingAddress);
+        readWrite.writeToFile(testingAddress, "This is a test, and the test worked.");
+        System.out.println('"' + readWrite.readFile(testingAddress) + '"');
+        readWrite.deleteFile(testingAddress);
     }
 }
