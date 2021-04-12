@@ -45,12 +45,12 @@
 <VBox prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
   <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" />
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1028.0" style="-fx-background-image: url('image/login.png'); -fx-background-repeat: round;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1028.0" style="-fx-background-image: url('fxml/image/login.png'); -fx-background-repeat: round;" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="mov" layoutX="917.0" layoutY="23.0" mnemonicParsing="false" onAction="#login" text="Login" />
-            <Button fx:id="home" layoutX="204.0" layoutY="23.0" mnemonicParsing="false" onAction="#home" text="Home" />
-            <Button fx:id="top" layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topa" text="Top Anime" />
-            <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" text="SignUp" />
+            <Button fx:id="mov" layoutX="917.0" layoutY="23.0" mnemonicParsing="false" onAction="#loginPage" text="Login" />
+            <Button layoutX="204.0" layoutY="23.0" mnemonicParsing="false" onAction="#homePage" text="Home" />
+            <Button layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topPage" text="Top Anime" />
+            <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" onAction="#signPage" text="SignUp" />
             <Button layoutX="165.0" layoutY="231.0" mnemonicParsing="false" text="Our Works" />
             <ImageView fitHeight="182.0" fitWidth="294.0" layoutX="573.0" layoutY="72.0">
                <image>

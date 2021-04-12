@@ -10,7 +10,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('image/login.png'); -fx-background-repeat: round;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('fxml/image/login.png'); -fx-background-repeat: round;">
          <children>
             <TextField fx:id="userid" layoutX="112.0" layoutY="187.0" prefHeight="26.0" prefWidth="213.0" promptText="Enter your username" />
             <PasswordField fx:id="passWord" layoutX="112.0" layoutY="237.0" prefHeight="26.0" prefWidth="213.0" promptText="Enter your password" />

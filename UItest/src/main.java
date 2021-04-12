@@ -29,7 +29,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
             Scene scene = new Scene(root, 1028, 579);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Welcome to Nakama Scouter");
