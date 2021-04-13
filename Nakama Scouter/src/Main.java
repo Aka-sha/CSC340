@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Testing Food API
-        //API Fails randomly. CONSIDER REMOVING OR REPLACE
+        //API will fail if used too many times in a short period of time.
         int foodID = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         Recipe recipeTitle = Recipe.loadRecipeTitleById(foodID);
         Recipe recipeSummary = Recipe.loadSummaryById(foodID);
@@ -88,9 +88,9 @@ public class Main {
 
         //Testing the UserDatabase
         UserDatabase userDB = new UserDatabase();
-        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass", 18, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass", 21, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustreallyfuckinglovegators", 23, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), ipAddress);
         userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), ipAddress);
         userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), ipAddress);
         for (int i = 0; i < userDB.getSize(); i++) {
@@ -114,8 +114,8 @@ public class Main {
         FileReadAndWriter readWrite = new FileReadAndWriter();
         final String testingAddress = System.getProperty("user.home") + File.separator + "Documents\\test.txt";
         readWrite.createFile(testingAddress);
-        readWrite.writeToFile(testingAddress, "This is a test, and the test worked.");
+        readWrite.writeToFile(testingAddress, userDB.printDatabase());
         System.out.println('"' + readWrite.readFile(testingAddress) + '"');
-        readWrite.deleteFile(testingAddress);
+        //readWrite.deleteFile(testingAddress);
     }
 }
