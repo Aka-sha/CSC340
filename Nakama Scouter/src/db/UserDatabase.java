@@ -41,7 +41,7 @@ public class UserDatabase {
     }
 
     /**
-     * This method adds a user to the user database, only checking the validity of the username and skipping the
+     * This method adds a user to the user database, only checking for username duplicates and tabs, skipping the
      * sort at the end.
      * @param _userName
      * @param _email
@@ -51,7 +51,7 @@ public class UserDatabase {
      * @param _ipAddress
      */
     public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
-        if (checkForValidUsername(_userName)) {
+        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
             applicationUser.add(newUser);
         }
