@@ -34,15 +34,15 @@ public class UserDatabase {
         if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
             applicationUser.add(newUser);
-            sortList();
+            singleSortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
         }
         else System.out.println("Account registration denied.");
     }
 
     /**
-     * This method adds a user to the user database, skipping the validity check of the information given to it
-     * and doesn't sort the list after the user is created.
+     * This method adds a user to the user database, only checking the validity of the username and skipping the
+     * sort at the end.
      * @param _userName
      * @param _email
      * @param _passWord
@@ -51,8 +51,10 @@ public class UserDatabase {
      * @param _ipAddress
      */
     public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
-        UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
-        applicationUser.add(newUser);
+        if (checkForValidUsername(_userName)) {
+            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
+            applicationUser.add(newUser);
+        }
     }
 
     /**
@@ -192,12 +194,12 @@ public class UserDatabase {
      * A single new user is added to the database, sorted so that it's in alphabetical order.
      *     NOTE: THIS METHOD SHOULD BE CALLED IMMEDIATELY AFTER A NEW ACCOUNT IS CREATED
      */
-    public void sortList() {
-        if (this.applicationUser.size() > 1) {
+    public void singleSortList() {
+        if (this.getSize() > 1) {
             UserProfile newestUser = this.applicationUser.get(this.applicationUser.size()-1);
             String newestUsername = newestUser.getUsername();
             int lowerSortThreshold = 0;
-            int upperSortThreshold = this.applicationUser.size()-2;
+            int upperSortThreshold = this.getSize()-2;
             int index = upperSortThreshold / 2;
             //Find the appropriate index for the new account. Loop will continue until the newest username comes after the username at i-1 and before the username at i
             for (; ; index = lowerSortThreshold + ((upperSortThreshold-lowerSortThreshold)/2)) {
@@ -221,6 +223,53 @@ public class UserDatabase {
             //Set the new account to the correct index
             this.applicationUser.set(index, newestUser);
         }
+    }
+
+    /**
+     * A backup in case the database becomes unsorted, the entire database is sorted using merge sort.
+     */
+    public void mergeSortList() {
+        if (this.getSize() > 1) {
+            this.applicationUser = this.mergeSort(this.applicationUser);
+            System.out.println("Database re-sorted.");
+        }
+    }
+
+    /**
+     * The actual method that handles the merge sort. Lists are recursively broken down into smaller lists,
+     * the smaller lists are sorted, and the full list is gradually reassembled.
+     * @param _list
+     * @return
+     */
+    private List<UserProfile> mergeSort(List<UserProfile> _list) {
+        if (_list.size() > 1) {
+            //Dividing the list into two and recursing
+            int midpoint = (_list.size() / 2);
+            List<UserProfile> sortedList = new ArrayList<UserProfile>();
+            List<UserProfile> miniList1 = this.mergeSort(_list.subList(0, midpoint));
+            List<UserProfile> miniList2 = this.mergeSort(_list.subList(midpoint, _list.size()));
+
+            //Assembling the sorted miniLists back together. Loop continues until one of the miniLists is empty
+            int index1 = 0;
+            int index2 = 0;
+            while(index1 < miniList1.size() && index2 < miniList2.size()){
+                //If the first element of miniList1 should come before the first element of miniList2, add it to the sortedList and add 1 to index1
+                if (this.compareWithCase(miniList1.get(index1).getUsername(), miniList2.get(index2).getUsername()) < 0) {
+                    sortedList.add(miniList1.get(index1));
+                    index1++;
+                }
+                //Otherwise, the first element of miniList2 should be added to sortedList and add 1 to index2
+                else {
+                    sortedList.add(miniList2.get(index2));
+                    index2++;
+                }
+            }
+            //One of the miniLists has been exhausted, dump the contents of the remaining miniList onto sortedList
+            for (; index1 < miniList1.size(); index1++) sortedList.add(miniList1.get(index1));
+            for (; index2 < miniList2.size(); index2++) sortedList.add(miniList2.get(index2));
+            return sortedList;
+        }
+        else return _list;
     }
 
     /**

@@ -116,5 +116,17 @@ public class Main {
         //Testing the file printing and saving
         System.out.println(userDB.printDatabase());
         userDB.saveUserDatabaseDefault();
+
+        //Testing the merge-sort algorithm in case the user database becomes unsorted and needs fixing
+        UserDatabase mergeDB = new UserDatabase();
+        mergeDB.quickAddNewApplicationUser("eHicks", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("ACarver", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("aCandy", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("TheMessiah", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("kev1nDu", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("BigQuig", "", "", 0, "", "");
+        System.out.println(mergeDB.printDatabase());
+        mergeDB.mergeSortList();
+        System.out.println(mergeDB.printDatabase());
     }
 }
