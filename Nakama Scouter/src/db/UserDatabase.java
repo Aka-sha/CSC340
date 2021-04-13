@@ -1,23 +1,23 @@
 package db;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class contains a list of every user of the applications, and can handle adding new users to the database
  * and editting the data of preexisting users.
- * Last modified 04/12/2021 by Edward Hicks
+ * Last modified 04/13/2021 by Edward Hicks
  * @author Edward Hicks
  */
 public class UserDatabase {
-    protected List<UserProfile> applicationUser;
+    protected List<UserProfile> applicationUser = new ArrayList<UserProfile>();
     private final int minimumUsernameLength = 4;
     private final int minimumPasswordLength = 8;
     private final int minimumAge = 18;
+    private final String defaultDatabaseAddress = System.getProperty("user.home") + File.separator + "Documents\\test.txt";
 
-    public UserDatabase() {
-        this.applicationUser = new ArrayList<UserProfile>();
-    }
+    public UserDatabase() { }
 
     /**
      * This methods checks to see if the username of the new account is unique and if it is, creates a new account using the
@@ -31,13 +31,28 @@ public class UserDatabase {
      */
     public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
         //Create new user and add it to the List
-        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoSemicolons(_userName, _passWord, _email, _city, _ipAddress)) {
+        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
             applicationUser.add(newUser);
             sortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
         }
         else System.out.println("Account registration denied.");
+    }
+
+    /**
+     * This method adds a user to the user database, skipping the validity check of the information given to it
+     * and doesn't sort the list after the user is created.
+     * @param _userName
+     * @param _email
+     * @param _passWord
+     * @param _age
+     * @param _city
+     * @param _ipAddress
+     */
+    public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
+        UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
+        applicationUser.add(newUser);
     }
 
     /**
@@ -139,7 +154,8 @@ public class UserDatabase {
     }
 
     /**
-     * All String information is checked to ensure it doesn't contain a semicolon that would break how the database is saved and loaded.
+     * All String information is checked to ensure it doesn't contain a tab that would break how the database is saved and loaded.
+     * Probably useless, but is there just in case.
      * @param _userName
      * @param _passWord
      * @param _email
@@ -147,29 +163,29 @@ public class UserDatabase {
      * @param _ipAddress
      * @return
      */
-    public boolean checkForNoSemicolons(String _userName, String _passWord, String _email, String _city, String _ipAddress) {
-        boolean noSemicolons = true;
+    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city, String _ipAddress) {
+        boolean noTabs = true;
         if (_userName.contains(";")) {
-            System.out.println("Username must not contain a semicolon.");
-            noSemicolons = false;
+            System.out.println("Username must not contain a tab.");
+            noTabs = false;
         }
         if (_passWord.contains(";")) {
-            System.out.println("Password must not contain a semicolon.");
-            noSemicolons = false;
+            System.out.println("Password must not contain a tab.");
+            noTabs = false;
         }
         if (_email.contains(";")) {
-            System.out.println("Email address must not contain a semicolon.");
-            noSemicolons = false;
+            System.out.println("Email address must not contain a tab.");
+            noTabs = false;
         }
         if (_city.contains(";")) {
-            System.out.println("City must not contain a semicolon.");
-            noSemicolons = false;
+            System.out.println("City must not contain a tab.");
+            noTabs = false;
         }
         if (_ipAddress.contains(";")) {
-            System.out.println("IP address must not contain a semicolon.");
-            noSemicolons = false;
+            System.out.println("IP address must not contain a tab.");
+            noTabs = false;
         }
-        return noSemicolons;
+        return noTabs;
     }
 
     /**
@@ -228,8 +244,6 @@ public class UserDatabase {
         for (int i = 0; i < this.getSize(); i++) {
             allUserData += this.printUser(i) + "\n";
         }
-        //Trims off the last \n in the String.
-        allUserData = allUserData.substring(0, allUserData.length()-2);
         return allUserData;
     }
 
@@ -241,18 +255,81 @@ public class UserDatabase {
     public String printUser(int i) {
         try {
             String userData = "";
-            userData += this.getUsernameByIndex(i) + ";";
-            userData += this.getPasswordByIndex(i) + ";";
-            userData += this.getEmailByIndex(i) + ";";
-            userData += this.getAgeByIndex(i) + ";";
-            userData += this.getCityByIndex(i) + ";";
-            userData += this.getIpAddressByIndex(i) + ";";
+            userData += this.getUsernameByIndex(i) + "\t";
+            userData += this.getPasswordByIndex(i) + "\t";
+            userData += this.getEmailByIndex(i) + "\t";
+            userData += this.getAgeByIndex(i) + "\t";
+            userData += this.getCityByIndex(i) + "\t";
+            userData += this.getIpAddressByIndex(i) + "\t";
             return userData;
         } catch (Exception ex) {
-            //Only happens if i exceeds the scope of the database or is less than 0 (Hopefully)
+            //Only happens if i exceeds the size of the database or is less than 0 (Hopefully)
             return "";
         }
     }
+
+    /**
+     * Converts the user database to String and saves it to the provided address
+     * @param _address
+     */
+    public void saveUserDatabase(String _address) {
+        FileReadAndWriter saveFile = new FileReadAndWriter();
+        //Try to create file if it doesn't already exist
+        saveFile.createFile(_address);
+        //Save the database to the text file
+        saveFile.writeToFile(_address, this.printDatabase());
+        System.out.println("Database successfully saved to " + _address);
+    }
+
+    /**
+     * Converts the user database to String and saves it to the default address
+     */
+    public void saveUserDatabaseDefault() { this.saveUserDatabase(defaultDatabaseAddress); }
+
+    /**
+     * Uses an inputted address for finding the user data text file and converting it into String.
+     * @param _address
+     */
+    public void loadUserDatabase(String _address) {
+        try {
+            FileReadAndWriter fileLoader = new FileReadAndWriter();
+            String userDatabase = fileLoader.readFile(_address);
+            while (!userDatabase.isEmpty()) {
+                //Getting the substring for the next user
+                String userSubstring = userDatabase.substring(0, userDatabase.indexOf("\n"));
+                //Getting the username from the substring
+                String newUsername = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the password from the substring
+                String newPassword = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the email from the substring
+                String newEmail = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the age from the substring
+                int newAge = Integer.parseInt(userSubstring.substring(0, userSubstring.indexOf("\t")));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the city from the substring
+                String newCity = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the IP address from the substring
+                String newIPAddress = userSubstring;
+                //Creating the new user
+                quickAddNewApplicationUser(newUsername, newEmail, newPassword, newAge, newCity, newIPAddress);
+                //Trim the userDatabase
+                userDatabase = userDatabase.substring(userDatabase.indexOf("\n")+1);
+            }
+            System.out.println("Database successfully loaded from " + _address);
+        } catch (Exception ex) {
+            System.out.println("An error has occurred when loading the user database. The file is formatted incorrectly or might have been tampered with.");
+        }
+    }
+
+    /**
+     * Uses the default address for finding the user data text file and converting it into String
+     * @return
+     */
+    public void loadUserDatabaseDefault() { this.loadUserDatabase(defaultDatabaseAddress); }
 
     //=================  GETTERS =================
     public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
