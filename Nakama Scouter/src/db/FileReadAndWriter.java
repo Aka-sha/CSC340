@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * This class handles all reading and writing to files at addresses provided
  * by the user.
- * Last updated: 4/12/21
+ * Last updated: 4/13/21 by Edward Hicks
  * @author Edward Hicks
  */
 
@@ -47,6 +47,8 @@ public class FileReadAndWriter implements FileReadAndWriterInterface {
             //Continuously read the contents of the file and add it to the output.
             while (scanner.hasNextLine()) {
                 fileContents += scanner.nextLine();
+                //Deletes the tab at the end of the line and makes it a new line instead. It's important.
+                fileContents = fileContents.substring(0, fileContents.length()-1) + "\n";
             }
             scanner.close();
         } catch (FileNotFoundException ex) {
