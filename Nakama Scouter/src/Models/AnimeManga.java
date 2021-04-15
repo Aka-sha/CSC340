@@ -236,7 +236,7 @@ public class AnimeManga extends APIBaseClass {
         animemanga.setGenre3(_genre3);
         animemanga.setOrder(_orderBy);
         animemanga.setSort(_sort);
-        String title = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemSearch(_type, _genre1, _genre2, _genre3, _orderBy, _sort, animemanga.RESULTS).toString();
+        String title = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemSearch(_type, _genre1, _genre2, _genre3, _orderBy, _sort, animemanga.TITLE).toString();
         if (title == null) {
             return null;
         }

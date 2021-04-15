@@ -38,26 +38,13 @@ public class Main {
 
 
         //Testing Restaurant API
-        //RestaurantApiTranslator NEEDS WORK!!!!!
         int distance = 30;
         String cuisine = "Japanese";
         String restID = "407270267399819";
-        Restaurant restaurantResults = Restaurant.loadRestaurantResults(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
         Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantData = Restaurant.loadRestaurantData(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
         Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantWeb = Restaurant.loadRestaurantWebsite(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantHours = Restaurant.loadRestaurantHours(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantPrice = Restaurant.loadRestaurantPriceRange(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        //Restaurant restaurantNameByID = Restaurant.loadRestaurantNameByID(restID); //API won't connect to this link, API may be down. Tester gets not response
-        //Restaurant restaurantPhoneByID = Restaurant.loadRestaurantPhoneByID(restID);
-        //Restaurant restaurantWebByID = Restaurant.loadRestaurantWebsiteByID(restID);
-        //Restaurant restaurantHoursByID = Restaurant.loadRestaurantHoursByID(restID);
-        //Restaurant restaurantPriceByID = Restaurant.loadRestaurantPriceByID(restID);
-        System.out.println("Rest. Get Results: " + restaurantResults.getTotalResults());
         System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
-        System.out.println("Restaurant Get Data: " + restaurantData.getData()); //RestaurantApiTranslator NEEDS WORK!!!!! Currently returns a JSON file of RESULTS (same issue)
-        //System.out.println("Restaurant Name By ID: " + restaurantNameByID.getRestaurantName());
+        System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
 
         //Testing AnimeManga API
         String type = "anime";
@@ -69,18 +56,6 @@ public class Main {
         String sort = "desc";
         AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
 
-        /** //AnimeApiTranslator NEEDS WORK!!!!! Currently returns a JSON file of RESULTS
-
-        AnimeManga animeTypeByID = AnimeManga.loadAnimeMangaTypeByID(id);
-        AnimeManga animeGenreByID = AnimeManga.loadAnimeMangaGenreByID(id);
-        AnimeManga animeURLByID = AnimeManga.loadAnimeMangaURLByID(id);
-        AnimeManga animeImageURLByID = AnimeManga.loadAnimeMangaImageUrlByID(id);
-        AnimeManga animeTitleByID = AnimeManga.loadAnimeMangaTitleByID(id);
-        AnimeManga animeTitleEnglishByID = AnimeManga.loadAnimeMangaTitleEnglishByID(id);
-        AnimeManga animeSynopsisByID = AnimeManga.loadAnimeMangaSynopsisByID(id);
-        AnimeManga animeEpisodesByID = AnimeManga.loadAnimeMangaEpisodesByID(id);
-        AnimeManga animeScoreByID = AnimeManga.loadAnimeMangaScoreByID(id);
-         */
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
         System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
         //System.out.println(animeRatingByID.getRating());

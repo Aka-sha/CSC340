@@ -1,19 +1,18 @@
 package API;
 
 import org.json.JSONObject;
-
+import org.json.JSONArray;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * The class is used to translate the information retrieved from the Food API.
  * The contents from connecting to the API URL produces a readable JSON file.
  *
- * TRANSLATOR NEEDS ADJUSTMENT (won't go deeper into the JSON files, for example try loading Restaurant Name)
- *
- * Last Updated 03/25/2021
+ * Last Updated 04/14/2021
  * @author Andy Cruse
  */
 public class RestaurantApiTranslator implements RestaurantApiInterface {
@@ -24,8 +23,7 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
 
     /**
      * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
-     * Then, the file is read to a String.
-     * When _loadItem = restaurant_name, another JSON file is read but is returned
+     * Then, the file is read to an arrayList to get each loaditem
      */
     @Override
     public Object loadRestaurantItemBySearch(double _latitude, double _longitude, int _distance, String _cuisine, String _loadItem) {
@@ -46,7 +44,14 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
             connection.disconnect();
             // Extract JSON object
             JSONObject obj = new JSONObject(content.toString());
-            return obj.getString(_loadItem);
+            JSONArray data = (JSONArray)obj.get("data");
+            ArrayList<Object> arrayList = new ArrayList<Object>();
+            //adds every _loadItem to an arrayList
+            for(int i = 0; i < data.length(); i++) {
+                JSONObject item = data.getJSONObject(i);
+                arrayList.add(item.getString(_loadItem));
+            }
+            return arrayList;
         } catch (Exception ex) {
             return null;
         }
@@ -55,7 +60,7 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
     /**
      * This method is used to connect to the Restaurant API, Documenu, via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
-     * The URL IS CORRECT but it won't connect. API Tester won't connect either. API down or outdated documentation?
+     * This is for testing purposes. CONSIDER DELETING!
      */
     public Object loadRestaurantItemByID(String _id, String _loadItem) {
         String searchString = "/" +_id + "?key=" + RestaurantApiTranslator.RESTAURANT_API_KEY;
