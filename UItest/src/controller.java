@@ -185,6 +185,7 @@ public class controller {
         addStuff.add(sub);
         ObservableList <String> add = FXCollections.observableList(addStuff);
         animeRec.setItems(add);
+        animeSub.clear();
     }
     @FXML
     public void animeRec(ActionEvent event) throws IOException {
@@ -227,5 +228,8 @@ public class controller {
         T5name.setText("Tensei shitara Slime Datta Ken 2nd Season Part 2");
         T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");
     }
+    @FXML
+    void animeDetail(ActionEvent event) {
 
+    }
 }
