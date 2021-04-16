@@ -34,6 +34,7 @@
                   <Font name="ROGFonts-Regular" size="16.0" />
                </font>
             </Button>
+            <Button layoutX="543.0" layoutY="14.0" mnemonicParsing="false" onAction="#homePage" text="Back" />
          </children>
       </AnchorPane>
    </children>

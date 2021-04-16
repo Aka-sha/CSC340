@@ -6,6 +6,8 @@ import db.UserProfile;
 import db.UserDatabase;
 import db.FileReadAndWriter;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,13 +40,13 @@ public class Main {
 
 
         //Testing Restaurant API
-        int distance = 30;
-        String cuisine = "Japanese";
-        String restID = "407270267399819";
-        Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
-        System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
+        //int distance = 30;
+        //String cuisine = "Japanese";
+        //String restID = "407270267399819";
+        //Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        //Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        //System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
+        //System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
 
         //Testing AnimeManga API
         String type = "anime";
@@ -54,10 +56,20 @@ public class Main {
         String genre3 = "4";
         String orderBy = "start_date";
         String sort = "desc";
-        AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
-
+        //put this into a method for user preferences or search etc.
+        List<String> searchQuery = new ArrayList<String>();
+        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
+        searchQuery.add(genre1);
+        searchQuery.add(genre2);
+        searchQuery.add(genre3);
+        searchQuery.add(orderBy);
+        searchQuery.add(sort);
+        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
+        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        List<Object> animeData = animeSearch.getData();
+        System.out.println(animeData);
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
-        System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
+        //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
         //System.out.println(animeRatingByID.getRating());
 
 

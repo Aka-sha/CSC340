@@ -1,21 +1,16 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class loads the Anime/Manga information under a number of various parameters
- * The API used for this, Jikan, is confusing. Study it carefully before making alterations
- * Last Updated 03/26/21
+ * Last Updated 04/16/21
  * @author Andy Cruse
  */
 public class AnimeManga extends APIBaseClass {
 
     protected String results;
-    protected String type;
-    protected String genre;
-    protected String genre1; //genre1, 2 ,3, order, and sort are used for search and recommendations
-    protected String genre2;
-    protected String genre3;
-    protected String order;
-    protected String sort;
     protected String id;
     protected String url;
     protected String imageUrl;
@@ -25,11 +20,8 @@ public class AnimeManga extends APIBaseClass {
     protected String episodes;
     protected String score;
     protected String rating;
+    protected List<Object> data;
     protected final String RESULTS = "results";
-    protected final String TYPE = "type";
-    protected final String GENRE = "genre";
-    protected final String ORDER = "order_by";
-    protected final String SORT = "sort_by";
     protected final String ID = "mal_id";
     protected final String URL = "url";
     protected final String IMAGE_URL = "image_url";
@@ -39,42 +31,6 @@ public class AnimeManga extends APIBaseClass {
     protected final String EPISODES = "episodes";
     protected final String SCORE = "score";
     protected final String RATING = "rated";
-
-    /**
-     * Static method creates a AnimeManga object based on the given user ID string.
-     * Method connects to AnimeManga API to returns whether the ID is a Manga or Anime
-     * (NEEDS WORK/TESTING)
-     * @param _id
-     * @return AnimeManga animemanga
-     */
-    public static AnimeManga loadAnimeMangaTypeByID(String _id) {
-        AnimeManga animemanga = new AnimeManga();
-        animemanga.setID(_id);
-        String type = AnimeManga.myLocationAPI.loadLocation(_id, animemanga.TYPE).toString();
-        if (type == null) {
-            return null;
-        }
-        animemanga.setType(type);
-        return animemanga;
-    }
-
-    /**
-     * Static method creates a AnimeManga object based on the given user ID string.
-     * Method connects to AnimeManga API to returns Genre of an Anime/Manga
-     * (NEEDS WORK/TESTING)
-     * @param _id
-     * @return AnimeManga animemanga
-     */
-    public static AnimeManga loadAnimeMangaGenreByID(String _id) {
-        AnimeManga animemanga = new AnimeManga();
-        animemanga.setID(_id);
-        String genre = AnimeManga.myLocationAPI.loadLocation(_id, animemanga.GENRE).toString();
-        if (genre == null) {
-            return null;
-        }
-        animemanga.setGenre(genre);
-        return animemanga;
-    }
 
     /**
      * Static method creates a AnimeManga object based on the given user ID string.
@@ -230,12 +186,6 @@ public class AnimeManga extends APIBaseClass {
      */
     public static AnimeManga loadAnimeMangaTitleBySearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort) {
         AnimeManga animemanga = new AnimeManga();
-        animemanga.setType(_type);
-        animemanga.setGenre1(_genre1);
-        animemanga.setGenre2(_genre2);
-        animemanga.setGenre3(_genre3);
-        animemanga.setOrder(_orderBy);
-        animemanga.setSort(_sort);
         String title = AnimeManga.myAnimeMangaAPI.loadAnimeMangaItemSearch(_type, _genre1, _genre2, _genre3, _orderBy, _sort, animemanga.TITLE).toString();
         if (title == null) {
             return null;
@@ -244,28 +194,27 @@ public class AnimeManga extends APIBaseClass {
         return animemanga;
     }
 
+    /** Static method creates a AnimeManga object based on the given user ID string.
+     * Creates a loadItem String List to allow for user input search. User can input as many genre's as the want
+     * up to maximum.
+     * Currently returns a String. May update, but good enough for now.
+     * @param _searchQuery
+     * @return
+     */
+    public static AnimeManga loadAnimeMangaDataBySearch(List<String> _searchQuery) {
+        AnimeManga animeManga = new AnimeManga();
+        List<String> loadItem = new ArrayList<String>();
+        loadItem.add(animeManga.IMAGE_URL);
+        loadItem.add(animeManga.TITLE);
+        loadItem.add(animeManga.SYNOPSIS);
+        List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
+        if (data == null) {
+            return null;
+        }
+        animeManga.setData(data);
+        return animeManga;
+    }
     //=============== GETTERS =============
-    public String getType() {
-        return this.type;
-    }
-    public String getGenre() {
-        return this.genre;
-    }
-    public String getGenre1() {
-        return this.genre1;
-    }
-    public String getGenre2() {
-        return this.genre2;
-    }
-    public String getGenre3() {
-        return this.genre3;
-    }
-    public String getOrder() {
-        return this.order;
-    }
-    public String getSort() {
-        return this.sort;
-    }
     public String getID() {
         return this.id;
     }
@@ -293,30 +242,12 @@ public class AnimeManga extends APIBaseClass {
     public String getRating() {
         return this.rating;
     }
+    public List<Object> getData() {
+        return this.data;
+    }
 
     //=============== SETTERS =============
 
-    public void setType(String _type) {
-        this.type = _type;
-    }
-    public void setGenre(String _genre) {
-        this.genre = _genre;
-    }
-    public void setGenre1(String _genre1) {
-        this.genre1 = _genre1;
-    }
-    public void setGenre2(String _genre2) {
-        this.genre2 = _genre2;
-    }
-    public void setGenre3(String _genre3) {
-        this.genre3 = _genre3;
-    }
-    public void setOrder(String _order) {
-        this.order = _order;
-    }
-    public void setSort(String _sort) {
-        this.sort = _sort;
-    }
     public void setID(String _id) {
         this.id = _id;
     }
@@ -343,5 +274,8 @@ public class AnimeManga extends APIBaseClass {
     }
     public void setRating(String _rating) {
         this.rating = _rating;
+    }
+    public void setData(List<Object> _data) {
+        this.data = _data;
     }
 }
