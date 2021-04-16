@@ -77,8 +77,8 @@ public class City extends APIBaseClass{
     public String getCityTitle(){
         return this.cityTitle;
     }
-    public double getLatitude() { return Double.parseDouble(this.latitude); }
-    public double getLongitude() { return Double.parseDouble(this.longitude); }
+    public String getLatitude() { return this.latitude; }
+    public String getLongitude() { return this.longitude; }
 
     //=============== SETTERS =============
     public void setIpAddress(String _ipAddress){
