@@ -84,8 +84,5 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
         } catch (Exception ex) {
             return null;
         }
-
-
-
     }
 }
