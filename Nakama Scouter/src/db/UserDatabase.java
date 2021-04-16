@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class UserDatabase {
     protected List<UserProfile> applicationUser = new ArrayList<UserProfile>();
-    private final int minimumUsernameLength = 4;
-    private final int minimumPasswordLength = 8;
-    private final int minimumAge = 18;
+    private final int MINIMUM_USERNAME_LENGTH = 4;
+    private final int MINIMUM_PASSWORD_LENGTH = 8;
+    private final int MINIMUM_AGE = 18;
     private final String defaultDatabaseAddress = System.getProperty("user.home") + File.separator + "Documents\\test.txt";
 
     public UserDatabase() { }
@@ -66,8 +66,8 @@ public class UserDatabase {
     public boolean checkForValidUsername(String _userName) {
         boolean usernameIsCompliant = true;
         //Checks the username to see if it meets the minimum password length
-        if (_userName.length() < minimumUsernameLength) {
-            System.out.println("Username must be at least " + minimumUsernameLength + " characters in length.");
+        if (_userName.length() < MINIMUM_USERNAME_LENGTH) {
+            System.out.println("Username must be at least " + MINIMUM_USERNAME_LENGTH + " characters in length.");
             usernameIsCompliant = false;
         }
         //Checks the username to ensure it has no spaces
@@ -120,8 +120,8 @@ public class UserDatabase {
         boolean passwordIsCompliant = true;
 
         //Checks the password to see if meets the minimum password length
-        if (_passWord.length() < minimumPasswordLength) {
-            System.out.println("Password must be at least " + minimumPasswordLength + " characters in length.");
+        if (_passWord.length() < MINIMUM_PASSWORD_LENGTH) {
+            System.out.println("Password must be at least " + MINIMUM_PASSWORD_LENGTH + " characters in length.");
             passwordIsCompliant = false;
         }
         //Checks the password to ensure it has no spaces
@@ -149,7 +149,7 @@ public class UserDatabase {
      */
     public boolean checkForValidAge(int _age) {
         if (_age < 18) {
-            System.out.println("Users must be over the age of " + minimumAge + " to use this service.");
+            System.out.println("Users must be over the age of " + MINIMUM_AGE + " to use this service.");
             return false;
         }
         return true;
@@ -396,6 +396,7 @@ public class UserDatabase {
         UserProfile edittedUser = getUserProfileByIndex(_i);
         edittedUser.setUsername(_userName);
         setUserProfileByIndex(_i, edittedUser);
+        mergeSortList();
     }
     public void setEmailByIndex(int _i, String _email) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
@@ -407,7 +408,7 @@ public class UserDatabase {
         edittedUser.setPassword(_passWord);
         setUserProfileByIndex(_i, edittedUser);
     }
-    public void setBirthdayByIndex(int _i, int _age) {
+    public void setAgeByIndex(int _i, int _age) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
         edittedUser.setAge(_age);
         setUserProfileByIndex(_i, edittedUser);

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class is used to translate the information retrieved from the Anime API.
@@ -24,7 +25,6 @@ public class AnimeApiTranslator implements AnimeApiInterface {
     /**
      * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String
-     * This is for testing purposes. CONSIDER DELETING!
      */
     @Override
     public Object loadAnimeMangaItemByID(String _id, String _loadItem) {
@@ -47,6 +47,42 @@ public class AnimeApiTranslator implements AnimeApiInterface {
             // Extract JSON object
             JSONObject obj = new JSONObject(content.toString());
             return obj.getString(_loadItem);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    /**
+     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
+     * This version of the method loads several elements at once without disconnecting the API.
+     * @param _id
+     * @param _loadItem
+     * @return
+     */
+    @Override
+    public List<Object> loadSeveralAnimeMangaItemByID(String _id, List<String> _loadItem) {
+        // Builds base url string
+        String searchString = "/anime/" + _id;
+        try {
+            URL url = new URL(AnimeApiTranslator.ANIME_BASED_URL + searchString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            // Build the content from the buffered input
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            // Close connections
+            in.close();
+            connection.disconnect();
+            // Extract JSON object
+            JSONObject obj = new JSONObject(content.toString());
+            List<Object> elements = new ArrayList<Object>();
+            for (int i = 0; i < _loadItem.size(); i++)
+                elements.add(obj.get(_loadItem.get(i));
+            return elements;
         } catch (Exception ex) {
             return null;
         }
