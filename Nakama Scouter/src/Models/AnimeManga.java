@@ -20,7 +20,7 @@ public class AnimeManga extends APIBaseClass {
     protected String episodes;
     protected String score;
     protected String rating;
-    protected String data;
+    protected List<Object> data;
     protected final String RESULTS = "results";
     protected final String ID = "mal_id";
     protected final String URL = "url";
@@ -207,7 +207,7 @@ public class AnimeManga extends APIBaseClass {
         loadItem.add(animeManga.IMAGE_URL);
         loadItem.add(animeManga.TITLE);
         loadItem.add(animeManga.SYNOPSIS);
-        String data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem).toString();
+        List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
         if (data == null) {
             return null;
         }
@@ -242,7 +242,7 @@ public class AnimeManga extends APIBaseClass {
     public String getRating() {
         return this.rating;
     }
-    public String getData() {
+    public List<Object> getData() {
         return this.data;
     }
 
@@ -275,7 +275,7 @@ public class AnimeManga extends APIBaseClass {
     public void setRating(String _rating) {
         this.rating = _rating;
     }
-    public void setData(String _data) {
+    public void setData(List<Object> _data) {
         this.data = _data;
     }
 }

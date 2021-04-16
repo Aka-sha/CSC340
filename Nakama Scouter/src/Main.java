@@ -40,13 +40,13 @@ public class Main {
 
 
         //Testing Restaurant API
-        int distance = 30;
-        String cuisine = "Japanese";
-        String restID = "407270267399819";
-        Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
-        System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
+        //int distance = 30;
+        //String cuisine = "Japanese";
+        //String restID = "407270267399819";
+        //Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        //Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        //System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
+        //System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
 
         //Testing AnimeManga API
         String type = "anime";
@@ -66,7 +66,8 @@ public class Main {
         searchQuery.add(sort);
         //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
         AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
-        System.out.println(animeSearch.getData());
+        List<Object> animeData = animeSearch.getData();
+        System.out.println(animeData);
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
         //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
         //System.out.println(animeRatingByID.getRating());
