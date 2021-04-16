@@ -6,6 +6,8 @@ import db.UserProfile;
 import db.UserDatabase;
 import db.FileReadAndWriter;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,10 +56,19 @@ public class Main {
         String genre3 = "4";
         String orderBy = "start_date";
         String sort = "desc";
-        AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
-
+        //put this into a method for user preferences or search etc.
+        List<String> searchQuery = new ArrayList<String>();
+        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
+        searchQuery.add(genre1);
+        searchQuery.add(genre2);
+        searchQuery.add(genre3);
+        searchQuery.add(orderBy);
+        searchQuery.add(sort);
+        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
+        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        System.out.println(animeSearch.getData());
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
-        System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
+        //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
         //System.out.println(animeRatingByID.getRating());
 
 
