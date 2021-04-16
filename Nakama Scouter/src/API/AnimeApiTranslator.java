@@ -81,7 +81,7 @@ public class AnimeApiTranslator implements AnimeApiInterface {
             JSONObject obj = new JSONObject(content.toString());
             List<Object> elements = new ArrayList<Object>();
             for (int i = 0; i < _loadItem.size(); i++)
-                elements.add(obj.get(_loadItem.get(i));
+                elements.add(obj.get(_loadItem.get(i)));
             return elements;
         } catch (Exception ex) {
             return null;
