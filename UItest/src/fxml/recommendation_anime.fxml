@@ -71,6 +71,7 @@
                   <Font name="ROGFontsv1.6-Regular" size="15.0" />
                </font>
             </Button>
+            <Button layoutX="76.0" layoutY="367.0" mnemonicParsing="false" onAction="#animeDetail" prefHeight="43.0" prefWidth="98.0" text="Detail" />
          </children>
     </AnchorPane>
   </children>

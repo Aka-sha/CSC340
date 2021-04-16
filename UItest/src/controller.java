@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -48,6 +49,21 @@ public class controller {
 
     @FXML
     private PasswordField passWord;
+
+    @FXML
+    private ListView<String> animeRec;
+
+    @FXML
+    private TextArea animeSub;
+
+    List<String> addStuff = new ArrayList<String>();
+
+    @FXML
+    private  ImageView recImg;
+
+    @FXML
+    private Button close;
+
 
 
     @FXML
@@ -168,16 +184,7 @@ public class controller {
             System.out.println(userids + " from " + city + " joined us");
         }
     }
-    @FXML
-    private ListView<String> animeRec;
 
-    @FXML
-    private TextArea animeSub;
-
-    List<String> addStuff = new ArrayList<String>();
-
-    @FXML
-    private  ImageView recImg;
 
     @FXML
     public void subAnimeRec(ActionEvent event) {
@@ -229,7 +236,17 @@ public class controller {
         T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");
     }
     @FXML
-    void animeDetail(ActionEvent event) {
+    void animeDetail(ActionEvent event) throws IOException {
+        Parent settings = FXMLLoader.load(getClass().getResource("fxml/animeDetail.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("AnimeDetail");
+        stage.setScene(new Scene(settings));
+        stage.show();
+    }
 
+    @FXML
+    void Close (ActionEvent event) throws IOException{
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
     }
 }
