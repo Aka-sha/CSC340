@@ -3,15 +3,15 @@ package Models;
 /**
  * This class loads the recipe information from the Restaurant API, Documenu.
  * Needs to be updated for search cuisines address and menus by restaurant ID ASAP once Translator issue is fixed
- * Last Updated 03/24/2021
+ * Last Updated 04/16/2021
  * @author Andy Cruse
  */
 public class Restaurant extends APIBaseClass {
 
     protected String ipAddress;
-    protected double latitude;
-    protected double longitude;
-    protected int distance;
+    protected String latitude;
+    protected String longitude;
+    protected String distance;
     protected String totalResults;
     protected String data;
     protected String restaurantName;
@@ -65,10 +65,10 @@ public class Restaurant extends APIBaseClass {
     public static Restaurant loadRestaurantPhoneByID(String _id) {
         Restaurant rest = new Restaurant();
         rest.setID(_id);
-        String title;
+        String phoneNum;
         try {
-            title = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.RESTAURANT_PHONE).toString();
-            rest.setRestaurantPhone(title.toString());
+            phoneNum = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.RESTAURANT_PHONE).toString();
+            rest.setRestaurantPhone(phoneNum.toString());
         }
         catch (NullPointerException ex) {
             rest.setRestaurantPhone("!NA!");
@@ -85,10 +85,10 @@ public class Restaurant extends APIBaseClass {
     public static Restaurant loadRestaurantWebsiteByID(String _id) {
         Restaurant rest = new Restaurant();
         rest.setID(_id);
-        String title;
+        String website;
         try {
-            title = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.RESTAURANT_WEBSITE).toString();
-            rest.setRestaurantWebsite(title.toString());
+            website = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.RESTAURANT_WEBSITE).toString();
+            rest.setRestaurantWebsite(website.toString());
         }
         catch (NullPointerException ex) {
             rest.setRestaurantWebsite("!NA!");
@@ -105,10 +105,10 @@ public class Restaurant extends APIBaseClass {
     public static Restaurant loadRestaurantHoursByID(String _id) {
         Restaurant rest = new Restaurant();
         rest.setID(_id);
-        String title;
+        String hours;
         try {
-            title = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.HOURS).toString();
-            rest.setHours(title.toString());
+            hours = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.HOURS).toString();
+            rest.setHours(hours.toString());
         }
         catch (NullPointerException ex) {
             rest.setHours("!NA!");
@@ -125,10 +125,10 @@ public class Restaurant extends APIBaseClass {
     public static Restaurant loadRestaurantPriceByID(String _id) {
         Restaurant rest = new Restaurant();
         rest.setID(_id);
-        String title;
+        String price;
         try {
-            title = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.PRICE_RANGE).toString();
-            rest.setPriceRange(title.toString());
+            price = rest.myRestaurantAPI.loadRestaurantItemByID(_id, rest.PRICE_RANGE).toString();
+            rest.setPriceRange(price.toString());
         }
         catch (NullPointerException ex) {
             rest.setPriceRange("!NA!");
@@ -142,7 +142,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantResults(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantResults(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -164,7 +164,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantData(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantData(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -185,7 +185,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantName(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantName(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -207,7 +207,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantPhone(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantPhone(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -229,7 +229,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantWebsite(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantWebsite(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -251,7 +251,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantHours(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantHours(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -273,7 +273,7 @@ public class Restaurant extends APIBaseClass {
      * @param _latitude, _longitude, _distance, _cuisine
      * @return Restaurant rest
      */
-    public static Restaurant loadRestaurantPriceRange(double _latitude, double _longitude, int _distance, String _cuisine) {
+    public static Restaurant loadRestaurantPriceRange(String _latitude, String _longitude, String _distance, String _cuisine) {
         Restaurant rest = new Restaurant();
         rest.setLatitude(_latitude);
         rest.setLongitude(_longitude);
@@ -294,13 +294,13 @@ public class Restaurant extends APIBaseClass {
     public String getIpAddress() {
         return this.ipAddress;
     }
-    public double getLatitude() {
+    public String getLatitude() {
         return this.latitude;
     }
-    public double getLongitude() {
+    public String getLongitude() {
         return this.longitude;
     }
-    public int getDistance() {
+    public String getDistance() {
         return this.distance;
     }
     public String getTotalResults() {
@@ -341,13 +341,13 @@ public class Restaurant extends APIBaseClass {
     public void setIpAddress(String _ipAddress) {
         this.ipAddress = _ipAddress;
     }
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    public void setDistance(int distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
     public void setTotalResults(String _totalResults) {

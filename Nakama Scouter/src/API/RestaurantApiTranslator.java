@@ -26,7 +26,7 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
      * Then, the file is read to an arrayList to get each loaditem
      */
     @Override
-    public Object loadRestaurantItemBySearch(double _latitude, double _longitude, int _distance, String _cuisine, String _loadItem) {
+    public Object loadRestaurantItemBySearch(String _latitude, String _longitude, String _distance, String _cuisine, String _loadItem) {
         String searchString = "s/search/geo?" + "key=" + RestaurantApiTranslator.RESTAURANT_API_KEY + "&lat=" + _latitude + "&lon=" + _longitude + "&distance=" + _distance + "&cuisine=" + _cuisine;
         try {
             URL url = new URL(RestaurantApiTranslator.RESTAURANT_BASE_URL + searchString);

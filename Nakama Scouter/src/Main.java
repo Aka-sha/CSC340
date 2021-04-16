@@ -40,10 +40,10 @@ public class Main {
 
 
         //Testing Restaurant API
-        //int distance = 30;
-        //String cuisine = "Japanese";
-        //String restID = "407270267399819";
-        //Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
+        String distance = "30";
+        String cuisine = "Japanese";
+        String restID = "407270267399819";
+        Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
         //Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
         //System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
         //System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
