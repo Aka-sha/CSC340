@@ -40,13 +40,17 @@ public class Main {
 
 
         //Testing Restaurant API
-        //int distance = 30;
-        //String cuisine = "Japanese";
-        //String restID = "407270267399819";
-        //Restaurant restaurantName = Restaurant.loadRestaurantName(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        //Restaurant restaurantPhone = Restaurant.loadRestaurantPhone(cityLat.getLatitude(), cityLon.getLongitude(), distance, cuisine);
-        //System.out.println("Rest. Get Name: " + restaurantName.getRestaurantName());
-        //System.out.println("Rest. Get Phone: " + restaurantPhone.getRestaurantPhone());
+        //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!
+        String distance = "30";
+        String cuisine = "Japanese";
+        String restID = "407270267399819";
+        List<String> restSearchQuery = new ArrayList<>();
+        restSearchQuery.add(cityLat.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+        restSearchQuery.add(cityLon.getLongitude()); //MUST STAY LONGITUDE
+        restSearchQuery.add(distance); //MUST STAY DISTANCE
+        restSearchQuery.add(cuisine); //MUST STAY CUISINE
+        Restaurant restaurantResults = Restaurant.loadRestaurantResults(restSearchQuery);
+        System.out.println(restaurantResults.getResults());
 
         //Testing AnimeManga API
         String type = "anime";
@@ -57,7 +61,7 @@ public class Main {
         String orderBy = "start_date";
         String sort = "desc";
         //put this into a method for user preferences or search etc.
-        List<String> searchQuery = new ArrayList<String>();
+        List<String> searchQuery = new ArrayList<>();
         searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
         searchQuery.add(genre1);
         searchQuery.add(genre2);
