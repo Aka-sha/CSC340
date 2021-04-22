@@ -1,41 +1,91 @@
 package db;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class contains a list of every user of the applications, and can handle adding new users to the database
  * and editting the data of preexisting users.
- * Last modified 03/24/2021 by Andy Cruse
+ * Last modified 04/13/2021 by Edward Hicks
  * @author Edward Hicks
  */
 public class UserDatabase {
-    protected List<UserProfile> applicationUser;
+    protected List<UserProfile> applicationUser = new ArrayList<UserProfile>();
+    private final int MINIMUM_USERNAME_LENGTH = 4;
+    private final int MINIMUM_PASSWORD_LENGTH = 8;
+    private final int MINIMUM_AGE = 18;
+    private final String defaultDatabaseAddress = System.getProperty("user.home") + File.separator + "Documents\\test.txt";
 
-    public UserDatabase() {
-        this.applicationUser = new ArrayList<UserProfile>();
-    }
+    public UserDatabase() { }
 
-    /*
-    This methods checks to see if the username of the new account is unique and if it is, creates a new account using the
-    provided username and password and adds it to the applicationUser List. The applicationUser list is then sorted.
+    /**
+     * This methods checks to see if the username of the new account is unique and if it is, creates a new account using the
+     *     provided username and password and adds it to the applicationUser List. The applicationUser list is then sorted.
+     * @param _userName
+     * @param _email
+     * @param _passWord
+     * @param _age
+     * @param _city
+     * @param _ipAddress
      */
     public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
         //Create new user and add it to the List
-        if (checkForValidUsername(_userName)) {
+        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
             applicationUser.add(newUser);
-            sortList();
+            singleSortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
         }
-        else System.out.println("The username " + _userName + " is already being used by another account. Account registration denied.");
+        else System.out.println("Account registration denied.");
     }
 
-    /*
-    The applicationUser database is searched to see if the desired username doesn't already exist, returning the outcome.
+    /**
+     * This method adds a user to the user database, only checking for username duplicates and tabs, skipping the
+     * sort at the end.
+     * @param _userName
+     * @param _email
+     * @param _passWord
+     * @param _age
+     * @param _city
+     * @param _ipAddress
+     */
+    public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
+        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
+            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
+            applicationUser.add(newUser);
+        }
+    }
+
+    /**
+     * The username is checked to see if it is compliant with various username requirements, then is checked for duplicates among
+     * pre-existing users.
+     * @param _userName
+     * @return
      */
     public boolean checkForValidUsername(String _userName) {
-        //First, check is database is empty. If so, return true.
+        boolean usernameIsCompliant = true;
+        //Checks the username to see if it meets the minimum password length
+        if (_userName.length() < MINIMUM_USERNAME_LENGTH) {
+            System.out.println("Username must be at least " + MINIMUM_USERNAME_LENGTH + " characters in length.");
+            usernameIsCompliant = false;
+        }
+        //Checks the username to ensure it has no spaces
+        if (_userName.contains(" ")) {
+            System.out.println("Username must not contain any spaces.");
+            usernameIsCompliant = false;
+        }
+        if (usernameIsCompliant) return checkUsernameForDuplicates(_userName);
+        return false;
+    }
+
+    /**
+     * The applicationUser database is searched to see if the desired username doesn't already exist, returning the outcome.
+     * @param _userName
+     * @return
+     */
+    public boolean checkUsernameForDuplicates(String _userName) {
+        //First, check if database is empty. If so, return true.
         if (this.applicationUser.size() == 0) return true;
 
         int lowerThreshold = 0;
@@ -44,12 +94,15 @@ public class UserDatabase {
         for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
             int usernameCompare = compareWithCase(_userName, getUsernameByIndex(i));
             //A matching username has been found, new username is not unique
-            if (usernameCompare == 0) return false;
+            if (usernameCompare == 0) {
+                System.out.println("The username " + _userName + " is already being used by another account.");
+                return false;
+            }
             //A matching username has not been found, new username is unique
             else if (lowerThreshold == upperThreshold) return true;
-            //Index is too high, move upperThreshold down
+                //Index is too high, move upperThreshold down
             else if (usernameCompare < 0) upperThreshold = i;
-            //Index is too low, move lowerIndex up
+                //Index is too low, move lowerIndex up
             else {
                 //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
                 if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
@@ -58,16 +111,95 @@ public class UserDatabase {
         }
     }
 
-    /*
-    A single new user is added to the database, sorted so that it's in alphabetical order.
-    NOTE: THIS METHOD SHOULD BE CALLED IMMEDIATELY AFTER A NEW ACCOUNT IS CREATED
+    /**
+     * The password provided is checked to see if it is compliant with various password requirements.
+     * @param _passWord
+     * @return
      */
-    public void sortList() {
-        if (this.applicationUser.size() > 1) {
+    public boolean checkForValidPassword(String _passWord) {
+        boolean passwordIsCompliant = true;
+
+        //Checks the password to see if meets the minimum password length
+        if (_passWord.length() < MINIMUM_PASSWORD_LENGTH) {
+            System.out.println("Password must be at least " + MINIMUM_PASSWORD_LENGTH + " characters in length.");
+            passwordIsCompliant = false;
+        }
+        //Checks the password to ensure it has no spaces
+        if (_passWord.contains(" ")) {
+            System.out.println("Password must not contain any spaces.");
+            passwordIsCompliant = false;
+        }
+        //Checks the password to ensure it contains both uppercase and lowercase letters
+        if (_passWord.equals(_passWord.toUpperCase()) || _passWord.equals(_passWord.toLowerCase())) {
+            System.out.println("Password must contain both uppercase and lowercase letters.");
+            passwordIsCompliant = false;
+        }
+        //Checks the password to ensure it contains at least one number
+        if (!_passWord.contains("0") && !_passWord.contains("1") &&!_passWord.contains("2") &&!_passWord.contains("3") &&!_passWord.contains("4") &&!_passWord.contains("5") &&!_passWord.contains("6") &&!_passWord.contains("7") &&!_passWord.contains("8") &&!_passWord.contains("9")) {
+            System.out.println("Password must contain at least one number.");
+            passwordIsCompliant = false;
+        }
+        return passwordIsCompliant;
+    }
+
+    /**
+     * The age is checked to see if it satisfies the minimum age requirement
+     * @param _age
+     * @return
+     */
+    public boolean checkForValidAge(int _age) {
+        if (_age < 18) {
+            System.out.println("Users must be over the age of " + MINIMUM_AGE + " to use this service.");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * All String information is checked to ensure it doesn't contain a tab that would break how the database is saved and loaded.
+     * Probably useless, but is there just in case.
+     * @param _userName
+     * @param _passWord
+     * @param _email
+     * @param _city
+     * @param _ipAddress
+     * @return
+     */
+    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city, String _ipAddress) {
+        boolean noTabs = true;
+        if (_userName.contains(";")) {
+            System.out.println("Username must not contain a tab.");
+            noTabs = false;
+        }
+        if (_passWord.contains(";")) {
+            System.out.println("Password must not contain a tab.");
+            noTabs = false;
+        }
+        if (_email.contains(";")) {
+            System.out.println("Email address must not contain a tab.");
+            noTabs = false;
+        }
+        if (_city.contains(";")) {
+            System.out.println("City must not contain a tab.");
+            noTabs = false;
+        }
+        if (_ipAddress.contains(";")) {
+            System.out.println("IP address must not contain a tab.");
+            noTabs = false;
+        }
+        return noTabs;
+    }
+
+    /**
+     * A single new user is added to the database, sorted so that it's in alphabetical order.
+     *     NOTE: THIS METHOD SHOULD BE CALLED IMMEDIATELY AFTER A NEW ACCOUNT IS CREATED
+     */
+    public void singleSortList() {
+        if (this.getSize() > 1) {
             UserProfile newestUser = this.applicationUser.get(this.applicationUser.size()-1);
             String newestUsername = newestUser.getUsername();
             int lowerSortThreshold = 0;
-            int upperSortThreshold = this.applicationUser.size()-2;
+            int upperSortThreshold = this.getSize()-2;
             int index = upperSortThreshold / 2;
             //Find the appropriate index for the new account. Loop will continue until the newest username comes after the username at i-1 and before the username at i
             for (; ; index = lowerSortThreshold + ((upperSortThreshold-lowerSortThreshold)/2)) {
@@ -93,10 +225,160 @@ public class UserDatabase {
         }
     }
 
-    /*
-    Compares two strings with a uniform case.
+    /**
+     * A backup in case the database becomes unsorted, the entire database is sorted using merge sort.
      */
-    public int compareWithCase(String _userName1, String _userName2) { return _userName1.toLowerCase().compareTo(_userName2.toLowerCase()); }
+    public void mergeSortList() {
+        if (this.getSize() > 1) {
+            this.applicationUser = this.mergeSort(this.applicationUser);
+            System.out.println("Database re-sorted.");
+        }
+    }
+
+    /**
+     * The actual method that handles the merge sort. Lists are recursively broken down into smaller lists,
+     * the smaller lists are sorted, and the full list is gradually reassembled.
+     * @param _list
+     * @return
+     */
+    private List<UserProfile> mergeSort(List<UserProfile> _list) {
+        if (_list.size() > 1) {
+            //Dividing the list into two and recursing
+            int midpoint = (_list.size() / 2);
+            List<UserProfile> sortedList = new ArrayList<UserProfile>();
+            List<UserProfile> miniList1 = this.mergeSort(_list.subList(0, midpoint));
+            List<UserProfile> miniList2 = this.mergeSort(_list.subList(midpoint, _list.size()));
+
+            //Assembling the sorted miniLists back together. Loop continues until one of the miniLists is empty
+            int index1 = 0;
+            int index2 = 0;
+            while(index1 < miniList1.size() && index2 < miniList2.size()){
+                //If the first element of miniList1 should come before the first element of miniList2, add it to the sortedList and add 1 to index1
+                if (this.compareWithCase(miniList1.get(index1).getUsername(), miniList2.get(index2).getUsername()) < 0) {
+                    sortedList.add(miniList1.get(index1));
+                    index1++;
+                }
+                //Otherwise, the first element of miniList2 should be added to sortedList and add 1 to index2
+                else {
+                    sortedList.add(miniList2.get(index2));
+                    index2++;
+                }
+            }
+            //One of the miniLists has been exhausted, dump the contents of the remaining miniList onto sortedList
+            for (; index1 < miniList1.size(); index1++) sortedList.add(miniList1.get(index1));
+            for (; index2 < miniList2.size(); index2++) sortedList.add(miniList2.get(index2));
+            return sortedList;
+        }
+        else return _list;
+    }
+
+    /**
+     * Compares two strings with a uniform case.
+     * @param _string1
+     * @param _string2
+     * @return
+     */
+    public int compareWithCase(String _string1, String _string2) { return _string1.toLowerCase().compareTo(_string2.toLowerCase()); }
+
+    /**
+     * Converts the personal information of all users into a String.
+     * @return
+     */
+    public String printDatabase() {
+        //Returns nothing if the method is called while the database is empty
+        if(this.getSize() == 0) return "";
+
+        String allUserData = "";
+        //This loop gets the data of every user in order and adds them to a single String.
+        for (int i = 0; i < this.getSize(); i++) {
+            allUserData += this.printUser(i) + "\n";
+        }
+        return allUserData;
+    }
+
+    /**
+     * Converts the personal information of a single user into a String, returning the outcome.
+     * @param i
+     * @return
+     */
+    public String printUser(int i) {
+        try {
+            String userData = "";
+            userData += this.getUsernameByIndex(i) + "\t";
+            userData += this.getPasswordByIndex(i) + "\t";
+            userData += this.getEmailByIndex(i) + "\t";
+            userData += this.getAgeByIndex(i) + "\t";
+            userData += this.getCityByIndex(i) + "\t";
+            userData += this.getIpAddressByIndex(i) + "\t";
+            return userData;
+        } catch (Exception ex) {
+            //Only happens if i exceeds the size of the database or is less than 0 (Hopefully)
+            return "";
+        }
+    }
+
+    /**
+     * Converts the user database to String and saves it to the provided address
+     * @param _address
+     */
+    public void saveUserDatabase(String _address) {
+        FileReadAndWriter saveFile = new FileReadAndWriter();
+        //Try to create file if it doesn't already exist
+        saveFile.createFile(_address);
+        //Save the database to the text file
+        saveFile.writeToFile(_address, this.printDatabase());
+        System.out.println("Database successfully saved to " + _address);
+    }
+
+    /**
+     * Converts the user database to String and saves it to the default address
+     */
+    public void saveUserDatabaseDefault() { this.saveUserDatabase(defaultDatabaseAddress); }
+
+    /**
+     * Uses an inputted address for finding the user data text file and converting it into String.
+     * @param _address
+     */
+    public void loadUserDatabase(String _address) {
+        try {
+            FileReadAndWriter fileLoader = new FileReadAndWriter();
+            String userDatabase = fileLoader.readFile(_address);
+            while (!userDatabase.isEmpty()) {
+                //Getting the substring for the next user
+                String userSubstring = userDatabase.substring(0, userDatabase.indexOf("\n"));
+                //Getting the username from the substring
+                String newUsername = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the password from the substring
+                String newPassword = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the email from the substring
+                String newEmail = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the age from the substring
+                int newAge = Integer.parseInt(userSubstring.substring(0, userSubstring.indexOf("\t")));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the city from the substring
+                String newCity = userSubstring.substring(0, userSubstring.indexOf("\t"));
+                userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
+                //Getting the IP address from the substring
+                String newIPAddress = userSubstring;
+                //Creating the new user
+                quickAddNewApplicationUser(newUsername, newEmail, newPassword, newAge, newCity, newIPAddress);
+                //Trim the userDatabase
+                userDatabase = userDatabase.substring(userDatabase.indexOf("\n")+1);
+            }
+            System.out.println("Database successfully loaded from " + _address);
+        } catch (Exception ex) {
+            System.out.println("An error has occurred when loading the user database. The file is formatted incorrectly or might have been tampered with.");
+        }
+    }
+
+    /**
+     * Uses the default address for finding the user data text file and converting it into String
+     * @return
+     */
+    public void loadUserDatabaseDefault() { this.loadUserDatabase(defaultDatabaseAddress); }
 
     //=================  GETTERS =================
     public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
@@ -114,6 +396,7 @@ public class UserDatabase {
         UserProfile edittedUser = getUserProfileByIndex(_i);
         edittedUser.setUsername(_userName);
         setUserProfileByIndex(_i, edittedUser);
+        mergeSortList();
     }
     public void setEmailByIndex(int _i, String _email) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
@@ -125,7 +408,7 @@ public class UserDatabase {
         edittedUser.setPassword(_passWord);
         setUserProfileByIndex(_i, edittedUser);
     }
-    public void setBirthdayByIndex(int _i, int _age) {
+    public void setAgeByIndex(int _i, int _age) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
         edittedUser.setAge(_age);
         setUserProfileByIndex(_i, edittedUser);
