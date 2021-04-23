@@ -87,28 +87,32 @@ public class UserDatabase {
     public boolean checkUsernameForDuplicates(String _userName) {
         //First, check if database is empty. If so, return true.
         if (this.applicationUser.size() == 0) return true;
-
-        int lowerThreshold = 0;
-        int upperThreshold = this.applicationUser.size()-1;
-
-        for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
-            int usernameCompare = compareWithCase(_userName, getUsernameByIndex(i));
-            //A matching username has been found, new username is not unique
-            if (usernameCompare == 0) {
-                System.out.println("The username " + _userName + " is already being used by another account.");
-                return false;
-            }
-            //A matching username has not been found, new username is unique
-            else if (lowerThreshold == upperThreshold) return true;
-                //Index is too high, move upperThreshold down
-            else if (usernameCompare < 0) upperThreshold = i;
-                //Index is too low, move lowerIndex up
-            else {
-                //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
-                if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
-                else lowerThreshold = i;
-            }
+        if (this.getIndexByUsername(_userName) != -1) {
+            System.out.println("The username " + _userName + " is already being used by another account.");
+            return false;
         }
+        return true;
+//        int lowerThreshold = 0;
+//        int upperThreshold = this.applicationUser.size()-1;
+//
+//        for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
+//            int usernameCompare = compareWithCase(_userName, getUsernameByIndex(i));
+//            //A matching username has been found, new username is not unique
+//            if (usernameCompare == 0) {
+//                System.out.println("The username " + _userName + " is already being used by another account.");
+//                return false;
+//            }
+//            //A matching username has not been found, new username is unique
+//            else if (lowerThreshold == upperThreshold) return true;
+//                //Index is too high, move upperThreshold down
+//            else if (usernameCompare < 0) upperThreshold = i;
+//                //Index is too low, move lowerIndex up
+//            else {
+//                //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
+//                if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
+//                else lowerThreshold = i;
+//            }
+//        }
     }
 
     /**
@@ -381,6 +385,28 @@ public class UserDatabase {
     public void loadUserDatabaseDefault() { this.loadUserDatabase(defaultDatabaseAddress); }
 
     //=================  GETTERS =================
+    public int getIndexByUsername(String _u) {
+        int lowerThreshold = 0;
+        int upperThreshold = this.applicationUser.size()-1;
+
+        for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
+            int usernameCompare = compareWithCase(_u, getUsernameByIndex(i));
+            //A matching username has been found
+            if (usernameCompare == 0) {
+                return i;
+            }
+            //A matching username has not been found
+            else if (lowerThreshold == upperThreshold) return -1;
+            //Index is too high, move upperThreshold down
+            else if (usernameCompare < 0) upperThreshold = i;
+            //Index is too low, move lowerIndex up
+            else {
+                //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
+                if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
+                else lowerThreshold = i;
+            }
+        }
+    }
     public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
     public String getUsernameByIndex(int _i) { return this.applicationUser.get(_i).getUsername(); }
     public String getEmailByIndex(int _i) { return this.applicationUser.get(_i).getEmail(); }
