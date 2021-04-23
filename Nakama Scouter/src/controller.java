@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -44,7 +45,7 @@ public class controller {
     private TextField reAge;
 
     @FXML
-    private TextField reCity;
+    private TextField reIP;
 
     @FXML
     private TextField userid;
@@ -163,16 +164,13 @@ public class controller {
 
     @FXML
     void signup(ActionEvent event) throws IOException {
-        UserDatabase userDB = new UserDatabase();
-        userDB.loadUserDatabaseDefault();
         String userids = reUserid.getText();
         String passWords = rePass1.getText();
         String Confirm = rePass2.getText();
         String email = reEmail.getText();
-        String city = reCity.getText();
+        String IP = reIP.getText();
         String age = reAge.getText();
-        String ipAddress = "174.204.142.53";
-        City cityTitle = City.loadCityTitleByIP(ipAddress);
+        City cityTitle = City.loadCityTitleByIP(IP);
         int min = age.compareTo("18");
         String empty = "";
 
@@ -186,7 +184,7 @@ public class controller {
         } else if (passWords.length() < 8) {
             String info = "Password must be at least 8 characters in length.";
             alert(event, info);
-        } else if (userids.equals(empty) || passWords.equals(empty) || Confirm.equals(empty) || email.equals(empty) || city.equals(empty) || age.equals(empty)) {
+        } else if (userids.equals(empty) || passWords.equals(empty) || Confirm.equals(empty) || email.equals(empty) || IP.equals(empty) || age.equals(empty)) {
             String info = "Please fill all the form";
             alert(event, info);
         } else if (min < 0) {
@@ -196,11 +194,9 @@ public class controller {
         } else {
             String info = userids + " Welcome To Anime Scout";
             int ageInt = Integer.parseInt(age);
-            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), ipAddress);
-            for (int i = 0; i < userDB.getSize(); i++) {
-                System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
-                        "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getIpAddressByIndex(i));
-            }
+            UserDatabase userDB = new UserDatabase();
+            userDB.loadUserDatabaseDefault();
+            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), IP);
             userDB.saveUserDatabaseDefault();
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
@@ -208,7 +204,7 @@ public class controller {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-            System.out.println(userids + " from " + city + " joined us");
+            System.out.println(userids + " from " + cityTitle.getCityTitle() + " joined us");
         }
     }
 
@@ -238,7 +234,7 @@ public class controller {
         reUserid.clear();
         rePass2.clear();
         reAge.clear();
-        reCity.clear();
+        reIP.clear();
     }
 
     int click = 0;
@@ -284,6 +280,12 @@ public class controller {
 
     @FXML
     private ListView<String> userList;
+
+    @FXML
+    void manage(MouseEvent event) {
+            String selected = userList.getSelectionModel().getSelectedItem().toString();
+
+    }
 
     @FXML
     void loadUser(ActionEvent event) {

@@ -72,7 +72,7 @@
                         <Insets left="13.0" />
                      </GridPane.margin>
                   </Text>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="IP" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="ROGFontsv1.6-Regular" size="20.0" />
                      </font>
@@ -81,7 +81,7 @@
                      </GridPane.margin>
                   </Text>
                   <TextField fx:id="reAge" prefHeight="26.0" prefWidth="323.0" promptText="Enter your age" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="reCity" prefHeight="26.0" prefWidth="323.0" promptText="Enter your city" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="reIP" prefHeight="26.0" prefWidth="323.0" promptText="Enter your IP" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <Button alignment="CENTER" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#clear" prefHeight="49.0" prefWidth="128.0" text="Clear">
