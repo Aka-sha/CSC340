@@ -5,11 +5,18 @@ import Models.Restaurant;
 import db.UserProfile;
 import db.UserDatabase;
 import db.FileReadAndWriter;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
         UserDatabase userDB = new UserDatabase();
 //        //Testing Food API
@@ -77,7 +84,6 @@ public class Main {
         //System.out.println(animeRatingByID.getRating());
 
 
-
         //testing MySQL Queries for Database established above
         for (int i = 0; i < userDB.getSize(); i++) {
             UserProfile userProfile = new UserProfile();
@@ -119,5 +125,23 @@ public class Main {
         System.out.println(mergeDB.printDatabase());
         mergeDB.mergeSortList();
         System.out.println(mergeDB.printDatabase());
+        //Testing The GUI
+
+        Application.launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+            Scene scene = new Scene(root, 1028, 579);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Welcome to Nakama Scouter");
+            primaryStage.setResizable(false);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
