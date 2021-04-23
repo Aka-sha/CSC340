@@ -20,13 +20,13 @@ import java.util.List;
 
 public class controller {
     @FXML
-    private ImageView t1Anime,t2Anime,t3Anime,t4Anime,t5Anime;
+    private ImageView t1Anime, t2Anime, t3Anime, t4Anime, t5Anime;
 
     @FXML
-    private Label T1text,T2text,T3text,T4text,T5text;
+    private Label T1text, T2text, T3text, T4text, T5text;
 
     @FXML
-    private Label T1name,T2name,T3name,T4name,T5name;
+    private Label T1name, T2name, T3name, T4name, T5name;
 
     @FXML
     private TextField reUserid;
@@ -61,11 +61,10 @@ public class controller {
     List<String> addStuff = new ArrayList<String>();
 
     @FXML
-    private  ImageView recImg;
+    private ImageView recImg;
 
     @FXML
     private Button close;
-
 
 
     @FXML
@@ -125,6 +124,7 @@ public class controller {
         alert.setTitle("Alert");
         alert.show();
     }
+
     @FXML
     public void welcome(ActionEvent event, String info) throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, info, new ButtonType("Close", ButtonBar.ButtonData.YES));
@@ -137,11 +137,19 @@ public class controller {
     public void loginB(ActionEvent event) throws Exception {
         userid.setUserData("admin");
         passWord.setUserData("admin123");
+        String adminIDs = "admin";
+        String adminPWs = "admin";
         String userids = userid.getText();
         String passWords = passWord.getText();
         if (userids.equals(userid.getUserData()) && passWords.equals(passWord.getUserData())) {
             System.out.println(userids + " login");
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
+            Scene rooter = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(rooter);
+            window.show();
+        } else if (userids.equals(adminIDs) && passWords.equals(adminPWs)) {
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/userlist.fxml"));
             Scene rooter = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
@@ -155,6 +163,8 @@ public class controller {
 
     @FXML
     void signup(ActionEvent event) throws IOException {
+        UserDatabase userDB = new UserDatabase();
+        userDB.loadUserDatabaseDefault();
         String userids = reUserid.getText();
         String passWords = rePass1.getText();
         String Confirm = rePass2.getText();
@@ -170,6 +180,12 @@ public class controller {
         if (!passWords.equals(Confirm)) {
             String info = "Passwords are not matched";
             alert(event, info);
+        } else if (userids.length() < 4) {
+            String info = "Username must be at least 4 characters in length.";
+            alert(event, info);
+        } else if (passWords.length() < 8) {
+            String info = "Password must be at least 8 characters in length.";
+            alert(event, info);
         } else if (userids.equals(empty) || passWords.equals(empty) || Confirm.equals(empty) || email.equals(empty) || city.equals(empty) || age.equals(empty)) {
             String info = "Please fill all the form";
             alert(event, info);
@@ -179,13 +195,13 @@ public class controller {
             alert(event, info);
         } else {
             String info = userids + " Welcome To Anime Scout";
-            UserDatabase userDB = new UserDatabase();
             int ageInt = Integer.parseInt(age);
             userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), ipAddress);
             for (int i = 0; i < userDB.getSize(); i++) {
                 System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
                         "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getIpAddressByIndex(i));
             }
+            userDB.saveUserDatabaseDefault();
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
             Scene rooter = new Scene(root);
@@ -201,10 +217,11 @@ public class controller {
     public void subAnimeRec(ActionEvent event) {
         String sub = animeSub.getText();
         addStuff.add(sub);
-        ObservableList <String> add = FXCollections.observableList(addStuff);
+        ObservableList<String> add = FXCollections.observableList(addStuff);
         animeRec.setItems(add);
         animeSub.clear();
     }
+
     @FXML
     public void animeRec(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/recommendation_anime.fxml"));
@@ -223,13 +240,16 @@ public class controller {
         reAge.clear();
         reCity.clear();
     }
+
     int click = 0;
+
     @FXML
     public void nextList(ActionEvent event) {
         click++;
         loadImage(click);
     }
-    public void loadImage(int n){
+
+    public void loadImage(int n) {
         t1Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1436/106694.jpg?s=d395802efdb5b4a093f094f0090b7a07"));
         T1name.setText("Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu. II");
         T1text.setText("Second season of Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu.");
@@ -246,6 +266,7 @@ public class controller {
         T5name.setText("Tensei shitara Slime Datta Ken 2nd Season Part 2");
         T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");
     }
+
     @FXML
     void animeDetail(ActionEvent event) throws IOException {
         Parent settings = FXMLLoader.load(getClass().getResource("fxml/animeDetail.fxml"));
@@ -256,8 +277,26 @@ public class controller {
     }
 
     @FXML
-    void Close (ActionEvent event) throws IOException{
+    void Close(ActionEvent event) throws IOException {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private ListView<String> userList;
+
+    @FXML
+    void loadUser(ActionEvent event) {
+        UserDatabase userDB = new UserDatabase();
+        userDB.loadUserDatabaseDefault();
+        ArrayList<String> userListA = new ArrayList();
+        for (int i = 0; i < userDB.getSize(); i++) {
+            userListA.add(userDB.getUsernameByIndex(i));
+        }
+        System.out.println(userListA);
+        for (String userListString : userListA) {
+            userList.getItems().add(userListString);
+        }
+
     }
 }
