@@ -92,7 +92,7 @@ public class Main extends Application {
             userProfile.setPassword(userDB.getPasswordByIndex(i));
             userProfile.setAge(userDB.getAgeByIndex(i));
             userProfile.setCity(cityTitle.getCityTitle());
-            userProfile.setIpAddress(ipAddress);
+//            userProfile.setIpAddress(ipAddress);
             userProfile.save();
         }
 
@@ -100,14 +100,14 @@ public class Main extends Application {
         userDB.loadUserDatabaseDefault();
 
         //Testing the UserDatabase
-        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), ipAddress);
-        userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), ipAddress);
+        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), 12345);
+        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), 12345);
+        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), 12345);
+        userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), 12345);
+        userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), 12345);
         for (int i = 0; i < userDB.getSize(); i++) {
             System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
-                    "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getIpAddressByIndex(i));
+                    "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getZipCodeByIndex(i));
         }
 
         //Testing the file printing and saving
@@ -116,12 +116,12 @@ public class Main extends Application {
 
         //Testing the merge-sort algorithm in case the user database becomes unsorted and needs fixing
         UserDatabase mergeDB = new UserDatabase();
-        mergeDB.quickAddNewApplicationUser("eHicks", "", "", 0, "", "");
-        mergeDB.quickAddNewApplicationUser("ACarver", "", "", 0, "", "");
-        mergeDB.quickAddNewApplicationUser("aCandy", "", "", 0, "", "");
-        mergeDB.quickAddNewApplicationUser("TheMessiah", "", "", 0, "", "");
-        mergeDB.quickAddNewApplicationUser("kev1nDu", "", "", 0, "", "");
-        mergeDB.quickAddNewApplicationUser("BigQuig", "", "", 0, "", "");
+        mergeDB.quickAddNewApplicationUser("eHicks", "", "", 0, "", 0);
+        mergeDB.quickAddNewApplicationUser("ACarver", "", "", 0, "", 0);
+        mergeDB.quickAddNewApplicationUser("aCandy", "", "", 0, "", 0);
+        mergeDB.quickAddNewApplicationUser("TheMessiah", "", "", 0, "", 0);
+        mergeDB.quickAddNewApplicationUser("kev1nDu", "", "", 0, "", 0);
+        mergeDB.quickAddNewApplicationUser("BigQuig", "", "", 0, "", 0);
         System.out.println(mergeDB.printDatabase());
         mergeDB.mergeSortList();
         System.out.println(mergeDB.printDatabase());

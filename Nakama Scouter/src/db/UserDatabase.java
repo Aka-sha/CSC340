@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This class contains a list of every user of the applications, and can handle adding new users to the database
  * and editting the data of preexisting users.
- * Last modified 04/13/2021 by Edward Hicks
+ * Last modified 04/23/2021 by Edward Hicks
  * @author Edward Hicks
  */
 public class UserDatabase {
@@ -27,12 +27,12 @@ public class UserDatabase {
      * @param _passWord
      * @param _age
      * @param _city
-     * @param _ipAddress
+     * @param _zipCode
      */
-    public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
+    public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, int _zipCode) {
         //Create new user and add it to the List
-        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
-            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
+        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city)) {
+            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _zipCode);
             applicationUser.add(newUser);
             singleSortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
@@ -48,11 +48,11 @@ public class UserDatabase {
      * @param _passWord
      * @param _age
      * @param _city
-     * @param _ipAddress
+     * @param _zipCode
      */
-    public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, String _ipAddress) {
-        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city, _ipAddress)) {
-            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _ipAddress);
+    public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, int _zipCode) {
+        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city)) {
+            UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _zipCode);
             applicationUser.add(newUser);
         }
     }
@@ -92,27 +92,6 @@ public class UserDatabase {
             return false;
         }
         return true;
-//        int lowerThreshold = 0;
-//        int upperThreshold = this.applicationUser.size()-1;
-//
-//        for (int i = upperThreshold / 2; ; i = lowerThreshold + ((upperThreshold-lowerThreshold)/2)) {
-//            int usernameCompare = compareWithCase(_userName, getUsernameByIndex(i));
-//            //A matching username has been found, new username is not unique
-//            if (usernameCompare == 0) {
-//                System.out.println("The username " + _userName + " is already being used by another account.");
-//                return false;
-//            }
-//            //A matching username has not been found, new username is unique
-//            else if (lowerThreshold == upperThreshold) return true;
-//                //Index is too high, move upperThreshold down
-//            else if (usernameCompare < 0) upperThreshold = i;
-//                //Index is too low, move lowerIndex up
-//            else {
-//                //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
-//                if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
-//                else lowerThreshold = i;
-//            }
-//        }
     }
 
     /**
@@ -166,10 +145,9 @@ public class UserDatabase {
      * @param _passWord
      * @param _email
      * @param _city
-     * @param _ipAddress
      * @return
      */
-    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city, String _ipAddress) {
+    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city) {
         boolean noTabs = true;
         if (_userName.contains(";")) {
             System.out.println("Username must not contain a tab.");
@@ -185,10 +163,6 @@ public class UserDatabase {
         }
         if (_city.contains(";")) {
             System.out.println("City must not contain a tab.");
-            noTabs = false;
-        }
-        if (_ipAddress.contains(";")) {
-            System.out.println("IP address must not contain a tab.");
             noTabs = false;
         }
         return noTabs;
@@ -313,7 +287,7 @@ public class UserDatabase {
             userData += this.getEmailByIndex(i) + "\t";
             userData += this.getAgeByIndex(i) + "\t";
             userData += this.getCityByIndex(i) + "\t";
-            userData += this.getIpAddressByIndex(i) + "\t";
+            userData += this.getZipCodeByIndex(i) + "\t";
             return userData;
         } catch (Exception ex) {
             //Only happens if i exceeds the size of the database or is less than 0 (Hopefully)
@@ -366,9 +340,9 @@ public class UserDatabase {
                 String newCity = userSubstring.substring(0, userSubstring.indexOf("\t"));
                 userSubstring = userSubstring.substring(userSubstring.indexOf("\t")+1);
                 //Getting the IP address from the substring
-                String newIPAddress = userSubstring;
+                int newZipCode = Integer.parseInt(userSubstring);
                 //Creating the new user
-                quickAddNewApplicationUser(newUsername, newEmail, newPassword, newAge, newCity, newIPAddress);
+                quickAddNewApplicationUser(newUsername, newEmail, newPassword, newAge, newCity, newZipCode);
                 //Trim the userDatabase
                 userDatabase = userDatabase.substring(userDatabase.indexOf("\n")+1);
             }
@@ -385,6 +359,14 @@ public class UserDatabase {
     public void loadUserDatabaseDefault() { this.loadUserDatabase(defaultDatabaseAddress); }
 
     //=================  GETTERS =================
+    public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
+    public String getUsernameByIndex(int _i) { return this.applicationUser.get(_i).getUsername(); }
+    public String getEmailByIndex(int _i) { return this.applicationUser.get(_i).getEmail(); }
+    public String getPasswordByIndex(int _i) { return this.applicationUser.get(_i).getPassword(); }
+    public int getAgeByIndex(int _i) { return this.applicationUser.get(_i).getAge(); }
+    public String getCityByIndex(int _i) { return this.applicationUser.get(_i).getCity(); }
+    public int getZipCodeByIndex(int _i) { return this.applicationUser.get(_i).getZipCode(); }
+    public int getSize() { return this.applicationUser.size(); }
     public int getIndexByUsername(String _u) {
         int lowerThreshold = 0;
         int upperThreshold = this.applicationUser.size()-1;
@@ -397,9 +379,9 @@ public class UserDatabase {
             }
             //A matching username has not been found
             else if (lowerThreshold == upperThreshold) return -1;
-            //Index is too high, move upperThreshold down
+                //Index is too high, move upperThreshold down
             else if (usernameCompare < 0) upperThreshold = i;
-            //Index is too low, move lowerIndex up
+                //Index is too low, move lowerIndex up
             else {
                 //If the thresholds are 1 away from each other, move lowerThreshold up to prevent infinite loop
                 if (upperThreshold-lowerThreshold == 1) lowerThreshold = upperThreshold;
@@ -407,14 +389,6 @@ public class UserDatabase {
             }
         }
     }
-    public UserProfile getUserProfileByIndex(int _i) { return this.applicationUser.get(_i); }
-    public String getUsernameByIndex(int _i) { return this.applicationUser.get(_i).getUsername(); }
-    public String getEmailByIndex(int _i) { return this.applicationUser.get(_i).getEmail(); }
-    public String getPasswordByIndex(int _i) { return this.applicationUser.get(_i).getPassword(); }
-    public int getAgeByIndex(int _i) { return this.applicationUser.get(_i).getAge(); }
-    public String getCityByIndex(int _i) { return this.applicationUser.get(_i).getCity(); }
-    public String getIpAddressByIndex(int _i) { return this.applicationUser.get(_i).getIpAddress(); }
-    public int getSize() { return this.applicationUser.size(); }
 
     //=================  SETTERS =================
     public void setUserProfileByIndex(int _i, UserProfile _userName) { this.applicationUser.set(_i, _userName); }
@@ -444,9 +418,9 @@ public class UserDatabase {
         edittedUser.setCity(_city);
         setUserProfileByIndex(_i, edittedUser);
     }
-    public void setIpAddressByIndex(int _i, String _ipAddress) {
+    public void setZipCodeByIndex(int _i, int _zipCode) {
         UserProfile edittedUser = getUserProfileByIndex(_i);
-        edittedUser.setIpAddress(_ipAddress);
+        edittedUser.setZipCode(_zipCode);
         setUserProfileByIndex(_i, edittedUser);
     }
 }
