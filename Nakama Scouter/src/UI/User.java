@@ -2,19 +2,22 @@ package UI;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class User {
     private SimpleStringProperty firstName, lastName;
     private Image photo;
+    private LocalDate birthday;
 
-    public Person(String firstName, String lastName, LocalDate birthday) {
+    public void Person(String firstName, String lastName, LocalDate birthday) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.birthday = birthday;
         photo = new Image("defaultImage.png");
     }
 
-    public Person(String firstName, String lastName, LocalDate birthday, Image photo) {
+    public void Person(String firstName, String lastName, LocalDate birthday, Image photo) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.birthday = birthday;
