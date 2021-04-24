@@ -54,17 +54,11 @@ public class User {
         return birthday;
     }
 
-    public int getAge()
-    {
-        return Period.between(birthday, LocalDate.now()).getYears();
-    }
+    public int getAge() { return Period.between(birthday, LocalDate.now()).getYears(); }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
-    public String toString()
-    {
-        return String.format("%s %s", firstName, lastName);
-    }
+    public String toString() { return String.format("%s %s", firstName, lastName); }
 }
