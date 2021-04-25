@@ -30,7 +30,7 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
         try{
             //_loadItem will for this is almost always going to be an address
             //Address will be in normal format (1600 Penn Lane etc). Use replace on string to fit API call format
-            URL url = new URL(GeolocationApiTranslator.BASE_URL + API_KEY + "&query=" + _address.replace(' ','%'));
+            URL url = new URL(GeolocationApiTranslator.BASE_URL + API_KEY + "&query=" + _address.replace(" ", "%20"));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

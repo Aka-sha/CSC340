@@ -196,7 +196,7 @@ public class controller {
             int ageInt = Integer.parseInt(age);
             UserDatabase userDB = new UserDatabase();
             userDB.loadUserDatabaseDefault();
-            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), IP);
+            //userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), IP);
             userDB.saveUserDatabaseDefault();
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
