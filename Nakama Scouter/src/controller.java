@@ -170,7 +170,7 @@ public class controller {
         String email = reEmail.getText();
         String IP = reIP.getText();
         String age = reAge.getText();
-        City cityTitle = City.loadCityTitleByIP(IP);
+        City cityTitle = City.loadCityResultsByAddress(""); //FIX LATER
         int min = age.compareTo("18");
         String empty = "";
 

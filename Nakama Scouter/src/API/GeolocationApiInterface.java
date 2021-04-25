@@ -1,5 +1,7 @@
 package API;
 
+import java.util.List;
+
 /**
  * This interface will define methods that are needed for the Geolocation API Translator
  * or any relevant API that is to be implemented.
@@ -8,6 +10,6 @@ package API;
  */
 public interface GeolocationApiInterface {
 
-    public Object loadLocation(String _ipAddress, String _loadItem);
+    public List<Object> loadLocation(String _address, List<String> _loadItem);
 
 }
