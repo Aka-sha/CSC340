@@ -170,7 +170,7 @@ public class controller {
         String email = reEmail.getText();
         String IP = reIP.getText();
         String age = reAge.getText();
-        City cityTitle = City.loadCityResultsByAddress(""); //FIX LATER
+        City city = City.loadCityResultsByAddress(""); //FIX LATER
         int min = age.compareTo("18");
         String empty = "";
 
@@ -196,7 +196,7 @@ public class controller {
             int ageInt = Integer.parseInt(age);
             UserDatabase userDB = new UserDatabase();
             userDB.loadUserDatabaseDefault();
-            //userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), IP);
+            userDB.addNewApplicationUser(userids, email, passWords, ageInt, city.getCityTitle(), Integer.parseInt(city.getZipCode()));
             userDB.saveUserDatabaseDefault();
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
@@ -204,7 +204,7 @@ public class controller {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-            System.out.println(userids + " from " + cityTitle.getCityTitle() + " joined us");
+            System.out.println(userids + " from " + city.getCityTitle() + " joined us");
         }
     }
 
