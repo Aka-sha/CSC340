@@ -1,3 +1,4 @@
+import Models.AnimeManga;
 import Models.City;
 import db.UserDatabase;
 import javafx.collections.FXCollections;
@@ -170,7 +171,7 @@ public class controller {
         String email = reEmail.getText();
         String IP = reIP.getText();
         String age = reAge.getText();
-        City city = City.loadCityResultsByAddress(""); //FIX LATER
+        City city = City.loadCityResultsByAddress(""); //FIX LATER!!! NEED reAddress.getText or something similar
         int min = age.compareTo("18");
         String empty = "";
 
@@ -246,6 +247,8 @@ public class controller {
     }
 
     public void loadImage(int n) {
+        AnimeManga animeManga = new AnimeManga(); //ADD SEARCH QUERY HERE or CONNECT TO RECOMMENDATION SYSTEM
+        /*
         t1Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1436/106694.jpg?s=d395802efdb5b4a093f094f0090b7a07"));
         T1name.setText("Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu. II");
         T1text.setText("Second season of Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu.");
@@ -261,6 +264,23 @@ public class controller {
         t5Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1236/113727.jpg?s=83919aa2db778f788cb7b7664b802a59"));
         T5name.setText("Tensei shitara Slime Datta Ken 2nd Season Part 2");
         T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");
+        */
+
+        t1Anime.setImage(new Image(animeManga.getImageUrlList().get(0)));
+        T1name.setText(animeManga.getTitleList().get(0));
+        T1text.setText(animeManga.getSynopsisList().get(0));
+        t2Anime.setImage(new Image(animeManga.getImageUrlList().get(1)));
+        T2name.setText(animeManga.getTitleList().get(1));
+        T2text.setText(animeManga.getSynopsisList().get(1));
+        t3Anime.setImage(new Image(animeManga.getImageUrlList().get(2)));
+        T3name.setText(animeManga.getTitleList().get(2));
+        T3text.setText(animeManga.getSynopsisList().get(2));
+        t4Anime.setImage(new Image(animeManga.getImageUrlList().get(3)));
+        T4name.setText(animeManga.getTitleList().get(3));
+        T4text.setText(animeManga.getSynopsisList().get(3));
+        t5Anime.setImage(new Image(animeManga.getImageUrlList().get(4)));
+        T5name.setText(animeManga.getTitleList().get(4));
+        T5text.setText(animeManga.getSynopsisList().get(4));
     }
 
     @FXML

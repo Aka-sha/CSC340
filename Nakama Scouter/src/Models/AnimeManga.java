@@ -20,7 +20,14 @@ public class AnimeManga extends APIBaseClass {
     protected String episodes;
     protected String score;
     protected String rating;
+    protected String type;
+    protected List<String> imageUrlList;
+    protected List<String> titleList;
+    protected List<String> synopsisList;
+    protected List<String> typeList;
+    protected List<String> ratingList;
     protected List<Object> data;
+    protected final String TYPE = "type";
     protected final String RESULTS = "results";
     protected final String ID = "mal_id";
     protected final String URL = "url";
@@ -41,17 +48,45 @@ public class AnimeManga extends APIBaseClass {
      */
     public static AnimeManga loadAnimeMangaDataBySearch(List<String> _searchQuery) {
         AnimeManga animeManga = new AnimeManga();
-        List<String> loadItem = new ArrayList<String>();
+        List<String> loadItem = new ArrayList<>();
+        List<String> imageURL = new ArrayList<>();
+        List<String> title = new ArrayList<>();
+        List<String> synopsis = new ArrayList<>();
+        List<String> type = new ArrayList<>();
+        List<String> rating = new ArrayList<>();
         loadItem.add(animeManga.IMAGE_URL);
         loadItem.add(animeManga.TITLE);
         loadItem.add(animeManga.SYNOPSIS);
+        loadItem.add(animeManga.TYPE);
+        loadItem.add(animeManga.RATING);
         List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
         if (data == null) {
             return null;
         }
-        animeManga.setImageUrl((String)data.get(0));
-        animeManga.setTitle((String)data.get(1));
-        animeManga.setSynopsis((String)data.get(2));
+        for (int i = 0; i < loadItem.size(); i++) {
+            switch (i % loadItem.size()) {
+                case 0:
+                    imageURL.add((String)data.get(i));
+                    break;
+                case 1:
+                    title.add((String)data.get(i));
+                    break;
+                case 2:
+                    synopsis.add((String)data.get(i));
+                    break;
+                case 3:
+                    type.add((String)data.get(i));
+                    break;
+                case 4:
+                    rating.add((String)data.get(i));
+                    break;
+            }
+        }
+        animeManga.setImageUrlList(imageURL);
+        animeManga.setTitleList(title);
+        animeManga.setSynopsisList(synopsis);
+        animeManga.setTypeList(type);
+        animeManga.setRatingList(rating);
         return animeManga;
     }
 
@@ -257,6 +292,11 @@ public class AnimeManga extends APIBaseClass {
     public List<Object> getData() {
         return this.data;
     }
+    public List<String> getImageUrlList() { return this.imageUrlList; }
+    public List<String> getTitleList() { return this.titleList; }
+    public List<String> getSynopsisList() { return this.synopsisList; }
+    public List<String> getTypeList() { return this.typeList; }
+    public List<String> getRatingList() { return this.ratingList; }
 
     //=============== SETTERS =============
 
@@ -290,4 +330,9 @@ public class AnimeManga extends APIBaseClass {
     public void setData(List<Object> _data) {
         this.data = _data;
     }
+    public void setImageUrlList(List<String> _list) { this.imageUrlList = _list; }
+    public void setTitleList(List<String> _list) { this.titleList = _list; }
+    public void setSynopsisList(List<String> _list) { this.synopsisList = _list; }
+    public void setTypeList(List<String> _list) { this.titleList = _list; }
+    public void setRatingList(List<String> _list) { this.ratingList = _list; }
 }

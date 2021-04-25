@@ -1,17 +1,12 @@
-import Models.AnimeManga;
 import Models.City;
-import Models.Recipe;
 import Models.Restaurant;
-import db.UserProfile;
 import db.UserDatabase;
-import db.FileReadAndWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +22,14 @@ public class Main extends Application {
         //City cityLon = City.loadCityLongitudeByIP(ipAddress);
         //System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
 
+        City city = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
+        List<String> restSearchQuery = new ArrayList<>();
+        restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+        restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
+        restSearchQuery.add("30"); //MUST STAY DISTANCE
+        restSearchQuery.add("Japanese"); //MUST STAY CUISINE
+        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
+        System.out.println(rest.getNameList());
 
         //Testing Restaurant API
         //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!
