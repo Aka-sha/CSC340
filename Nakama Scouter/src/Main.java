@@ -1,17 +1,12 @@
-import Models.AnimeManga;
 import Models.City;
-import Models.Recipe;
 import Models.Restaurant;
-import db.UserProfile;
 import db.UserDatabase;
-import db.FileReadAndWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,86 +14,77 @@ import java.util.List;
 public class Main extends Application {
     public static void main(String[] args) {
         UserDatabase userDB = new UserDatabase();
-//        //Testing Food API
-//        //API will fail if used too many times in a short period of time.
-//        int foodID = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-//        Recipe recipeTitle = Recipe.loadRecipeTitleById(foodID);
-//        Recipe recipeSummary = Recipe.loadSummaryById(foodID);
-//        Recipe recipeVegetarian = Recipe.loadIsVegetarianById(foodID);
-//        Recipe recipeVegan = Recipe.loadIsVeganById(foodID);
-//        Recipe recipePricePerServing = Recipe.loadPricePerServingById(foodID);
-//        Recipe recipeMinutes = Recipe.loadReadyInMinutesById(foodID);
-//        Recipe recipeServings = Recipe.loadServingsById(foodID);
-//        System.out.println("Recipe Title: " + recipeTitle.getTitle());
-//        System.out.println("Recipe Summary: " + recipeSummary.getSummary());
-//        System.out.println("Vegetarian: " + recipeVegetarian.getIsVegetarian());
-//        System.out.println("Vegan: " + recipeVegan.getIsVegan());
-//        System.out.println("Price Per Serving: " + recipePricePerServing.getPricePerServing());
-//        System.out.println("Minutes Needed to Cook: " + recipeMinutes.getReadyInMinutes());
-//        System.out.println("Servings: " + recipeServings.getServings());
-//
-//
+
         //Testing Location API
         String ipAddress = "174.204.142.53"; // New York
-        City cityTitle = City.loadCityTitleByIP(ipAddress);
-        City cityLat = City.loadCityLatitudeByIP(ipAddress);
-        City cityLon = City.loadCityLongitudeByIP(ipAddress);
-        System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
+        //City cityTitle = City.loadCityTitleByIP(ipAddress);
+        //City cityLat = City.loadCityLatitudeByIP(ipAddress);
+        //City cityLon = City.loadCityLongitudeByIP(ipAddress);
+        //System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
 
+        City city = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
+        List<String> restSearchQuery = new ArrayList<>();
+        restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+        restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
+        restSearchQuery.add("30"); //MUST STAY DISTANCE
+        restSearchQuery.add("Japanese"); //MUST STAY CUISINE
+        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
+        System.out.println(rest.getNameList());
 
         //Testing Restaurant API
         //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!
-        String distance = "30";
-        String cuisine = "Japanese";
-        String restID = "407270267399819";
-        List<String> restSearchQuery = new ArrayList<>();
-        restSearchQuery.add(cityLat.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
-        restSearchQuery.add(cityLon.getLongitude()); //MUST STAY LONGITUDE
-        restSearchQuery.add(distance); //MUST STAY DISTANCE
-        restSearchQuery.add(cuisine); //MUST STAY CUISINE
-        Restaurant restaurantResults = Restaurant.loadRestaurantResults(restSearchQuery);
-        System.out.println(restaurantResults.getResults());
+        //String distance = "30";
+        //String cuisine = "Japanese";
+        //String restID = "407270267399819";
+        //List<String> restSearchQuery = new ArrayList<>();
+        //restSearchQuery.add(cityLat.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+        //restSearchQuery.add(cityLon.getLongitude()); //MUST STAY LONGITUDE
+        //restSearchQuery.add(distance); //MUST STAY DISTANCE
+        //restSearchQuery.add(cuisine); //MUST STAY CUISINE
+        //Restaurant restaurantResults = Restaurant.loadRestaurantResults(restSearchQuery);
+        //System.out.println(restaurantResults.getResults());
 
         //Testing AnimeManga API
-        String type = "anime";
-        String id = "884";
-        String genre1 = "1";
-        String genre2 = "10";
-        String genre3 = "4";
-        String orderBy = "start_date";
-        String sort = "desc";
+        //String type = "anime";
+        //String id = "884";
+        //String genre1 = "1";
+        //String genre2 = "10";
+        //String genre3 = "4";
+        //String orderBy = "start_date";
+        //String sort = "desc";
         //put this into a method for user preferences or search etc.
-        List<String> searchQuery = new ArrayList<>();
-        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
-        searchQuery.add(genre1);
-        searchQuery.add(genre2);
-        searchQuery.add(genre3);
-        searchQuery.add(orderBy);
-        searchQuery.add(sort);
+        //List<String> searchQuery = new ArrayList<>();
+        //searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
+        //searchQuery.add(genre1);
+        //searchQuery.add(genre2);
+        //searchQuery.add(genre3);
+        //searchQuery.add(orderBy);
+        //searchQuery.add(sort);
         //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
-        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
-        List<Object> animeData = animeSearch.getData();
-        System.out.println(animeData);
+        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        //List<Object> animeData = animeSearch.getData();
+        //System.out.println(animeData);
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
         //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
         //System.out.println(animeRatingByID.getRating());
 
 
         //testing MySQL Queries for Database established above
-        for (int i = 0; i < userDB.getSize(); i++) {
-            UserProfile userProfile = new UserProfile();
-            userProfile.setUsername(userDB.getUsernameByIndex(i));
-            userProfile.setEmail(userDB.getEmailByIndex(i));
-            userProfile.setPassword(userDB.getPasswordByIndex(i));
-            userProfile.setAge(userDB.getAgeByIndex(i));
-            userProfile.setCity(cityTitle.getCityTitle());
+        //for (int i = 0; i < userDB.getSize(); i++) {
+            //UserProfile userProfile = new UserProfile();
+            //userProfile.setUsername(userDB.getUsernameByIndex(i));
+            //userProfile.setEmail(userDB.getEmailByIndex(i));
+            //userProfile.setPassword(userDB.getPasswordByIndex(i));
+            //userProfile.setAge(userDB.getAgeByIndex(i));
+            //userProfile.setCity(cityTitle.getCityTitle());
 //            userProfile.setIpAddress(ipAddress);
-            userProfile.save();
-        }
+            //userProfile.save();
+       // }
 
         //Testing the file loading
         userDB.loadUserDatabaseDefault();
 
+        City cityTitle = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
         //Testing the UserDatabase
         userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), 12345);
         userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), 12345);
