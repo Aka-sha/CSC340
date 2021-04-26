@@ -63,7 +63,7 @@ public class AnimeManga extends APIBaseClass {
         if (data == null) {
             return null;
         }
-        for (int i = 0; i < loadItem.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             switch (i % loadItem.size()) {
                 case 0:
                     imageURL.add((String)data.get(i));
@@ -333,6 +333,6 @@ public class AnimeManga extends APIBaseClass {
     public void setImageUrlList(List<String> _list) { this.imageUrlList = _list; }
     public void setTitleList(List<String> _list) { this.titleList = _list; }
     public void setSynopsisList(List<String> _list) { this.synopsisList = _list; }
-    public void setTypeList(List<String> _list) { this.titleList = _list; }
+    public void setTypeList(List<String> _list) { this.typeList = _list; }
     public void setRatingList(List<String> _list) { this.ratingList = _list; }
 }
