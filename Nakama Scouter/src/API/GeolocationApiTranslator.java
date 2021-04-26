@@ -1,31 +1,36 @@
 package API;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class is used to translate the information retrieved from the Geolocation API.
  * The contents from connecting to the API URL produces a readable JSON file.
- * Last Updated 03/23/2021
+ * Last Updated 04/25/2021
  * @author Andy Cruse
  */
 
 public class GeolocationApiTranslator implements GeolocationApiInterface{
-    private static final String baseURL = "http://ip-api.com/json/";
-
+    private static final String BASE_URL = "http://api.positionstack.com/v1/forward?access_key="; //780b46c13583c487962bb1a0b511dbe7&query=
+    private static final String API_KEY = "780b46c13583c487962bb1a0b511dbe7";
     /**
      * This method is used to connect to the Location API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
-     * @param _ipAddress, _loadItem
+     * @param _address, _loadItem
      * @return _loadItem
      */
     @Override
-    public Object loadLocation(String _ipAddress, String _loadItem){
+    public List<Object> loadLocation(String _address, List<String> _loadItem){
         try{
-            URL url = new URL(GeolocationApiTranslator.baseURL + _ipAddress + "?fields=status,city,lat,lon,query");
+            //_loadItem will for this is almost always going to be an address
+            //Address will be in normal format (1600 Penn Lane etc). Use replace on string to fit API call format
+            URL url = new URL(GeolocationApiTranslator.BASE_URL + API_KEY + "&query=" + _address.replace(" ", "%20"));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -40,7 +45,15 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
             connection.disconnect();
             // Extract JSON object
             JSONObject obj = new JSONObject(content.toString());
-            return obj.getString(_loadItem);
+            JSONArray data = (JSONArray)obj.get("data");
+            //"data" returns a JSON Array even though the results are the same. Index 0 is all we need
+            JSONObject item = data.getJSONObject(0);
+            ArrayList<Object> arrayList = new ArrayList<Object>();
+            //adds every _loadItem to an arrayList
+            for(int i = 0; i < _loadItem.size(); i++) {
+                arrayList.add(item.getString(_loadItem.get(i)));
+            }
+            return arrayList;
         } catch (Exception ex) {
             return null;
         }
