@@ -175,7 +175,7 @@ public class controller {
         String age = reAge.getText();
         int ageInt = Integer.parseInt(age);
         String IP = "174.204.142.53";
-        City cityTitle = City.loadCityTitleByIP(IP);
+        City cityTitle = City.loadCityResultsByAddress("");
         int min = age.compareTo("18");
         String empty = "";
 
