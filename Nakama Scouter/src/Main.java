@@ -19,6 +19,7 @@ import java.util.List;
 public class Main extends Application {
     public static void main(String[] args) {
         UserDatabase userDB = new UserDatabase();
+<<<<<<< Updated upstream
 //        //Testing Food API
 //        //API will fail if used too many times in a short period of time.
 //        int foodID = 716429; //returns "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
@@ -38,6 +39,10 @@ public class Main extends Application {
 //        System.out.println("Servings: " + recipeServings.getServings());
 //
 //
+=======
+
+
+>>>>>>> Stashed changes
         //Testing Location API
         String ipAddress = "174.204.142.53"; // New York
         City cityTitle = City.loadCityTitleByIP(ipAddress);

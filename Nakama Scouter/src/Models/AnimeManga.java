@@ -32,6 +32,60 @@ public class AnimeManga extends APIBaseClass {
     protected final String SCORE = "score";
     protected final String RATING = "rated";
 
+<<<<<<< Updated upstream
+=======
+    /** Static method creates a AnimeManga object based on the given user ID string.
+     * Creates a loadItem String List to allow for user input search. User can input as many genre's as the want
+     * up to maximum.
+     * Currently returns a String. May update, but good enough for now.
+     * @param _searchQuery
+     * @return
+     */
+    public static AnimeManga loadAnimeMangaDataBySearch(List<String> _searchQuery) {
+        AnimeManga animeManga = new AnimeManga();
+        List<String> loadItem = new ArrayList<>();
+        List<String> imageURL = new ArrayList<>();
+        List<String> title = new ArrayList<>();
+        List<String> synopsis = new ArrayList<>();
+        List<String> type = new ArrayList<>();
+        List<String> rating = new ArrayList<>();
+        loadItem.add(animeManga.IMAGE_URL);
+        loadItem.add(animeManga.TITLE);
+        loadItem.add(animeManga.SYNOPSIS);
+        loadItem.add(animeManga.TYPE);
+        loadItem.add(animeManga.RATING);
+        List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
+        if (data == null) {
+            return null;
+        }
+        for (int i = 0; i < data.size(); i++) {
+            switch (i % loadItem.size()) {
+                case 0:
+                    imageURL.add((String)data.get(i));
+                    break;
+                case 1:
+                    title.add((String)data.get(i));
+                    break;
+                case 2:
+                    synopsis.add((String)data.get(i));
+                    break;
+                case 3:
+                    type.add((String)data.get(i));
+                    break;
+                case 4:
+                    rating.add((String)data.get(i));
+                    break;
+            }
+        }
+        animeManga.setImageUrlList(imageURL);
+        animeManga.setTitleList(title);
+        animeManga.setSynopsisList(synopsis);
+        animeManga.setTypeList(type);
+        animeManga.setRatingList(rating);
+        return animeManga;
+    }
+
+>>>>>>> Stashed changes
     /**
      * Static method creates a AnimeManga object based on the given user ID string.
      * Method connects to AnimeManga API to returns the MyAnimeList url for the Anime/Manga
