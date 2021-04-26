@@ -174,6 +174,8 @@ public class controller {
         int zipInt = Integer.parseInt(zip);
         String age = reAge.getText();
         int ageInt = Integer.parseInt(age);
+        String IP = "174.204.142.53";
+        City cityTitle = City.loadCityResultsByAddress("");
         int min = age.compareTo("18");
         String empty = "";
 
@@ -198,7 +200,7 @@ public class controller {
             String info = userids + " Welcome To Anime Scout";
             UserDatabase userDB = new UserDatabase();
             userDB.loadUserDatabaseDefault();
-            userDB.addNewApplicationUser(userids, email, passWords, ageInt, "11", zipInt);
+            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), zipInt);
             userDB.saveUserDatabaseDefault();
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
@@ -206,7 +208,7 @@ public class controller {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-            System.out.println(userids + " from " + "11" + " joined us");
+            System.out.println(userids + " from " + cityTitle.getCityTitle() + " joined us");
         }
     }
 

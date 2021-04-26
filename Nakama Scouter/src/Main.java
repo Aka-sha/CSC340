@@ -1,3 +1,4 @@
+import Models.AnimeManga;
 import Models.City;
 import Models.Restaurant;
 import db.UserDatabase;
@@ -45,23 +46,23 @@ public class Main extends Application {
         //System.out.println(restaurantResults.getResults());
 
         //Testing AnimeManga API
-        //String type = "anime";
-        //String id = "884";
-        //String genre1 = "1";
-        //String genre2 = "10";
-        //String genre3 = "4";
-        //String orderBy = "start_date";
-        //String sort = "desc";
+        String type = "anime";
+        String genre1 = "1";
+        String genre2 = "10";
+        String genre3 = "4";
+        String orderBy = "start_date";
+        String sort = "desc";
         //put this into a method for user preferences or search etc.
-        //List<String> searchQuery = new ArrayList<>();
-        //searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
-        //searchQuery.add(genre1);
-        //searchQuery.add(genre2);
-        //searchQuery.add(genre3);
-        //searchQuery.add(orderBy);
-        //searchQuery.add(sort);
+        List<String> searchQuery = new ArrayList<>();
+        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
+        searchQuery.add(genre1);
+        searchQuery.add(genre2);
+        searchQuery.add(genre3);
+        searchQuery.add(orderBy);
+        searchQuery.add(sort);
         //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
-        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        System.out.println(animeSearch.getTypeList().get(1));
         //List<Object> animeData = animeSearch.getData();
         //System.out.println(animeData);
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
