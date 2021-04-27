@@ -1,5 +1,6 @@
 package UI;
 
+import Models.AnimeManga;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,14 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class animeListCon {
+
+
+
+
     @FXML
     private ImageView t1Anime, t2Anime, t3Anime, t4Anime, t5Anime;
 
@@ -23,7 +30,7 @@ public class animeListCon {
     @FXML
     private Label T1name, T2name, T3name, T4name, T5name;
 
-    int click = 0;
+    int click = 1;
 
     @FXML
     public void homePage(ActionEvent event) throws Exception {
@@ -86,14 +93,33 @@ public class animeListCon {
             e.printStackTrace();
         }
     }
+
+
     @FXML
     public void nextList(ActionEvent event) {
         click++;
         loadImage(click);
     }
-
+    public AnimeManga preSet() {
+        String type = "anime";
+        String genre1 = "1";
+        String genre2 = "10";
+        String genre3 = "4";
+        String orderBy = "start_date";
+        String sort = "desc";
+        List<String> searchQuery = new ArrayList<>();
+        searchQuery.add(type);
+        searchQuery.add(genre1);
+        searchQuery.add(genre2);
+        searchQuery.add(genre3);
+        searchQuery.add(orderBy);
+        searchQuery.add(sort);
+        AnimeManga anime = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+        return anime;
+    }
     public void loadImage(int n) {
-        t1Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1436/106694.jpg?s=d395802efdb5b4a093f094f0090b7a07"));
+        AnimeManga anime = preSet();
+        /*t1Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1436/106694.jpg?s=d395802efdb5b4a093f094f0090b7a07"));
         T1name.setText("Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu. II");
         T1text.setText("Second season of Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu.");
         t2Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1407/111469.jpg?s=57f3024519667ef0d0fd15beeea628c1"));
@@ -107,7 +133,24 @@ public class animeListCon {
         T4text.setText("The web manga centers around Bojji, a deaf, powerless prince who cannot even wield a children's sword. As the firstborn son, he strives hard and dreams of becoming the world's greatest king. However,...");
         t5Anime.setImage(new Image("https://cdn.myanimelist.net/images/anime/1236/113727.jpg?s=83919aa2db778f788cb7b7664b802a59"));
         T5name.setText("Tensei shitara Slime Datta Ken 2nd Season Part 2");
-        T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");
+        T5text.setText("Second half of Tensei shitara Slime Datta Ken 2nd Season.");*/
+        t1Anime.setImage(new Image(anime.getImageUrlList().get(n*5-4)));
+        T1name.setText(anime.getTitleList().get(n*5-4));
+        T1text.setText(anime.getSynopsisList().get(n*5-4));
+        t2Anime.setImage(new Image(anime.getImageUrlList().get(n*5-3)));
+        T2name.setText(anime.getTitleList().get(n*5-3));
+        T2text.setText(anime.getSynopsisList().get(n*5-3));
+        t3Anime.setImage(new Image(anime.getImageUrlList().get(n*5-2)));
+        T3name.setText(anime.getTitleList().get(n*5-2));
+        T3text.setText(anime.getSynopsisList().get(n*5-2));
+        t4Anime.setImage(new Image(anime.getImageUrlList().get(n*5-1)));
+        T4name.setText(anime.getTitleList().get(n*5-1));
+        T4text.setText(anime.getSynopsisList().get(n*5-1));
+        t5Anime.setImage(new Image(anime.getImageUrlList().get(n*5-0)));
+        T5name.setText(anime.getTitleList().get(n*5-0));
+        T5text.setText(anime.getSynopsisList().get(n*5-0));
+
+
     }
 
     @FXML

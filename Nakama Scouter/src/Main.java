@@ -62,7 +62,7 @@ public class Main extends Application {
         searchQuery.add(sort);
         //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
         AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
-        System.out.println(animeSearch.getTypeList().get(1));
+        System.out.println(animeSearch.getTitleList().get(1));
         //List<Object> animeData = animeSearch.getData();
         //System.out.println(animeData);
         //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
