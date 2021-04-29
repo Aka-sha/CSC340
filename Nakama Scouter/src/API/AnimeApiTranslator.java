@@ -26,28 +26,9 @@ public class AnimeApiTranslator implements AnimeApiInterface {
      */
     @Override
     public Object loadAnimeMangaItemByID(String _id, String _loadItem) {
-        // Builds base url string
-        String searchString = "/anime/" + _id;
-        try {
-            URL url = new URL(AnimeApiTranslator.ANIME_BASED_URL + searchString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            // Build the content from the buffered input
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            // Close connections
-            in.close();
-            connection.disconnect();
-            // Extract JSON object
-            JSONObject obj = new JSONObject(content.toString());
-            return obj.getString(_loadItem);
-        } catch (Exception ex) {
-            return null;
-        }
+        List<String> oneItem = new ArrayList<String>();
+        oneItem.add(_loadItem);
+        return this.loadSeveralAnimeMangaItemByID(_id, oneItem).get(0);
     }
 
     /**
