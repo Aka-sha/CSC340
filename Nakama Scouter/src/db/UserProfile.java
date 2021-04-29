@@ -16,7 +16,7 @@ public class UserProfile extends DataObject{
     //Anime preferences
     //Food preferences
 
-    public UserProfile() {}
+    public UserProfile(String _userName, String _email, String _passWord, int _age, String _city, String _zipCode) {}
 
     //Creates a new account that's approved by the UserDatabase
     public UserProfile(String _userName, String _email, String _passWord, int _age, String _city, int _zipCode) {

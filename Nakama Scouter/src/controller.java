@@ -19,6 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class is the container for the Action methods that modify data and the View.
+ * Last Updated 04/29/2021
+ * @author Andy Cruse, modified by Aka'sh Carver
+ */
+
 public class controller {
     @FXML
     private ImageView t1Anime, t2Anime, t3Anime, t4Anime, t5Anime;
@@ -169,6 +175,7 @@ public class controller {
         String Confirm = rePass2.getText();
         String email = reEmail.getText();
         String IP = reIP.getText();
+        int intIP = Integer.parseInt(IP);
         String age = reAge.getText();
         City cityTitle = City.loadCityTitleByIP(IP);
         int min = age.compareTo("18");
@@ -194,10 +201,12 @@ public class controller {
         } else {
             String info = userids + " Welcome To Anime Scout";
             int ageInt = Integer.parseInt(age);
+
             UserDatabase userDB = new UserDatabase();
             userDB.loadUserDatabaseDefault();
-            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), IP);
+            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), intIP);
             userDB.saveUserDatabaseDefault();
+
             welcome(event, info);
             Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
             Scene rooter = new Scene(root);
@@ -207,7 +216,6 @@ public class controller {
             System.out.println(userids + " from " + cityTitle.getCityTitle() + " joined us");
         }
     }
-
 
     @FXML
     public void subAnimeRec(ActionEvent event) {
@@ -284,7 +292,6 @@ public class controller {
     @FXML
     void manage(MouseEvent event) {
             String selected = userList.getSelectionModel().getSelectedItem().toString();
-
     }
 
     @FXML
