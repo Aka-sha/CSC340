@@ -57,6 +57,8 @@ public class Main extends Application {
         restSearchQuery.add("Japanese"); //MUST STAY CUISINE
         Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
         System.out.println(rest.getNameList());
+        System.out.println(rest.getPriceRangeList());
+        System.out.println(rest.getPhoneList());
 
         //Testing Restaurant API
         //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!

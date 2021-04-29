@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.signUpCon">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('fxml/image/login.png'); -fx-background-repeat: round;">
          <children>
@@ -72,7 +72,7 @@
                         <Insets left="13.0" />
                      </GridPane.margin>
                   </Text>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="ZipCode" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Zipcode" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="ROGFontsv1.6-Regular" size="20.0" />
                      </font>
@@ -81,7 +81,16 @@
                      </GridPane.margin>
                   </Text>
                   <TextField fx:id="reAge" prefHeight="26.0" prefWidth="323.0" promptText="Enter your age" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="reZip" prefHeight="26.0" prefWidth="323.0" promptText="Enter your Zipcode" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="reZip" prefHeight="26.0" prefWidth="323.0" promptText="Enter your zipcode" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="ROGFontsv1.6-Regular" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="13.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="reCity" prefHeight="26.0" prefWidth="323.0" promptText="Enter your City" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Button alignment="CENTER" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#clear" prefHeight="49.0" prefWidth="128.0" text="Clear">
