@@ -78,7 +78,7 @@ public class RestaurantApiTranslator implements RestaurantApiInterface {
             // Extract JSON object
             JSONObject obj = new JSONObject(content.toString());
             JSONArray data = (JSONArray)obj.get("data");
-            ArrayList<Object> dataList = new ArrayList<Object>();
+            List<Object> dataList = new ArrayList<Object>();
             //adds every _loadItem to an arrayList
             for (int i = 0; i < data.length(); i++) {
                 JSONObject item = data.getJSONObject(i);

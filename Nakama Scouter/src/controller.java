@@ -18,13 +18,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * The class is the container for the Action methods that modify data and the View.
  * Last Updated 04/29/2021
  * @author Andy Cruse, modified by Aka'sh Carver
  */
-
 public class controller {
     @FXML
     private ImageView t1Anime, t2Anime, t3Anime, t4Anime, t5Anime;
@@ -58,6 +56,12 @@ public class controller {
 
     @FXML
     private PasswordField passWord;
+
+    @FXML
+    private TextField CityTitle;
+
+    @FXML
+    private TextField reCityTitle;
 
     @FXML
     private ListView<String> animeRec;
@@ -175,11 +179,11 @@ public class controller {
         String Confirm = rePass2.getText();
         String email = reEmail.getText();
         String IP = reIP.getText();
-        int intIP = Integer.parseInt(IP);
         String age = reAge.getText();
-        City cityTitle = City.loadCityTitleByIP(IP);
+        String cityTitle = reCityTitle.getText();
         int min = age.compareTo("18");
         String empty = "";
+        int intIP = Integer.parseInt(IP);
 
 
         if (!passWords.equals(Confirm)) {
@@ -204,7 +208,7 @@ public class controller {
 
             UserDatabase userDB = new UserDatabase();
             userDB.loadUserDatabaseDefault();
-            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle.getCityTitle(), intIP);
+            userDB.addNewApplicationUser(userids, email, passWords, ageInt, cityTitle, intIP);
             userDB.saveUserDatabaseDefault();
 
             welcome(event, info);
@@ -213,7 +217,7 @@ public class controller {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-            System.out.println(userids + " from " + cityTitle.getCityTitle() + " joined us");
+            System.out.println(userids + " from " + cityTitle + " joined us");
         }
     }
 

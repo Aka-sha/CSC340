@@ -23,6 +23,11 @@ public class Restaurant extends APIBaseClass {
     protected String hours;
     protected String priceRange;
     protected List<Object> results;
+    protected List<String> nameList = new ArrayList<>();
+    protected List<String> phoneList = new ArrayList<>();
+    protected List<String> websiteList = new ArrayList<>();
+    protected List<String> hoursList = new ArrayList<>();
+    protected List<String> priceRangeList = new ArrayList<>();
     protected final String TOTAL_RESULTS = "totalResults";
     protected final String DATA = "data";
     protected final String RESTAURANT_NAME = "restaurant_name";
@@ -33,6 +38,53 @@ public class Restaurant extends APIBaseClass {
     protected final String PRICE_RANGE = "price_range";
 
     public void Restaurant() {}
+
+    /**
+     * Static method creates a Restaurant object based on latitude, longtitude, a distance radius in miles, and a specified cuisine
+     * This method connects with the Restaurant API to return the Number of Results
+     * @param _searchQuery
+     * @return Restaurant rest
+     */
+    public static Restaurant loadRestaurantResults(List<String> _searchQuery) {
+        Restaurant rest = new Restaurant();
+        List<String> loadItems = new ArrayList<String>();
+        loadItems.add(rest.RESTAURANT_NAME);
+        loadItems.add(rest.RESTAURANT_PHONE);
+        loadItems.add(rest.RESTAURANT_WEBSITE);
+        loadItems.add(rest.HOURS);
+        loadItems.add(rest.PRICE_RANGE);
+        try {
+            List<Object> results = rest.myRestaurantAPI.loadRestaurantItemBySearch(_searchQuery, loadItems);
+            for (int i = 0; i < results.size(); i++) {
+                int mod = i % loadItems.size();
+                switch (mod) {
+                    case 0:
+                        rest.nameList.add((String)results.get(i));
+                        break;
+                    case 1:
+                        rest.phoneList.add((String)results.get(i));
+                        break;
+                    case 2:
+                        rest.websiteList.add((String)results.get(i));
+                        break;
+                    case 3:
+                        rest.hoursList.add((String)results.get(i));
+                        break;
+                    case 4:
+                        rest.priceRangeList.add((String)results.get(i));
+                        break;
+                }
+            }
+        }
+        catch (NullPointerException ex) {
+            rest.nameList.add(null);
+            rest.phoneList.add(null);
+            rest.websiteList.add(null);
+            rest.hoursList.add(null);
+            rest.priceRangeList.add(null);
+        }
+        return rest;
+    }
 
     /**
      * Static method creates a Restaurant object based on a Restaurant ID
@@ -130,30 +182,6 @@ public class Restaurant extends APIBaseClass {
         }
         catch (NullPointerException ex) {
             rest.setPriceRange("!NA!");
-        }
-        return rest;
-    }
-
-    /**
-     * Static method creates a Restaurant object based on latitude, longtitude, a distance radius in miles, and a specified cuisine
-     * This method connects with the Restaurant API to return the Number of Results
-     * @param _searchQuery
-     * @return Restaurant rest
-     */
-    public static Restaurant loadRestaurantResults(List<String> _searchQuery) {
-        Restaurant rest = new Restaurant();
-        List<String> loadItems = new ArrayList<String>();
-        loadItems.add(rest.RESTAURANT_NAME);
-        loadItems.add(rest.RESTAURANT_PHONE);
-        loadItems.add(rest.RESTAURANT_WEBSITE);
-        loadItems.add(rest.HOURS);
-        loadItems.add(rest.PRICE_RANGE);
-        try {
-            List<Object> results = rest.myRestaurantAPI.loadRestaurantItemBySearch(_searchQuery, loadItems);
-            rest.setResults(results);
-        }
-        catch (NullPointerException ex) {
-            rest.setResults(null);
         }
         return rest;
     }
@@ -327,6 +355,26 @@ public class Restaurant extends APIBaseClass {
     public List<Object> getResults() {
         return this.results;
     }
+
+    public List<String> getNameList() {
+        return this.nameList;
+    }
+
+    public List<String> getPhoneList() {
+        return this.phoneList;
+    }
+
+    public List<String> getWebsiteList() {
+        return this.websiteList;
+    }
+
+    public List<String> getHoursList() {
+        return this.hoursList;
+    }
+
+    public List<String> getPriceRangeList() {
+        return this.priceRangeList;
+    }
     //=============== SETTERS =============
     public void setIpAddress(String _ipAddress) {
         this.ipAddress = _ipAddress;
@@ -361,8 +409,9 @@ public class Restaurant extends APIBaseClass {
     public void setPriceRange(String _priceRange) {
         this.priceRange = _priceRange;
     }
-
-    public void setResults(List<Object> _results) {
-        this.results = _results;
-    }
+    public void setNameList(List<String> _list) { this.nameList = _list; }
+    public void setPhoneList(List<String> _list) { this.phoneList = _list; }
+    public void setWebsiteList(List<String> _list) { this.websiteList = _list; }
+    public void setHoursList(List<String> _list) { this.hoursList = _list; }
+    public void setPriceRangeList(List<String> _list) { this.priceRangeList = _list; }
 }
