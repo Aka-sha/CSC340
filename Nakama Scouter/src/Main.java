@@ -14,6 +14,32 @@ import java.util.List;
 
 public class Main extends Application {
     public static void main(String[] args) {
+        //Black Box testing (comment out if it's to be skipped)
+        blackBoxTest();
+        //Testing The GUI
+        Application.launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+            Scene scene = new Scene(root, 1028, 579);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Welcome to Nakama Scouter");
+            primaryStage.setResizable(false);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A method for testing every individual aspect of Nakama Scouter by comparing expected outputs with
+     * the actual output.
+     */
+    public static void blackBoxTest() {
         UserDatabase userDB = new UserDatabase();
 
         //Testing Location API
@@ -72,19 +98,19 @@ public class Main extends Application {
 
         //testing MySQL Queries for Database established above
         //for (int i = 0; i < userDB.getSize(); i++) {
-            //UserProfile userProfile = new UserProfile();
-            //userProfile.setUsername(userDB.getUsernameByIndex(i));
-            //userProfile.setEmail(userDB.getEmailByIndex(i));
-            //userProfile.setPassword(userDB.getPasswordByIndex(i));
-            //userProfile.setAge(userDB.getAgeByIndex(i));
-            //userProfile.setCity(cityTitle.getCityTitle());
+        //UserProfile userProfile = new UserProfile();
+        //userProfile.setUsername(userDB.getUsernameByIndex(i));
+        //userProfile.setEmail(userDB.getEmailByIndex(i));
+        //userProfile.setPassword(userDB.getPasswordByIndex(i));
+        //userProfile.setAge(userDB.getAgeByIndex(i));
+        //userProfile.setCity(cityTitle.getCityTitle());
 //            userProfile.setIpAddress(ipAddress);
-            //userProfile.save();
-       // }
+        //userProfile.save();
+        // }
+
 
         //Testing the file loading
         userDB.loadUserDatabaseDefault();
-
         City cityTitle = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
         //Testing the UserDatabase
         userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), 12345);
@@ -92,16 +118,18 @@ public class Main extends Application {
         userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), 12345);
         userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), 12345);
         userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), 12345);
-        for (int i = 0; i < userDB.getSize(); i++) {
-            System.out.println(i + " USERNAME: " + userDB.getUsernameByIndex(i) + " \n PASSWORD: " + userDB.getPasswordByIndex(i) + " \n EMAIL: " + userDB.getEmailByIndex(i) +
-                    "\n AGE: " + userDB.getAgeByIndex(i) + "\n CITY: " + userDB.getCityByIndex(i) + "\n IP ADDRESS: " + userDB.getZipCodeByIndex(i));
-        }
+        userDB.printDatabase();
+        //Comparing
+        blackBoxCompare(userDB.getIndexByUsername("eHicks"), 2);
+        blackBoxCompare(userDB.getIndexByUsername("ACarver"), 1);
+        blackBoxCompare(userDB.getIndexByUsername("aCandy"), 0);
+        blackBoxCompare(userDB.getIndexByUsername("EHicks"), -1);
 
         //Testing the file printing and saving
         System.out.println(userDB.printDatabase());
         userDB.saveUserDatabaseDefault();
 
-        //Testing the merge-sort algorithm in case the user database becomes unsorted and needs fixing
+        //Testing the quickAddNewApplication method
         UserDatabase mergeDB = new UserDatabase();
         mergeDB.quickAddNewApplicationUser("eHicks", "", "", 0, "", 0);
         mergeDB.quickAddNewApplicationUser("ACarver", "", "", 0, "", 0);
@@ -109,26 +137,40 @@ public class Main extends Application {
         mergeDB.quickAddNewApplicationUser("TheMessiah", "", "", 0, "", 0);
         mergeDB.quickAddNewApplicationUser("kev1nDu", "", "", 0, "", 0);
         mergeDB.quickAddNewApplicationUser("BigQuig", "", "", 0, "", 0);
-        System.out.println(mergeDB.printDatabase());
+        System.out.println("TESTING METHOD quickAddNewApplicationUser");
+        //Comparing output
+        blackBoxCompare(mergeDB.getUsernameByIndex(0), "eHicks");
+        blackBoxCompare(mergeDB.getUsernameByIndex(1), "ACarver");
+        blackBoxCompare(mergeDB.getUsernameByIndex(2), "aCandy");
+        blackBoxCompare(mergeDB.getUsernameByIndex(3), "TheMessiah");
+        blackBoxCompare(mergeDB.getUsernameByIndex(4), "kev1nDu");
+        blackBoxCompare(mergeDB.getUsernameByIndex(5), "BigQuig");
+        //Testing the merge-sort algorithm
         mergeDB.mergeSortList();
-        System.out.println(mergeDB.printDatabase());
-        //Testing The GUI
-
-        Application.launch(args);
+        //Comparing output
+        blackBoxCompare(mergeDB.getUsernameByIndex(0), "aCandy");
+        blackBoxCompare(mergeDB.getUsernameByIndex(1), "ACarver");
+        blackBoxCompare(mergeDB.getUsernameByIndex(2), "BigQuig");
+        blackBoxCompare(mergeDB.getUsernameByIndex(3), "eHicks");
+        blackBoxCompare(mergeDB.getUsernameByIndex(4), "kev1nDu");
+        blackBoxCompare(mergeDB.getUsernameByIndex(5), "TheMessiah");
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
-            Scene scene = new Scene(root, 1028, 579);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Welcome to Nakama Scouter");
-            primaryStage.setResizable(false);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /**
+     * This method is to be used during black box testing to compare two strings to see if the expected and
+     * received output match. Will not work well when used to compare objects that don't parse well into
+     * String, like an image.
+     * @param _actual
+     * @param _expected
+     */
+    public static void blackBoxCompare(Object _actual, Object _expected) {
+        String actual = _actual.toString();
+        String expected = _expected.toString();
+        System.out.println("EXPECTED OUTPUT: " + expected);
+        System.out.println("RECEIVED OUTPUT: " + actual);
+        if (actual.equals(expected))
+            System.out.println("--------- SUCCESS ---------");
+        else
+            System.out.println("~~~ !ERROR! ~~~ !ERROR! ~~~");
     }
 }
