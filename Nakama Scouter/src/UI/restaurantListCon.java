@@ -69,7 +69,8 @@ public class restaurantListCon {
 
         Scene Scene = new Scene(Parent);
 
-
+        animeListCon controller = loader.getController();
+        controller.loadImage(1);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
