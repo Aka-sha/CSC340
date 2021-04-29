@@ -45,16 +45,12 @@ public class controller {
 
 
     @FXML
-    public void homePage(ActionEvent event) throws Exception {
-        try {
+    public void homePage(ActionEvent event) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
             Scene rooter = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -91,16 +87,12 @@ public class controller {
     }
 
     @FXML
-    public void loginPage(ActionEvent event) throws Exception {
-        try {
+    public void loginPage(ActionEvent event) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
             Scene rooter = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
             window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -198,7 +190,6 @@ public class controller {
         for (int i = 0; i < userDB.getSize(); i++) {
             userListA.add(userDB.getUsernameByIndex(i));
         }
-        System.out.println(userListA);
         for (String userListString : userListA) {
             userList.getItems().add(userListString);
         }

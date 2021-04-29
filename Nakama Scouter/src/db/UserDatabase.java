@@ -30,15 +30,15 @@ public class UserDatabase {
      * @param _zipCode
      */
     public void addNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, int _zipCode) {
-        //Create new user and add it to the List
-        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city)) {
+//        Create new user and add it to the List
+//        if (checkForValidUsername(_userName) && checkForValidPassword(_passWord) && checkForValidAge(_age) && checkForNoTabs(_userName, _passWord, _email, _city)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _zipCode);
             applicationUser.add(newUser);
             singleSortList();
             System.out.println("New account created! Username: " + _userName + ", Password: " + _passWord);
         }
-        else System.out.println("Account registration denied.");
-    }
+//        else System.out.println("Account registration denied.");
+//        }
 
     /**
      * This method adds a user to the user database, only checking for username duplicates and tabs, skipping the
@@ -51,10 +51,10 @@ public class UserDatabase {
      * @param _zipCode
      */
     public void quickAddNewApplicationUser(String _userName, String _email, String _passWord, int _age, String _city, int _zipCode) {
-        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city)) {
+//        if (checkUsernameForDuplicates(_userName) && checkForNoTabs(_userName, _passWord, _email, _city)) {
             UserProfile newUser = new UserProfile(_userName, _email, _passWord, _age, _city, _zipCode);
             applicationUser.add(newUser);
-        }
+//        }
     }
 
     /**
@@ -63,80 +63,80 @@ public class UserDatabase {
      * @param _userName
      * @return
      */
-    public boolean checkForValidUsername(String _userName) {
-        boolean usernameIsCompliant = true;
-        //Checks the username to see if it meets the minimum password length
-        if (_userName.length() < MINIMUM_USERNAME_LENGTH) {
-            System.out.println("Username must be at least " + MINIMUM_USERNAME_LENGTH + " characters in length.");
-            usernameIsCompliant = false;
-        }
+    //public boolean checkForValidUsername(String _userName) {
+    //    boolean usernameIsCompliant = true;
+    //    Checks the username to see if it meets the minimum password length
+    //    if (_userName.length() < MINIMUM_USERNAME_LENGTH) {
+    //        System.out.println("Username must be at least " + MINIMUM_USERNAME_LENGTH + " characters in length.");
+    //       usernameIsCompliant = false;
+    //    }
         //Checks the username to ensure it has no spaces
-        if (_userName.contains(" ")) {
-            System.out.println("Username must not contain any spaces.");
-            usernameIsCompliant = false;
-        }
-        if (usernameIsCompliant) return checkUsernameForDuplicates(_userName);
-        return false;
-    }
+    //    if (_userName.contains(" ")) {
+    //        System.out.println("Username must not contain any spaces.");
+    //        usernameIsCompliant = false;
+    //    }
+    //    if (usernameIsCompliant) return checkUsernameForDuplicates(_userName);
+    //    return false;
+    //}
 
     /**
      * The applicationUser database is searched to see if the desired username doesn't already exist, returning the outcome.
      * @param _userName
      * @return
      */
-    public boolean checkUsernameForDuplicates(String _userName) {
+    //public boolean checkUsernameForDuplicates(String _userName) {
         //First, check if database is empty. If so, return true.
-        if (this.applicationUser.size() == 0) return true;
-        if (this.getIndexByUsername(_userName) != -1) {
-            System.out.println("The username " + _userName + " is already being used by another account.");
-            return false;
-        }
-        return true;
-    }
+    //    if (this.applicationUser.size() == 0) return true;
+    //    if (this.getIndexByUsername(_userName) != -1) {
+    //        System.out.println("The username " + _userName + " is already being used by another account.");
+    //        return false;
+    //    }
+    //    return true;
+    //}
 
     /**
      * The password provided is checked to see if it is compliant with various password requirements.
      * @param _passWord
      * @return
      */
-    public boolean checkForValidPassword(String _passWord) {
-        boolean passwordIsCompliant = true;
-
-        //Checks the password to see if meets the minimum password length
-        if (_passWord.length() < MINIMUM_PASSWORD_LENGTH) {
-            System.out.println("Password must be at least " + MINIMUM_PASSWORD_LENGTH + " characters in length.");
-            passwordIsCompliant = false;
-        }
-        //Checks the password to ensure it has no spaces
-        if (_passWord.contains(" ")) {
-            System.out.println("Password must not contain any spaces.");
-            passwordIsCompliant = false;
-        }
-        //Checks the password to ensure it contains both uppercase and lowercase letters
-        if (_passWord.equals(_passWord.toUpperCase()) || _passWord.equals(_passWord.toLowerCase())) {
-            System.out.println("Password must contain both uppercase and lowercase letters.");
-            passwordIsCompliant = false;
-        }
-        //Checks the password to ensure it contains at least one number
-        if (!_passWord.contains("0") && !_passWord.contains("1") &&!_passWord.contains("2") &&!_passWord.contains("3") &&!_passWord.contains("4") &&!_passWord.contains("5") &&!_passWord.contains("6") &&!_passWord.contains("7") &&!_passWord.contains("8") &&!_passWord.contains("9")) {
-            System.out.println("Password must contain at least one number.");
-            passwordIsCompliant = false;
-        }
-        return passwordIsCompliant;
-    }
+//    public boolean checkForValidPassword(String _passWord) {
+//        boolean passwordIsCompliant = true;
+//
+//        //Checks the password to see if meets the minimum password length
+//        if (_passWord.length() < MINIMUM_PASSWORD_LENGTH) {
+//            System.out.println("Password must be at least " + MINIMUM_PASSWORD_LENGTH + " characters in length.");
+//            passwordIsCompliant = false;
+//        }
+//        //Checks the password to ensure it has no spaces
+//        if (_passWord.contains(" ")) {
+//            System.out.println("Password must not contain any spaces.");
+//            passwordIsCompliant = false;
+//        }
+//        //Checks the password to ensure it contains both uppercase and lowercase letters
+//        if (_passWord.equals(_passWord.toUpperCase()) || _passWord.equals(_passWord.toLowerCase())) {
+//            System.out.println("Password must contain both uppercase and lowercase letters.");
+//            passwordIsCompliant = false;
+//        }
+//        //Checks the password to ensure it contains at least one number
+//        if (!_passWord.contains("0") && !_passWord.contains("1") &&!_passWord.contains("2") &&!_passWord.contains("3") &&!_passWord.contains("4") &&!_passWord.contains("5") &&!_passWord.contains("6") &&!_passWord.contains("7") &&!_passWord.contains("8") &&!_passWord.contains("9")) {
+//            System.out.println("Password must contain at least one number.");
+//            passwordIsCompliant = false;
+//        }
+//        return passwordIsCompliant;
+//    }
 
     /**
      * The age is checked to see if it satisfies the minimum age requirement
      * @param _age
      * @return
      */
-    public boolean checkForValidAge(int _age) {
-        if (_age < 18) {
-            System.out.println("Users must be over the age of " + MINIMUM_AGE + " to use this service.");
-            return false;
-        }
-        return true;
-    }
+//    public boolean checkForValidAge(int _age) {
+//        if (_age < 18) {
+//            System.out.println("Users must be over the age of " + MINIMUM_AGE + " to use this service.");
+//            return false;
+//        }
+//        return true;
+//    }
 
     /**
      * All String information is checked to ensure it doesn't contain a tab that would break how the database is saved and loaded.
@@ -147,26 +147,26 @@ public class UserDatabase {
      * @param _city
      * @return
      */
-    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city) {
-        boolean noTabs = true;
-        if (_userName.contains(";")) {
-            System.out.println("Username must not contain a tab.");
-            noTabs = false;
-        }
-        if (_passWord.contains(";")) {
-            System.out.println("Password must not contain a tab.");
-            noTabs = false;
-        }
-        if (_email.contains(";")) {
-            System.out.println("Email address must not contain a tab.");
-            noTabs = false;
-        }
-        if (_city.contains(";")) {
-            System.out.println("City must not contain a tab.");
-            noTabs = false;
-        }
-        return noTabs;
-    }
+//    public boolean checkForNoTabs(String _userName, String _passWord, String _email, String _city) {
+//        boolean noTabs = true;
+//        if (_userName.contains(";")) {
+//            System.out.println("Username must not contain a tab.");
+//            noTabs = false;
+//        }
+//        if (_passWord.contains(";")) {
+//            System.out.println("Password must not contain a tab.");
+//            noTabs = false;
+//        }
+//        if (_email.contains(";")) {
+//            System.out.println("Email address must not contain a tab.");
+//            noTabs = false;
+//        }
+//        if (_city.contains(";")) {
+//            System.out.println("City must not contain a tab.");
+//            noTabs = false;
+//        }
+//        return noTabs;
+//    }
 
     /**
      * A single new user is added to the database, sorted so that it's in alphabetical order.

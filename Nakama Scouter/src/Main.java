@@ -15,7 +15,7 @@ import java.util.List;
 public class Main extends Application {
     public static void main(String[] args) {
         //Black Box testing (comment out if it's to be skipped)
-        blackBoxTest();
+        //blackBoxTest();
         //Testing The GUI
         Application.launch(args);
     }
