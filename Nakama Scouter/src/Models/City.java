@@ -22,6 +22,7 @@ public class City extends APIBaseClass{
     protected final String ZIP_CODE = "postal_code";
 
 
+
     public void City() {}
 
     /**
@@ -39,8 +40,8 @@ public class City extends APIBaseClass{
         }
         city.setCityTitle(cityTitle);
         return city;
-    }
-    */
+    }*/
+
 
     /**
      * Static method creates a City object based on the given user ipAddress string.
@@ -105,9 +106,7 @@ public class City extends APIBaseClass{
     public String getAddress(){
         return this.address;
     }
-    public String getCityTitle(){
-        return this.cityTitle;
-    }
+    public String getCityTitle(){ return this.cityTitle; }
     public String getLatitude() { return this.latitude; }
     public String getLongitude() { return this.longitude; }
     public String getZipCode() { return this.zipCode; }
