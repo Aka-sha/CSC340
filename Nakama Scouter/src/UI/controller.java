@@ -104,6 +104,19 @@ public class controller {
     }
 
     @FXML
+    void finder(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/nearRestaurant.fxml"));
+            Scene rooter = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(rooter);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void alert(ActionEvent event, String info) throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, info, new ButtonType("Close", ButtonBar.ButtonData.YES));
         alert.setHeaderText(null);
