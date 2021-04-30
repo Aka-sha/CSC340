@@ -79,42 +79,42 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="T1text" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
+                  <Label fx:id="F1seriesText" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="T2text" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label fx:id="F2seriesText" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="T3text" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Label fx:id="F3seriesText" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="T4text" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Label fx:id="F4seriesText" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                      <font>
                      <Font name="System Bold" size="12.0" />
                   </font></Label>
-                  <Label fx:id="T5text" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Label fx:id="F5seriesText" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin><font>
                      <Font name="System Bold" size="12.0" />
                   </font>
                   </Label>
-                  <Label fx:id="T1name" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1">
+                  <Label fx:id="F1seriesName" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -122,7 +122,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="T2name" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="F2seriesName" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -130,7 +130,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="T3name" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="F3seriesName" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -138,7 +138,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="T4name" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="F4seriesName" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -146,7 +146,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="T5name" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="F5seriesName" alignment="BASELINE_LEFT" contentDisplay="TOP" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -154,29 +154,29 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Hyperlink onAction="#animeRec" prefHeight="70.0" prefWidth="130.0">
+                  <Hyperlink onAction="#animeRecommendEvent" prefHeight="70.0" prefWidth="130.0">
                      <graphic>
-                        <ImageView fx:id="t1Anime" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="f1Series" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Hyperlink>
-                  <Hyperlink onAction="#animeRec" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="1">
+                  <Hyperlink onAction="#animeRecommendEvent" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="1">
                      <graphic>
-                        <ImageView fx:id="t2Anime" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="f2Series" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Hyperlink>
-                  <Hyperlink onAction="#animeRec" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="2">
+                  <Hyperlink onAction="#animeRecommendEvent" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="2">
                      <graphic>
-                        <ImageView fx:id="t3Anime" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="f3Series" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Hyperlink>
-                  <Hyperlink onAction="#animeRec" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="3">
+                  <Hyperlink onAction="#animeRecommendEvent" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="3">
                      <graphic>
-                        <ImageView fx:id="t4Anime" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="f4Series" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Hyperlink>
-                  <Hyperlink onAction="#animeRec" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="4">
+                  <Hyperlink onAction="#animeRecommendEvent" prefHeight="70.0" prefWidth="130.0" GridPane.rowIndex="4">
                      <graphic>
-                        <ImageView fx:id="t5Anime" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="f5Series" fitHeight="70.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Hyperlink>
                </children>
