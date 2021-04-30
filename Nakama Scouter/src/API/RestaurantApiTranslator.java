@@ -17,9 +17,9 @@ import java.util.List;
  * @author Andy Cruse
  */
 public class RestaurantApiTranslator implements RestaurantApiInterface {
-    static config config = new config();
+    static apiKeyConfig apiKeyConfig = new apiKeyConfig();
     private static final String RESTAURANT_BASE_URL = "https://api.documenu.com/v2/restaurant";
-    private static final String RESTAURANT_API_KEY = config.restAPIKey;
+    private static final String RESTAURANT_API_KEY = apiKeyConfig.restAPIKey;
 
 
     /**

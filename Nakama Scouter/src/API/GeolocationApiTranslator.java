@@ -17,9 +17,9 @@ import java.util.List;
  */
 
 public class GeolocationApiTranslator implements GeolocationApiInterface{
-    static config config = new config();
+    static apiKeyConfig apiKeyConfig = new apiKeyConfig();
     private static final String BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-    private static final String API_KEY = config.geoAPIKey;
+    private static final String API_KEY = apiKeyConfig.geoAPIKey;
     /**
      * This method is used to connect to the Location API via a URL and add the contents to a JSON file.
      * Then, the file is read to a String.
