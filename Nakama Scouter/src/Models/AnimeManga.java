@@ -94,31 +94,46 @@ public class AnimeManga extends APIBaseClass {
     public static AnimeManga loadAnimeMangaUserData(String _userName) {
         AnimeManga animeManga = new AnimeManga();
         List<String> loadItem = new ArrayList<>();
-        List<String> title = new ArrayList<>(); // 0
-        List<String> addedToList = new ArrayList<>(); // 1
         loadItem.add(animeManga.TITLE);
+        loadItem.add(animeManga.IMAGE_URL);
+        loadItem.add(animeManga.SYNOPSIS);
+        loadItem.add(animeManga.TYPE);
+        loadItem.add(animeManga.RATING);
         loadItem.add(animeManga.ADDED_TO_LIST);
-        List<Object> data = AnimeManga.myAnimeMangaAPI.loadUserAnimeList(_userName, loadItem); //.toString();
         try {
-            //there are 2 loaditems so 2 cases
+            List<Object> data = AnimeManga.myAnimeMangaAPI.loadUserAnimeList(_userName, loadItem); //.toString();
+            //there are 6 loaditems so 6 cases
             for (int i = 0; i < data.size(); i++) {
                 switch (i % loadItem.size()) {
                     case 0:
-                        title.add((String) data.get(i));
+                        animeManga.titleList.add((String) data.get(i));
                         break;
                     case 1:
-                        addedToList.add((String) data.get(i));
+                        animeManga.imageUrlList.add((String) data.get(i));
+                        break;
+                    case 2:
+                        animeManga.synopsisList.add((String)data.get(i));
+                        break;
+                    case 3:
+                        animeManga.typeList.add((String)data.get(i));
+                        break;
+                    case 4:
+                        animeManga.ratingList.add((String)data.get(i));
+                        break;
+                    case 5:
+                        animeManga.addedToListList.add((String)data.get(i));
                         break;
                 }
             }
 
         } catch (NullPointerException ex) {
-            title.add("");
-            addedToList.add("");
+            animeManga.titleList.add("");
+            animeManga.imageUrlList.add("");
+            animeManga.synopsisList.add("");
+            animeManga.typeList.add("");
+            animeManga.ratingList.add("");
+            animeManga.addedToListList.add("");
         }
-
-        animeManga.setTitleList(title);
-        animeManga.setAddedToListList(addedToList);
         return animeManga;
     }
 
