@@ -122,4 +122,3 @@ public class City extends APIBaseClass{
     public void setLongitude(String _longitude) { this.longitude = _longitude; }
     public void setZipCode(String _zipCode) { this.zipCode = _zipCode; }
 }
-
