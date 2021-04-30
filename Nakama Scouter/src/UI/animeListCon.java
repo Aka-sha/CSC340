@@ -138,19 +138,19 @@ public class animeListCon {
 
 
         /*Each block being a full line load
-        f1Series.setImage(new Image(anime.getImageUrlList().get(n*4-4)));
-        F1seriesName.setText(anime.getTitleList().get(n*4-4));
-        F1seriesText.setText(anime.getSynopsisList().get(n*4-4));
+        f1Series.setImage(new Image(anime.getImageUrlList().get(n*5-4)));
+        F1seriesName.setText(anime.getTitleList().get(n*5-4));
+        F1seriesText.setText(anime.getSynopsisList().get(n*5-4));
 
-        f2Series.setImage(new Image(anime.getImageUrlList().get(n*4-3)));
-        F2seriesName.setText(anime.getTitleList().get(n*4-3));
-        F2seriesText.setText(anime.getSynopsisList().get(n*4-3));
+        f2Series.setImage(new Image(anime.getImageUrlList().get(n*5-3)));
+        F2seriesName.setText(anime.getTitleList().get(n*5-3));
+        F2seriesText.setText(anime.getSynopsisList().get(n*5-3));
 
-        f3Series.setImage(new Image(anime.getImageUrlList().get(n*4-2)));
-        F3seriesName.setText(anime.getTitleList().get(n*4-2));
-        F3seriesText.setText(anime.getSynopsisList().get(n*4-2));
+        f3Series.setImage(new Image(anime.getImageUrlList().get(n*5-2)));
+        F3seriesName.setText(anime.getTitleList().get(n*5-2));
+        F3seriesText.setText(anime.getSynopsisList().get(n*5-2));
 
-        f4Series.setImage(new Image(anime.getImageUrlList().get(n*4-1)));
+        f4Series.setImage(new Image(anime.getImageUrlList().get(n*5-1)));
         F4seriesName.setText(anime.getTitleList().get(n*4-1));
         F4seriesText.setText(anime.getSynopsisList().get(n*4-1));
 
