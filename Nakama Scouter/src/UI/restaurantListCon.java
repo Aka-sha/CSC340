@@ -1,16 +1,11 @@
 package UI;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import Models.City;
 import Models.Restaurant;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class restaurantListCon {
@@ -50,7 +42,7 @@ public class restaurantListCon {
     private ListView<String> priceColumn;
 
     @FXML
-    private ListView<String> hoursColumn;
+    private ListView<String> idColumn;
 
     @FXML
     public void homePage(ActionEvent event) throws IOException {
@@ -122,12 +114,12 @@ public class restaurantListCon {
         List<String> phoneList = new ArrayList<>();
         List<String> siteList = new ArrayList<>();
         List<String> priceList = new ArrayList<>();
-        List<String> hoursList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
         nameList = rest.getNameList();
         phoneList = rest.getPhoneList();
         siteList = rest.getWebsiteList();
         priceList = rest.getPriceRangeList();
-        hoursList = rest.getHoursList();
+        idList = rest.getIdList();
 //        nameList.add("mac");
 //        phoneList.add("2232232232");
 //        siteList.add("www.mc.com");
@@ -137,7 +129,7 @@ public class restaurantListCon {
         phoneColumn.getItems().clear();
         siteColumn.getItems().clear();
         priceColumn.getItems().clear();
-        hoursColumn.getItems().clear();
+        idColumn.getItems().clear();
         for (String userListString : nameList) {
             restColumn.getItems().add(userListString);
         }
@@ -150,8 +142,8 @@ public class restaurantListCon {
         for (String userListString : priceList) {
             priceColumn.getItems().add(userListString);
         }
-        for (String userListString : hoursList) {
-            hoursColumn.getItems().add(userListString);
+        for (String userListString : idList) {
+            idColumn.getItems().add(userListString);
         }
 
     }
