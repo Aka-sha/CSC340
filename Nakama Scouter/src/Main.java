@@ -15,7 +15,7 @@ import java.util.List;
 public class Main extends Application {
     public static void main(String[] args) {
         //Black Box testing (comment out if it's to be skipped)
-        //blackBoxTest();
+        blackBoxTest();
         //Testing The GUI
         Application.launch(args);
     }
@@ -110,6 +110,17 @@ public class Main extends Application {
 //        //userProfile.save();
 //        // }
 
+        //Use this address format. Surprisingly hard to fuck up for some reason...
+        City city = City.loadCityResultsByAddress("");//24 Sussex Drive Ottawa ON");
+        List<String> restSearchQuery = new ArrayList<>();
+        restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+        restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
+        restSearchQuery.add("30"); //MUST STAY DISTANCE
+        restSearchQuery.add("Japanese"); //MUST STAY CUISINE
+        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
+        System.out.println(rest.getNameList());
+        System.out.println(rest.getPriceRangeList());
+        System.out.println(rest.getPhoneList());
 
         //Testing the file loading, printing, and saving
         userDB.loadUserDatabaseDefault();
