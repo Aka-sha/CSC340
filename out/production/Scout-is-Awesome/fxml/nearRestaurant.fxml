@@ -39,7 +39,7 @@
                 <TableColumn prefWidth="111.0" text="PhoneNum" />
                   <TableColumn prefWidth="375.0" text="Website" />
                   <TableColumn prefWidth="81.0" text="Price" />
-                  <TableColumn prefWidth="117.0" text="Hours" />
+                  <TableColumn prefWidth="117.0" text="ID" />
               </columns>
             </TableView>
             <TextField fx:id="nearState" layoutX="405.0" layoutY="83.0" prefHeight="23.0" prefWidth="109.0" />
@@ -50,7 +50,7 @@
                   <ListView fx:id="phoneColumn" prefHeight="332.0" prefWidth="110.0" />
                   <ListView fx:id="siteColumn" prefHeight="332.0" prefWidth="376.0" />
                   <ListView fx:id="priceColumn" prefHeight="332.0" prefWidth="81.0" />
-                  <ListView fx:id="hoursColumn" prefHeight="332.0" prefWidth="117.0" />
+                  <ListView fx:id="idColumn" prefHeight="332.0" prefWidth="117.0" />
                </children>
             </HBox>
          </children>
