@@ -13,7 +13,7 @@ import java.util.List;
  * The class is used to translate the information retrieved from the Anime API.
  * The contents from connecting to the API URL produces a readable JSON file.
  *
- * Last Updated 04/16/2021
+ * Last Updated 04/30/2021
  * @author Andy Cruse
  */
 public class AnimeApiTranslator implements AnimeApiInterface {

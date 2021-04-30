@@ -21,13 +21,13 @@ public class AnimeManga extends APIBaseClass {
     protected String score;
     protected String rating;
     protected String type;
-    protected List<String> tagsList;
-    protected List<String> addedToListList;
-    protected List<String> imageUrlList;
-    protected List<String> titleList;
-    protected List<String> synopsisList;
-    protected List<String> typeList;
-    protected List<String> ratingList;
+    protected List<String> tagsList = new ArrayList<>();
+    protected List<String> addedToListList = new ArrayList<>();
+    protected List<String> imageUrlList = new ArrayList<>();
+    protected List<String> titleList = new ArrayList<>();
+    protected List<String> synopsisList = new ArrayList<>();
+    protected List<String> typeList = new ArrayList<>();
+    protected List<String> ratingList = new ArrayList<>();
     protected List<Object> data;
     protected final String TYPE = "type";
     protected final String RESULTS = "results";
@@ -54,44 +54,40 @@ public class AnimeManga extends APIBaseClass {
     public static AnimeManga loadAnimeMangaDataBySearch(List<String> _searchQuery) {
         AnimeManga animeManga = new AnimeManga();
         List<String> loadItem = new ArrayList<>();
-        List<String> imageURL = new ArrayList<>();
-        List<String> title = new ArrayList<>();
-        List<String> synopsis = new ArrayList<>();
-        List<String> type = new ArrayList<>();
-        List<String> rating = new ArrayList<>();
         loadItem.add(animeManga.IMAGE_URL);
         loadItem.add(animeManga.TITLE);
         loadItem.add(animeManga.SYNOPSIS);
         loadItem.add(animeManga.TYPE);
         loadItem.add(animeManga.RATING);
-        List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
-        if (data == null) {
-            return null;
-        }
-        for (int i = 0; i < data.size(); i++) {
-            switch (i % loadItem.size()) {
-                case 0:
-                    imageURL.add((String)data.get(i));
-                    break;
-                case 1:
-                    title.add((String)data.get(i));
-                    break;
-                case 2:
-                    synopsis.add((String)data.get(i));
-                    break;
-                case 3:
-                    type.add((String)data.get(i));
-                    break;
-                case 4:
-                    rating.add((String)data.get(i));
-                    break;
+        try {
+            List<Object> data = AnimeManga.myAnimeMangaAPI.loadSeveralAnimeMangaItemBySearch(_searchQuery, loadItem); //.toString();
+            for (int i = 0; i < data.size(); i++) {
+                switch (i % loadItem.size()) {
+                    case 0:
+                        animeManga.imageUrlList.add((String) data.get(i));
+                        break;
+                    case 1:
+                        animeManga.titleList.add((String) data.get(i));
+                        break;
+                    case 2:
+                        animeManga.synopsisList.add((String) data.get(i));
+                        break;
+                    case 3:
+                        animeManga.typeList.add((String) data.get(i));
+                        break;
+                    case 4:
+                        animeManga.ratingList.add((String) data.get(i));
+                        break;
+                }
             }
+        } catch (Exception e) {
+            animeManga.imageUrlList.add("");
+            animeManga.titleList.add("");
+            animeManga.synopsisList.add("");
+            animeManga.typeList.add("");
+            animeManga.ratingList.add("");
         }
-        animeManga.setImageUrlList(imageURL);
-        animeManga.setTitleList(title);
-        animeManga.setSynopsisList(synopsis);
-        animeManga.setTypeList(type);
-        animeManga.setRatingList(rating);
+
         return animeManga;
     }
 
