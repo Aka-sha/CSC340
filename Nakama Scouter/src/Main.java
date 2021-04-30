@@ -137,7 +137,7 @@ public class Main extends Application {
         blackBoxCompare(testDB.getEmailByIndex(0), "eHicks@uncg.edu");
         blackBoxCompare(testDB.getPasswordByIndex(0), "HicksPass1");
         blackBoxCompare(testDB.getAgeByIndex(0), 18);
-        //blackBoxCompare(testDB.getCityByIndex(0), cityTitle.getCityTitle());
+        blackBoxCompare(testDB.getCityByIndex(0), cityTitle.getCityTitle());
         blackBoxCompare(testDB.getZipCodeByIndex(0), 12345);
         //Add more users to the DB
         testDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), 12345);
