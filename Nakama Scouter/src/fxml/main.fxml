@@ -14,6 +14,8 @@
             <Button layoutX="204.0" layoutY="23.0" mnemonicParsing="false" onAction="#homePage" text="Home" />
             <Button layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topPage" text="Top Anime" />
             <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" onAction="#signPage" text="SignUp" />
+            <Button layoutX="151.0" layoutY="231.0" mnemonicParsing="false" onAction="#finder" text="Find some food" />
+            <Button layoutX="400.0" layoutY="231.0" mnemonicParsing="false" onAction="#reccomendationPage" text="Get reccomendation" />
             <Button layoutX="113.0" layoutY="190.0" mnemonicParsing="false" onAction="#finder" text="Find Local Japanese Cuisine" />
             <ImageView fitHeight="182.0" fitWidth="294.0" layoutX="573.0" layoutY="72.0">
                <image>
