@@ -52,6 +52,7 @@
             <Button layoutX="305.0" layoutY="23.0" mnemonicParsing="false" onAction="#topPage" text="Top Anime" />
             <Button layoutX="421.0" layoutY="23.0" mnemonicParsing="false" onAction="#signPage" text="SignUp" />
             <Button layoutX="151.0" layoutY="231.0" mnemonicParsing="false" onAction="#finder" text="Find some food" />
+            <Button layoutX="400.0" layoutY="231.0" mnemonicParsing="false" onAction="#reccomendationPage" text="Get reccomendation" />
             <ImageView fitHeight="182.0" fitWidth="294.0" layoutX="573.0" layoutY="72.0">
                <image>
                   <Image url="@image/4ce9b63f7219d1616f4d1ff6aa15a282_1.png" />
