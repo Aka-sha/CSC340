@@ -28,6 +28,7 @@ public class Restaurant extends APIBaseClass {
     protected List<String> websiteList = new ArrayList<>();
     protected List<String> hoursList = new ArrayList<>();
     protected List<String> priceRangeList = new ArrayList<>();
+    protected List<String> idList = new ArrayList<>();
     protected final String TOTAL_RESULTS = "totalResults";
     protected final String DATA = "data";
     protected final String RESTAURANT_NAME = "restaurant_name";
@@ -51,7 +52,7 @@ public class Restaurant extends APIBaseClass {
         loadItems.add(rest.RESTAURANT_NAME);
         loadItems.add(rest.RESTAURANT_PHONE);
         loadItems.add(rest.RESTAURANT_WEBSITE);
-        loadItems.add(rest.HOURS);
+        loadItems.add(rest.RESTAURANT_ID);
         loadItems.add(rest.PRICE_RANGE);
         try {
             List<Object> results = rest.myRestaurantAPI.loadRestaurantItemBySearch(_searchQuery, loadItems);
@@ -68,7 +69,7 @@ public class Restaurant extends APIBaseClass {
                         rest.websiteList.add((String)results.get(i));
                         break;
                     case 3:
-                        rest.hoursList.add((String)results.get(i));
+                        rest.idList.add((String)results.get(i));
                         break;
                     case 4:
                         rest.priceRangeList.add((String)results.get(i));
@@ -77,11 +78,11 @@ public class Restaurant extends APIBaseClass {
             }
         }
         catch (NullPointerException ex) {
-            rest.nameList.add(null);
-            rest.phoneList.add(null);
-            rest.websiteList.add(null);
-            rest.hoursList.add(null);
-            rest.priceRangeList.add(null);
+            rest.nameList.add("");
+            rest.phoneList.add("");
+            rest.websiteList.add("");
+            rest.idList.add("");
+            rest.priceRangeList.add("");
         }
         return rest;
     }
@@ -375,6 +376,7 @@ public class Restaurant extends APIBaseClass {
     public List<String> getPriceRangeList() {
         return this.priceRangeList;
     }
+    public List<String> getIdList() { return this.idList; }
     //=============== SETTERS =============
     public void setIpAddress(String _ipAddress) {
         this.ipAddress = _ipAddress;
@@ -414,4 +416,5 @@ public class Restaurant extends APIBaseClass {
     public void setWebsiteList(List<String> _list) { this.websiteList = _list; }
     public void setHoursList(List<String> _list) { this.hoursList = _list; }
     public void setPriceRangeList(List<String> _list) { this.priceRangeList = _list; }
+    private void setIdList(List<String> _list) { this.idList = _list; }
 }

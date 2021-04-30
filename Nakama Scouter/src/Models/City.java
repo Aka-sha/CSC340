@@ -16,9 +16,9 @@ public class City extends APIBaseClass{
     protected String latitude;
     protected String longitude;
     protected String zipCode;
-    protected final String CITY_TITLE = "region";
-    protected final String LATITUDE = "latitude";
-    protected final String LONGITUDE = "longitude";
+    protected final String CITY_TITLE = "locality";
+    protected final String LATITUDE = "lat";
+    protected final String LONGITUDE = "lng";
     protected final String ZIP_CODE = "postal_code";
 
 
@@ -83,21 +83,21 @@ public class City extends APIBaseClass{
         City city = new City();
         List<String> loadItem = new ArrayList<>();
         loadItem.add(city.CITY_TITLE);
+        loadItem.add(city.ZIP_CODE);
         loadItem.add(city.LATITUDE);
         loadItem.add(city.LONGITUDE);
-        loadItem.add(city.ZIP_CODE);
         try {
             List<Object> results = city.myLocationAPI.loadLocation(_address, loadItem);
             city.setCityTitle((String)results.get(0));
-            city.setLatitude((String)results.get(1));
-            city.setLongitude((String)results.get(2));
-            city.setZipCode((String)results.get(3));
+            city.setZipCode((String)results.get(1));
+            city.setLatitude((String)results.get(2));
+            city.setLongitude((String)results.get(3));
         }
         catch (NullPointerException ex) {
-            city.setCityTitle(null);
-            city.setLatitude(null);
-            city.setLongitude(null);
-            city.setZipCode(null);
+            city.setCityTitle("");
+            city.setZipCode("");
+            city.setLatitude("");
+            city.setLongitude("");
         }
         return city;
     }
@@ -122,4 +122,3 @@ public class City extends APIBaseClass{
     public void setLongitude(String _longitude) { this.longitude = _longitude; }
     public void setZipCode(String _zipCode) { this.zipCode = _zipCode; }
 }
-
