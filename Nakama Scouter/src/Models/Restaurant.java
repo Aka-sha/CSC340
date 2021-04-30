@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class loads the recipe information from the Restaurant API, Documenu.
  * Needs to be updated for search cuisines address and menus by restaurant ID ASAP once Translator issue is fixed
- * Last Updated 04/16/2021
+ * Last Updated 04/30/2021
  * @author Andy Cruse
  */
 public class Restaurant extends APIBaseClass {
@@ -378,43 +378,43 @@ public class Restaurant extends APIBaseClass {
     }
     public List<String> getIdList() { return this.idList; }
     //=============== SETTERS =============
-    public void setIpAddress(String _ipAddress) {
+    private void setIpAddress(String _ipAddress) {
         this.ipAddress = _ipAddress;
     }
-    public void setLatitude(String latitude) {
+    private void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-    public void setLongitude(String longitude) {
+    private void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    public void setDistance(String distance) {
+    private void setDistance(String distance) {
         this.distance = distance;
     }
-    public void setData(String _data) {
+    private void setData(String _data) {
         this.data = _data;
     }
-    public void setRestaurantName(String _restaurantName) {
+    private void setRestaurantName(String _restaurantName) {
         this.restaurantName = _restaurantName;
     }
-    public void setID(String _id) {
+    private void setID(String _id) {
         this.restaurantID = _id;
     }
-    public void setRestaurantPhone(String _restaurantPhone) {
+    private void setRestaurantPhone(String _restaurantPhone) {
         this.restaurantPhone = _restaurantPhone;
     }
-    public void setRestaurantWebsite(String _restaurantWebsite) {
+    private void setRestaurantWebsite(String _restaurantWebsite) {
         this.restaurantWebsite = _restaurantWebsite;
     }
-    public void setHours(String _hours) {
+    private void setHours(String _hours) {
         this.hours = _hours;
     }
-    public void setPriceRange(String _priceRange) {
+    private void setPriceRange(String _priceRange) {
         this.priceRange = _priceRange;
     }
-    public void setNameList(List<String> _list) { this.nameList = _list; }
-    public void setPhoneList(List<String> _list) { this.phoneList = _list; }
-    public void setWebsiteList(List<String> _list) { this.websiteList = _list; }
-    public void setHoursList(List<String> _list) { this.hoursList = _list; }
-    public void setPriceRangeList(List<String> _list) { this.priceRangeList = _list; }
+    private void setNameList(List<String> _list) { this.nameList = _list; }
+    private void setPhoneList(List<String> _list) { this.phoneList = _list; }
+    private void setWebsiteList(List<String> _list) { this.websiteList = _list; }
+    private void setHoursList(List<String> _list) { this.hoursList = _list; }
+    private void setPriceRangeList(List<String> _list) { this.priceRangeList = _list; }
     private void setIdList(List<String> _list) { this.idList = _list; }
 }

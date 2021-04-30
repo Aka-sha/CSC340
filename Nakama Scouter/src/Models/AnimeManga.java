@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * This class loads the Anime/Manga information under a number of various parameters
- * Last Updated 04/16/21
+ * Last Updated 04/30/21
  * @author Andy Cruse
  */
 public class AnimeManga extends APIBaseClass {
@@ -91,6 +91,11 @@ public class AnimeManga extends APIBaseClass {
         return animeManga;
     }
 
+    /**
+     * Shows anime results per user from MyAnimeList
+     * @param _userName
+     * @return
+     */
     public static AnimeManga loadAnimeMangaUserData(String _userName) {
         AnimeManga animeManga = new AnimeManga();
         List<String> loadItem = new ArrayList<>();
