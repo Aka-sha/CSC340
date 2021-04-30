@@ -15,7 +15,7 @@ import java.util.List;
 public class Main extends Application {
     public static void main(String[] args) {
         //Black Box testing (comment out if it's to be skipped)
-        //blackBoxTest();
+        blackBoxTest();
         //Testing The GUI
         Application.launch(args);
     }
@@ -49,7 +49,8 @@ public class Main extends Application {
         //City cityLon = City.loadCityLongitudeByIP(ipAddress);
         //System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
 
-        City city = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
+        //Use this address format. Surprisingly hard to fuck up for some reason...
+        City city = City.loadCityResultsByAddress("938 Bugshop Street Princeton NC");//24 Sussex Drive Ottawa ON");
         List<String> restSearchQuery = new ArrayList<>();
         restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
         restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
