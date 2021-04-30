@@ -43,6 +43,8 @@
                   <TextField fx:id="reEmail" prefHeight="26.0" prefWidth="323.0" promptText="Enter your email address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <PasswordField fx:id="rePass1" prefHeight="26.0" prefWidth="213.0" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <PasswordField fx:id="rePass2" prefHeight="26.0" prefWidth="213.0" promptText="Enter your password again" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="reAge" prefHeight="26.0" prefWidth="323.0" promptText="Enter your age" GridPane.columnIndex="3" />
+                  <TextField fx:id="reZip" prefHeight="26.0" prefWidth="323.0" promptText="Enter your zipcode" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
                      <font>
                         <Font name="ROGFontsv1.6-Regular" size="20.0" />
@@ -82,8 +84,6 @@
                         <Insets left="13.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField fx:id="reZip" prefHeight="26.0" prefWidth="323.0" promptText="Enter your zipcode" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="reAge" prefHeight="26.0" prefWidth="323.0" promptText="Enter your age" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <Button alignment="CENTER" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#clear" prefHeight="49.0" prefWidth="128.0" text="Clear">
