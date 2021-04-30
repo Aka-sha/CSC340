@@ -23,14 +23,18 @@
                   <Font name="System Bold Italic" size="25.0" />
                </font>
             </Text>
-            <ImageView fx:id="recImg" fitHeight="176.0" fitWidth="267.0" layoutX="6.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-            <ListView fx:id="animeRec" layoutX="273.0" layoutY="136.0" prefHeight="304.0" prefWidth="751.0" />
+            <ImageView fx:id="recImg" fitHeight="176.0" fitWidth="267.0" layoutX="6.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="https://cdn.myanimelist.net/images/anime/1436/106694.jpg?s=d395802efdb5b4a093f094f0090b7a07" />
+               </image></ImageView>
+            <ListView fx:id="animeRecommend" layoutX="273.0" layoutY="136.0" prefHeight="304.0" prefWidth="751.0" />
             <TextArea fx:id="animeSub" layoutX="273.0" layoutY="446.0" prefHeight="130.0" prefWidth="682.0" />
-            <Button defaultButton="true" layoutX="955.0" layoutY="482.0" mnemonicParsing="false" onAction="#subAnimeRec" prefHeight="58.0" prefWidth="69.0" text="Submit" textFill="#1d00ff">
+            <Button defaultButton="true" layoutX="955.0" layoutY="482.0" mnemonicParsing="false" onAction="#subAnimeRecommend" prefHeight="58.0" prefWidth="69.0" text="Submit" textFill="#1d00ff">
                <font>
                   <Font name="ROGFontsv1.6-Regular" size="15.0" />
                </font>
             </Button>
+            <Button layoutX="76.0" layoutY="367.0" mnemonicParsing="false" onAction="#animeDetail" prefHeight="43.0" prefWidth="98.0" text="Details" />
          </children>
     </AnchorPane>
   </children>

@@ -33,7 +33,13 @@ public class controller {
     private ListView<String> animeRec;
 
     @FXML
+    private ListView<String> animeRecommend;
+
+    @FXML
     private TextArea animeSub;
+
+    @FXML
+    private TextArea animeSubRecommend;
 
     List<String> addStuff = new ArrayList<String>();
 
@@ -109,9 +115,9 @@ public class controller {
     }
 
     @FXML
-    void reccomendationPage(ActionEvent event) {
+    void recommendationPage(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/animeReccomendation.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/animeRecommendation.fxml"));
             Scene rooter = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rooter);
@@ -156,10 +162,7 @@ public class controller {
         }
     }
 
-
-
-
-
+    //For topAnime page
     @FXML
     public void subAnimeRec(ActionEvent event) {
         String sub = animeSub.getText();
@@ -167,6 +170,16 @@ public class controller {
         ObservableList<String> add = FXCollections.observableList(addStuff);
         animeRec.setItems(add);
         animeSub.clear();
+    }
+
+    //For recommend page
+    @FXML
+    public void subAnimeRecommend(ActionEvent event) {
+        String sub = animeSubRecommend.getText();
+        addStuff.add(sub);
+        ObservableList<String> add = FXCollections.observableList(addStuff);
+        animeRecommend.setItems(add);
+        animeSubRecommend.clear();
     }
 
 
