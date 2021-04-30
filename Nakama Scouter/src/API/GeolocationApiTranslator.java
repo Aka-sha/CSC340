@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * The class is used to translate the information retrieved from the Geolocation API.
  * The contents from connecting to the API URL produces a readable JSON file.
- * Last Updated 04/25/2021
+ * Last Updated 04/30/2021
  * @author Andy Cruse
  */
 
@@ -51,16 +51,6 @@ public class GeolocationApiTranslator implements GeolocationApiInterface{
             //There is only 1 index so never change the 0 unless the documentation is screwed
             //geoObject contains all the data needed
             JSONObject geoObject = results.getJSONObject(0);
-            //pieces of the address like names and zip
-            /**
-             * 0: Number
-             * 1: Street
-             * 2: region? (not 100% sure needs more testing)
-             * 3: city
-             * 4: state
-             * 5: country
-             * 6: zipcode
-             */
             //If we need to load it in _loadItems, this will cycle through each piece of the address
             //components JSON Array and find what we want to load
             JSONArray addressComponents = (JSONArray)geoObject.get("address_components");

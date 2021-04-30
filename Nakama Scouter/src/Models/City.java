@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class loads city and location details based on user IP Address
- * May or may not need more depending on the scope of the project.
- * Last Updated 03/23/21
+ * This class loads city and location details based on user address
+ * API: Google Geocoding API
+ * Last Updated 04/30/21
  * @author Andy Cruse
  */
 public class City extends APIBaseClass{
