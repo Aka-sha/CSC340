@@ -120,14 +120,8 @@ public class AnimeApiTranslator implements AnimeApiInterface {
         }
     }
 
-    /**
-     * This method is used to connect to the Anime/Manga API via a URL and add the contents to a JSON file.
-     * Then, the file is read to an arrayList for the loaditem
-     */
-    @Override
-    public Object loadAnimeMangaItemSearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort, String _loadItem) {
-        // Builds base url string
-        String searchString = "/search/" + _type + "?q=&genre=" + _genre1 + "," + _genre2 + "," + _genre3 + "&order_by=" + _orderBy + "&sort=" + _sort;
+    public List<Object> loadUserAnimeList(String _user, List<String> _loadItem) {
+        String searchString = "/user/" + _user + "/animelist/all";
         try {
             URL url = new URL(AnimeApiTranslator.ANIME_BASED_URL + searchString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -144,14 +138,16 @@ public class AnimeApiTranslator implements AnimeApiInterface {
             connection.disconnect();
             // Extract JSON object
             JSONObject obj = new JSONObject(content.toString());
-            JSONArray results = (JSONArray)obj.get("results");
-            ArrayList<Object> arrayList = new ArrayList<Object>();
-            //adds loaditem to arrayList
-            for(int i = 0; i < results.length(); i++) {
-                JSONObject item = results.getJSONObject(i);
-                arrayList.add(item.getString(_loadItem));
+            JSONArray anime = (JSONArray)obj.get("anime");
+            List<Object> elements = new ArrayList<>();
+            for (int i = 0; i < anime.length(); i++) {
+                JSONObject item = anime.getJSONObject(i);
+                //elements.add(item.getString(_loadItem.get(i)));
+                for (int j = 0; j < _loadItem.size(); j++) {
+                    elements.add(item.getString(_loadItem.get(j)));
+                }
             }
-            return arrayList;
+            return elements;
         } catch (Exception ex) {
             return null;
         }

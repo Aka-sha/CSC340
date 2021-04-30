@@ -106,33 +106,38 @@ public class restaurantListCon {
     @FXML
     void restaurantFind(ActionEvent event) {
 
-//        String street = nearStreet.getText();
-//        String city = nearCity.getText();
-//        String distance = nearDistance.getText();
-//        String state = nearState.getText();
-//        String address = street + ", " + city + " " + state;
-//        City loadCity = City.loadCityResultsByAddress(address);
-//        List<String> restSearchQuery = new ArrayList<>();
-//        restSearchQuery.add(loadCity.getLatitude());
-//        restSearchQuery.add(loadCity.getLongitude());
-//        restSearchQuery.add(distance);
-//        restSearchQuery.add("Japanese");
-//        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
+        String street = nearStreet.getText();
+        String city = nearCity.getText();
+        String distance = nearDistance.getText();
+        String state = nearState.getText();
+        String address = street + ", " + city + " " + state;
+        City loadCity = City.loadCityResultsByAddress(address);
+        List<String> restSearchQuery = new ArrayList<>();
+        restSearchQuery.add(loadCity.getLatitude());
+        restSearchQuery.add(loadCity.getLongitude());
+        restSearchQuery.add(distance);
+        restSearchQuery.add("Japanese");
+        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
         List<String> nameList = new ArrayList<>();
         List<String> phoneList = new ArrayList<>();
         List<String> siteList = new ArrayList<>();
         List<String> priceList = new ArrayList<>();
         List<String> hoursList = new ArrayList<>();
-//        nameList = rest.getNameList();
-//        phoneList = rest.getPhoneList();
-//        siteList = rest.getWebsiteList();
-//        priceList = rest.getPriceRangeList();
-//        hoursList = rest.getHoursList();
-        nameList.add("mac");
-        phoneList.add("2232232232");
-        siteList.add("www.mc.com");
-        priceList.add("$");
-        hoursList.add("0:00 - 23:00");
+        nameList = rest.getNameList();
+        phoneList = rest.getPhoneList();
+        siteList = rest.getWebsiteList();
+        priceList = rest.getPriceRangeList();
+        hoursList = rest.getHoursList();
+//        nameList.add("mac");
+//        phoneList.add("2232232232");
+//        siteList.add("www.mc.com");
+//        priceList.add("$");
+//        hoursList.add("0:00 - 23:00");
+        restColumn.getItems().clear();
+        phoneColumn.getItems().clear();
+        siteColumn.getItems().clear();
+        priceColumn.getItems().clear();
+        hoursColumn.getItems().clear();
         for (String userListString : nameList) {
             restColumn.getItems().add(userListString);
         }

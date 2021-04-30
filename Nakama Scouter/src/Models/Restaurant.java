@@ -77,11 +77,11 @@ public class Restaurant extends APIBaseClass {
             }
         }
         catch (NullPointerException ex) {
-            rest.nameList.add(null);
-            rest.phoneList.add(null);
-            rest.websiteList.add(null);
-            rest.hoursList.add(null);
-            rest.priceRangeList.add(null);
+            rest.nameList.add("");
+            rest.phoneList.add("");
+            rest.websiteList.add("");
+            rest.hoursList.add("");
+            rest.priceRangeList.add("");
         }
         return rest;
     }

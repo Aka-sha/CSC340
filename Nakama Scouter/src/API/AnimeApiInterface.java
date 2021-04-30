@@ -13,7 +13,7 @@ public interface AnimeApiInterface {
 
     public List<Object> loadSeveralAnimeMangaItemByID(String _id, List<String> _loadItem);
 
-    public Object loadAnimeMangaItemSearch(String _type, String _genre1, String _genre2, String _genre3, String _orderBy, String _sort, String _loadItem);
-
     public List<Object> loadSeveralAnimeMangaItemBySearch(List<String> _searchQuery, List<String> _loadItem);
+
+    public List<Object> loadUserAnimeList(String _user, List<String> _loadItem);
 }

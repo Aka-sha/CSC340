@@ -21,6 +21,8 @@ public class AnimeManga extends APIBaseClass {
     protected String score;
     protected String rating;
     protected String type;
+    protected List<String> tagsList;
+    protected List<String> addedToListList;
     protected List<String> imageUrlList;
     protected List<String> titleList;
     protected List<String> synopsisList;
@@ -38,6 +40,9 @@ public class AnimeManga extends APIBaseClass {
     protected final String EPISODES = "episodes";
     protected final String SCORE = "score";
     protected final String RATING = "rated";
+    protected final String VIDEO_URL = "video_url";
+    protected final String TAGS = "tags";
+    protected final String ADDED_TO_LIST = "added_to_list";
 
     /** Static method creates a AnimeManga object based on the given user ID string.
      * Creates a loadItem String List to allow for user input search. User can input as many genre's as the want
@@ -87,6 +92,37 @@ public class AnimeManga extends APIBaseClass {
         animeManga.setSynopsisList(synopsis);
         animeManga.setTypeList(type);
         animeManga.setRatingList(rating);
+        return animeManga;
+    }
+
+    public static AnimeManga loadAnimeMangaUserData(String _userName) {
+        AnimeManga animeManga = new AnimeManga();
+        List<String> loadItem = new ArrayList<>();
+        List<String> title = new ArrayList<>(); // 0
+        List<String> addedToList = new ArrayList<>(); // 1
+        loadItem.add(animeManga.TITLE);
+        loadItem.add(animeManga.ADDED_TO_LIST);
+        List<Object> data = AnimeManga.myAnimeMangaAPI.loadUserAnimeList(_userName, loadItem); //.toString();
+        try {
+            //there are 2 loaditems so 2 cases
+            for (int i = 0; i < data.size(); i++) {
+                switch (i % loadItem.size()) {
+                    case 0:
+                        title.add((String) data.get(i));
+                        break;
+                    case 1:
+                        addedToList.add((String) data.get(i));
+                        break;
+                }
+            }
+
+        } catch (NullPointerException ex) {
+            title.add("");
+            addedToList.add("");
+        }
+
+        animeManga.setTitleList(title);
+        animeManga.setAddedToListList(addedToList);
         return animeManga;
     }
 
@@ -297,42 +333,46 @@ public class AnimeManga extends APIBaseClass {
     public List<String> getSynopsisList() { return this.synopsisList; }
     public List<String> getTypeList() { return this.typeList; }
     public List<String> getRatingList() { return this.ratingList; }
+    public List<String> getTagsList() { return this.tagsList; }
+    public List<String> getAddedToListList() { return this.addedToListList; }
 
     //=============== SETTERS =============
 
-    public void setID(String _id) {
+    private void setID(String _id) {
         this.id = _id;
     }
-    public void setURL(String _url) {
+    private void setURL(String _url) {
         this.url = _url;
     }
-    public void setImageUrl(String _imageUrl) {
+    private void setImageUrl(String _imageUrl) {
         this.imageUrl = _imageUrl;
     }
-    public void setTitle(String _title) {
+    private void setTitle(String _title) {
         this.title = _title;
     }
-    public void setTitleEnglish(String _titleEnglish) {
+    private void setTitleEnglish(String _titleEnglish) {
         this.titleEnglish = _titleEnglish;
     }
-    public void setSynopsis(String _synopsis) {
+    private void setSynopsis(String _synopsis) {
         this.synopsis = _synopsis;
     }
-    public void setEpisodes(String _episodes) {
+    private void setEpisodes(String _episodes) {
         this.episodes = _episodes;
     }
-    public void setScore(String _score) {
+    private void setScore(String _score) {
         this.score = _score;
     }
-    public void setRating(String _rating) {
+    private void setRating(String _rating) {
         this.rating = _rating;
     }
-    public void setData(List<Object> _data) {
+    private void setData(List<Object> _data) {
         this.data = _data;
     }
-    public void setImageUrlList(List<String> _list) { this.imageUrlList = _list; }
-    public void setTitleList(List<String> _list) { this.titleList = _list; }
-    public void setSynopsisList(List<String> _list) { this.synopsisList = _list; }
-    public void setTypeList(List<String> _list) { this.typeList = _list; }
-    public void setRatingList(List<String> _list) { this.ratingList = _list; }
+    private void setImageUrlList(List<String> _list) { this.imageUrlList = _list; }
+    private void setTitleList(List<String> _list) { this.titleList = _list; }
+    private void setSynopsisList(List<String> _list) { this.synopsisList = _list; }
+    private void setTypeList(List<String> _list) { this.typeList = _list; }
+    private void setRatingList(List<String> _list) { this.ratingList = _list; }
+    private void setTagsList(List<String> _list) { this.tagsList = _list; }
+    private void setAddedToListList(List<String> _list) { this.addedToListList = _list; }
 }
