@@ -94,10 +94,10 @@ public class City extends APIBaseClass{
             city.setLongitude((String)results.get(3));
         }
         catch (NullPointerException ex) {
-            city.setCityTitle(null);
-            city.setZipCode(null);
-            city.setLatitude(null);
-            city.setLongitude(null);
+            city.setCityTitle("");
+            city.setZipCode("");
+            city.setLatitude("");
+            city.setLongitude("");
         }
         return city;
     }
