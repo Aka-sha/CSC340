@@ -42,94 +42,102 @@ public class Main extends Application {
     public static void blackBoxTest() {
         UserDatabase userDB = new UserDatabase();
 
-        //Testing Location API
-        String ipAddress = "174.204.142.53"; // New York
-        //City cityTitle = City.loadCityTitleByIP(ipAddress);
-        //City cityLat = City.loadCityLatitudeByIP(ipAddress);
-        //City cityLon = City.loadCityLongitudeByIP(ipAddress);
-        //System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
+//        //Testing Location API
+//        String ipAddress = "174.204.142.53"; // New York
+//        //City cityTitle = City.loadCityTitleByIP(ipAddress);
+//        //City cityLat = City.loadCityLatitudeByIP(ipAddress);
+//        //City cityLon = City.loadCityLongitudeByIP(ipAddress);
+//        //System.out.println("Address Based on New York IP: " + cityTitle.getCityTitle() + " " + cityLat.getLatitude() + " " + cityLon.getLongitude()); //prints New York 48.8271 -73.9359
+//
+//        City city = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
+//        List<String> restSearchQuery = new ArrayList<>();
+//        restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+//        restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
+//        restSearchQuery.add("30"); //MUST STAY DISTANCE
+//        restSearchQuery.add("Japanese"); //MUST STAY CUISINE
+//        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
+//        System.out.println(rest.getNameList());
+//        System.out.println(rest.getPriceRangeList());
+//        System.out.println(rest.getPhoneList());
+//
+//        //Testing Restaurant API
+//        //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!
+//        //String distance = "30";
+//        //String cuisine = "Japanese";
+//        //String restID = "407270267399819";
+//        //List<String> restSearchQuery = new ArrayList<>();
+//        //restSearchQuery.add(cityLat.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
+//        //restSearchQuery.add(cityLon.getLongitude()); //MUST STAY LONGITUDE
+//        //restSearchQuery.add(distance); //MUST STAY DISTANCE
+//        //restSearchQuery.add(cuisine); //MUST STAY CUISINE
+//        //Restaurant restaurantResults = Restaurant.loadRestaurantResults(restSearchQuery);
+//        //System.out.println(restaurantResults.getResults());
+//
+//        //Testing AnimeManga API
+//        String type = "anime";
+//        String genre1 = "1";
+//        String genre2 = "10";
+//        String genre3 = "4";
+//        String orderBy = "start_date";
+//        String sort = "desc";
+//        //put this into a method for user preferences or search etc.
+//        List<String> searchQuery = new ArrayList<>();
+//        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
+//        searchQuery.add(genre1);
+//        searchQuery.add(genre2);
+//        searchQuery.add(genre3);
+//        searchQuery.add(orderBy);
+//        searchQuery.add(sort);
+//        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
+//        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
+//        System.out.println(animeSearch.getTitleList().get(1));
+//        //List<Object> animeData = animeSearch.getData();
+//        //System.out.println(animeData);
+//        //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
+//        //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
+//        //System.out.println(animeRatingByID.getRating());
+//
+//
+//        //testing MySQL Queries for Database established above
+//        //for (int i = 0; i < userDB.getSize(); i++) {
+//        //UserProfile userProfile = new UserProfile();
+//        //userProfile.setUsername(userDB.getUsernameByIndex(i));
+//        //userProfile.setEmail(userDB.getEmailByIndex(i));
+//        //userProfile.setPassword(userDB.getPasswordByIndex(i));
+//        //userProfile.setAge(userDB.getAgeByIndex(i));
+//        //userProfile.setCity(cityTitle.getCityTitle());
+////            userProfile.setIpAddress(ipAddress);
+//        //userProfile.save();
+//        // }
 
-        City city = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
-        List<String> restSearchQuery = new ArrayList<>();
-        restSearchQuery.add(city.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
-        restSearchQuery.add(city.getLongitude()); //MUST STAY LONGITUDE
-        restSearchQuery.add("30"); //MUST STAY DISTANCE
-        restSearchQuery.add("Japanese"); //MUST STAY CUISINE
-        Restaurant rest = Restaurant.loadRestaurantResults(restSearchQuery);
-        System.out.println(rest.getNameList());
-        System.out.println(rest.getPriceRangeList());
-        System.out.println(rest.getPhoneList());
 
-        //Testing Restaurant API
-        //SOME LOAD ITEMS RETURN "". THEY EXIST AND ARENT NULL!
-        //String distance = "30";
-        //String cuisine = "Japanese";
-        //String restID = "407270267399819";
-        //List<String> restSearchQuery = new ArrayList<>();
-        //restSearchQuery.add(cityLat.getLatitude()); //MUST STAY LATITUDE FOR TRANSLATOR (working on update!!!)
-        //restSearchQuery.add(cityLon.getLongitude()); //MUST STAY LONGITUDE
-        //restSearchQuery.add(distance); //MUST STAY DISTANCE
-        //restSearchQuery.add(cuisine); //MUST STAY CUISINE
-        //Restaurant restaurantResults = Restaurant.loadRestaurantResults(restSearchQuery);
-        //System.out.println(restaurantResults.getResults());
-
-        //Testing AnimeManga API
-        String type = "anime";
-        String genre1 = "1";
-        String genre2 = "10";
-        String genre3 = "4";
-        String orderBy = "start_date";
-        String sort = "desc";
-        //put this into a method for user preferences or search etc.
-        List<String> searchQuery = new ArrayList<>();
-        searchQuery.add(type); // TYPE MUST ALWAYS BE FIRST FOR URL TO WORK PROPERLY
-        searchQuery.add(genre1);
-        searchQuery.add(genre2);
-        searchQuery.add(genre3);
-        searchQuery.add(orderBy);
-        searchQuery.add(sort);
-        //AnimeManga animeSearch = AnimeManga.loadAnimeMangaTitleBySearch(type,  genre1, genre2, genre3,  orderBy, sort);
-        AnimeManga animeSearch = AnimeManga.loadAnimeMangaDataBySearch(searchQuery);
-        System.out.println(animeSearch.getTitleList().get(1));
-        //List<Object> animeData = animeSearch.getData();
-        //System.out.println(animeData);
-        //AnimeManga animeRatingByID = AnimeManga.loadAnimeMangaRatingByID(id);
-        //System.out.println("Anime Search Get Title: " + animeSearch.getTitle()); //Returns JSON File
-        //System.out.println(animeRatingByID.getRating());
-
-
-        //testing MySQL Queries for Database established above
-        //for (int i = 0; i < userDB.getSize(); i++) {
-        //UserProfile userProfile = new UserProfile();
-        //userProfile.setUsername(userDB.getUsernameByIndex(i));
-        //userProfile.setEmail(userDB.getEmailByIndex(i));
-        //userProfile.setPassword(userDB.getPasswordByIndex(i));
-        //userProfile.setAge(userDB.getAgeByIndex(i));
-        //userProfile.setCity(cityTitle.getCityTitle());
-//            userProfile.setIpAddress(ipAddress);
-        //userProfile.save();
-        // }
-
-
-        //Testing the file loading
+        //Testing the file loading, printing, and saving
         userDB.loadUserDatabaseDefault();
-        City cityTitle = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
-        //Testing the UserDatabase
-        userDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), 12345);
-        userDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), 12345);
-        userDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), 12345);
-        userDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), 12345);
-        userDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), 12345);
-        userDB.printDatabase();
-        //Comparing
-        blackBoxCompare(userDB.getIndexByUsername("eHicks"), 2);
-        blackBoxCompare(userDB.getIndexByUsername("ACarver"), 1);
-        blackBoxCompare(userDB.getIndexByUsername("aCandy"), 0);
-        blackBoxCompare(userDB.getIndexByUsername("EHicks"), -1);
-
-        //Testing the file printing and saving
         System.out.println(userDB.printDatabase());
         userDB.saveUserDatabaseDefault();
+        
+        City cityTitle = City.loadCityResultsByAddress("1600 Pennsylvania Ave NW, Washington DC");
+        //Creating an empty database for testing
+        UserDatabase testDB = new UserDatabase();
+        //Testing the UserDatabase
+        testDB.addNewApplicationUser("eHicks", "eHicks@uncg.edu", "HicksPass1", 18, cityTitle.getCityTitle(), 12345);
+        //Comparing
+        blackBoxCompare(testDB.getUsernameByIndex(0), "eHicks");
+        blackBoxCompare(testDB.getEmailByIndex(0), "eHicks@uncg.edu");
+        blackBoxCompare(testDB.getPasswordByIndex(0), "HicksPass1");
+        blackBoxCompare(testDB.getAgeByIndex(0), 18);
+        //blackBoxCompare(testDB.getCityByIndex(0), cityTitle.getCityTitle());
+        blackBoxCompare(testDB.getZipCodeByIndex(0), 12345);
+        //Add more users to the DB
+        testDB.addNewApplicationUser("ACarver", "akasha_1@uncg.edu", "AkashPass2", 21, cityTitle.getCityTitle(), 12345);
+        testDB.addNewApplicationUser("aCandy", "wacruse@uncg.edu", "ijustReallyfuckinglovegators3", 23, cityTitle.getCityTitle(), 12345);
+        testDB.addNewApplicationUser("eHicks", "eHicksOtherEmail@uncg.edu", "sneakysumbitch", 22, cityTitle.getCityTitle(), 12345);
+        testDB.addNewApplicationUser("EHicks", "eHicksOtherOtherEmail@uncg.edu", "Sneakier Sum Bitch", 1000, cityTitle.getCityTitle(), 12345);
+        testDB.printDatabase();
+        //Comparing
+        blackBoxCompare(testDB.getIndexByUsername("eHicks"), 2);
+        blackBoxCompare(testDB.getIndexByUsername("ACarver"), 1);
+        blackBoxCompare(testDB.getIndexByUsername("aCandy"), 0);
 
         //Testing the quickAddNewApplication method
         UserDatabase mergeDB = new UserDatabase();
